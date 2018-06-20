@@ -1,0 +1,90 @@
+%% LyX 2.2.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=0.1\paperheight,bmargin=0.1\paperheight,lmargin=0.1\columnwidth,rmargin=0.1\paperwidth}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{setspace}
+\doublespacing
+\usepackage{babel}
+\begin{document}
+
+\title{Two anyons in Hamonic Trap: momentum tail}
+
+\maketitle
+The two fermions wavefunction
+
+\[
+\Psi_{F}(x_{1},x_{2})=\frac{1}{\sqrt{2}}\left[\phi_{0}(x_{1})\phi_{1}(x_{2})-\phi_{1}(x_{1})\phi_{0}(x_{2})\right]
+\]
+
+where 
+\[
+\phi_{n}(x)=\frac{1}{\pi^{1/4}\sqrt{2^{n}n!}}H_{n}(x)e^{-\frac{x^{2}}{2}}
+\]
+
+So
+
+\begin{align*}
+\Psi_{F}(x_{1},x_{2}) & =\frac{1}{\sqrt{2}}\left[\frac{1}{\pi^{1/4}}e^{-\frac{x_{1}^{2}}{2}}\frac{1}{\pi^{1/4}\sqrt{2}}2x_{2}e^{-\frac{x_{2}^{2}}{2}}-\frac{1}{\pi^{1/4}\sqrt{2}}2x_{1}e^{-\frac{x_{1}^{2}}{2}}\frac{1}{\pi^{1/4}}e^{-\frac{x_{2}^{2}}{2}}\right]\\
+ & =\frac{1}{\sqrt{\pi}}e^{-\frac{x_{1}^{2}+x_{2}^{2}}{2}}\left[x_{2}-x_{1}\right]
+\end{align*}
+
+The hardcore boson wavefunction is
+
+\begin{align*}
+\Psi_{B}(x_{1},x_{2}) & =\frac{1}{\sqrt{\pi}}e^{-\frac{x_{1}^{2}+x_{2}^{2}}{2}}|x_{2}-x_{1}|
+\end{align*}
+
+Its momentum distribution from one body density matrix is
+\begin{align*}
+n_{B}(p) & =\frac{2}{2\pi}\int dxdx'e^{ip(x-x')}\rho_{B}(x,x')\\
+ & =\frac{1}{\pi}\int dxdx'e^{ip(x-x')}\rho_{B}(x,x')\\
+ & =\frac{1}{\pi}\int dxdx'\text{cos}(p(x-x'))\rho_{B}(x,x')
+\end{align*}
+
+where 
+\[
+\rho_{B}(x,x')=\int dx_{2}\Psi_{B}^{*}(x,x_{2})\Psi_{B}(x',x_{2})
+\]
+
+There are ways to calculate $\rho_{B}(x,x')$ such as using Toplitz
+matrix, but here for benchmarking the numerical method, we numerically
+integrate $n_{B}(p)$ using, first calculate a grid of $\rho_{B}(x,x')$
+then do the summation for the integral.
+
+\begin{align*}
+n_{B}(p) & =\frac{1}{\pi}\int dxdx'\text{cos}(p(x-x'))\rho_{B}(x,x')
+\end{align*}
+
+The result of $n_{B}(p)p^{4}$ verses $p$ is in the following figure.
+
+%\includegraphics[scale=0.8]{momentum_prefactor}
+
+At large $p$, it tends to constant value. The value is represented
+by the orange line, which is $\frac{2}{\pi}\sqrt{\frac{2}{\pi}}=0.5079..$
+
+Here is the analytic derivation of the momentum tail for two hardcore bosons. The momentum distribution can be written as
+\[ n_B(p) = \frac{1}{\pi} \int dx_2\, \left|\int dx\,e^{ipx} \,\Psi^*_B(x,x_2)   \right|^2 \] 
+where \[ \int dx\,e^{ipx} \,\Psi^*_B(x,x_2)=\frac{1}{\sqrt{\pi}} \, \int dx \,e^{ipx} e^{-(x^2+x_2^2)/2} \,|x-x_2| =  -\frac{2}{\sqrt{\pi}} \,\frac{1}{p^2} \,e^{-x_2^2+ipx_2} \] where the last equality is valid in the limit $p \rightarrow infty$ and we have used Eq.~(4) in PRL {\bf 91}, 090401 (2003). Inserting this result into $n_B(p)$, we have 
+\[ 
+\lim_{p \rightarrow \infty} n_B(p) =  \frac{1}{\pi} \int dx_2\, \left|  -\frac{2}{\sqrt{\pi}} \,\frac{1}{p^2} \,e^{-x_2^2+ipx_2} \right|^2 = \frac{2}{\pi} \sqrt{\frac{2}{\pi}} \,\frac{1}{p^4} \] from which we can infer that the Tan contact for two harmonically trapped hardcore bosons is \[ C_B = \frac{2}{\pi} \sqrt{\frac{2}{\pi}} \] This is consistent with the ground state energy of two bosons in the TG ($g \rightarrow \infty$) limit, which reads\[  E_B = E_0 - 2  \sqrt{\frac{2}{\pi}} \frac{1}{g} \] and from the adiabatic sweep theorem, we have (see Eur. Phys. J. Special Topics {\bf 226}, 1583 (2017))   \[ \frac{dE_B}{d(1/g)}= -  2  \sqrt{\frac{2}{\pi}} = -\pi C_B\] 
+
+Now consider two hardcore anyons. Apart from an overall phase factor, the wavefunction can be written as 
+\[ \Psi_\kappa (x_1,x_2) = e^{-i \frac{\pi \kappa}{2} \epsilon(x_2-x_1)} \,\Psi_B(x_1,x_2) \] Its momentum distribution is given by
+\[ n_{\kappa}(p)  =\frac{2}{2\pi}\iint dxdx'e^{ip(x-x')}\rho_{\kappa}(x,x') = \frac{1}{\pi} \int dx_2\, \left|\int dx\,e^{ipx} \,\Psi^*_\kappa(x,x_2)   \right|^2 \] Now let us examine the integral
+\begin{eqnarray*}
+\int dx\,e^{ipx} \,\Psi^*_\kappa(x,x_2) &=& \int dx\,e^{ipx} \,e^{i \frac{\pi \kappa}{2} \epsilon(x_2-x)} \,\Psi^*_B(x,x_2) \\
+&=& \int dx\,e^{ipx} \,[\cos (\pi \kappa/2) +i\epsilon(x_2-x) \sin (\pi \kappa/2) ] \,\Psi^*_B(x,x_2) 
+\end{eqnarray*}
+Note that $\epsilon(x_2-x) \,\Psi^*_B(x,x_2) =\Psi_F (x,x_2)$ is an analytic function, hence in the $p \rightarrow \infty$ limit, the $\sin$ term above results in an exponentially decaying term. The leading term is then given by the $\cos$ term which is simply (using the above result for hardcore bosons):
+\[ \lim_{p \rightarrow \infty} \left[ \int dx\,e^{ipx} \,\Psi^*_\kappa(x,x_2) \right] = \cos (\pi \kappa/2)  \left( -\frac{2}{\sqrt{\pi}} \,\frac{1}{p^2} \,e^{-x_2^2+ipx_2}  \right) \] Therefore, we have 
+\[ \lim_{p \rightarrow \infty} n_\kappa(p) = \cos^2(\pi \kappa/2)\,\lim_{p \rightarrow \infty} n_B(p) =  \cos^2(\pi \kappa/2)\,\frac{2}{\pi} \sqrt{\frac{2}{\pi}} \,\frac{1}{p^4} \] If we define the momentum tail coefficient as the Tan contact, then \[ C_\kappa =  \cos^2(\pi \kappa/2)\,C_B \]which is consistent with the result obtained in Eur. Phys. J. D {\bf 71}, 135 (2017). Note that in that paper, the anyon statistical parameter $\chi$ is equal to $(1-\kappa)$ in our notation.
+
+An anyon gas with interaction strength $g$ has the same energy as a bosonic gas with interaction strength $g' = g/cos(\kappa \pi/2)$. Therefore, in the large $g$ limit, the two harmonically trapped anyons should have energy \[ E_\kappa = E_0 - 2  \sqrt{\frac{2}{\pi}} \frac{1}{g'} = E_0 - 2  \sqrt{\frac{2}{\pi}} \frac{\cos(\kappa \pi/2)}{g} \] Therefore, it seems that the adiabatic sweep theorem for anyon gas should read
+\[  \frac{dE_\kappa}{d(1/g)} = - 2\cos(\kappa \pi/2)\,  \sqrt{\frac{2}{\pi}}=-\pi C_\kappa/ \cos(\kappa \pi/2)\]
+
+\end{document}
