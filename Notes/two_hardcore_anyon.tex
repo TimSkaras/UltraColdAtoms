@@ -10,7 +10,6 @@
 \usepackage{array}
 
 
-
 \begin{document}
 \title{Two hard-core anyons in harmonic trap}
 %\author{Li Yang$^1$, and Han Pu$^{1,2}$}
@@ -50,19 +49,19 @@ The corresponding reduced density operator can be written as
 
 \section{hardcore anyons in harmonic trap}
 Now consider two hardcore anyons in a harmonic trap. Using the anyon-Fermi mapping, the corresponding wavefunction of the anyons is given by 
-\[ \Psi^\kappa (x_1,x_2) = A^\kappa(x_2-x_1) \,\Psi_F(x_1,x_2) \]
+\[ \Psi_\kappa (x_1,x_2) = A_\kappa(x_2-x_1) \,\Psi_F(x_1,x_2) \]
 where $\kappa$ is the anyon statistical parameter and 
-\[ A^\kappa (x_2-x_1) = e^{i\pi (1-\kappa) \theta(x_2-x_1)}= \left\{ \begin{array}{ll} e^{i\pi(1-\kappa)}\,, & x_2>x_1 \\ 1 \,, & x_2 <x_1 \end{array}  \right.  \] where $\theta(x_2-x_1)$ is the Heaviside step function.
+\[ A_\kappa (x_2-x_1) = e^{i\pi (1-\kappa) \theta(x_2-x_1)}= \left\{ \begin{array}{ll} e^{i\pi(1-\kappa)}\,, & x_2>x_1 \\ 1 \,, & x_2 <x_1 \end{array}  \right.  \] where $\theta(x_2-x_1)$ is the Heaviside step function.
 The anyon wavefunction satisfies the following exchange properties:
-\[ \Psi^{\kappa}(x_1,x_2) = e^{i\pi \kappa \epsilon(x_1-x_2)} \,\Psi^\kappa(x_2,x_1) \]
+\[ \Psi_\kappa(x_1,x_2) = e^{i\pi \kappa \epsilon(x_1-x_2)} \,\Psi_\kappa(x_2,x_1) \]
 where \[ \epsilon(x) =  \left\{  \begin{array}{cl} 1\,, & x>0 \\ 0 \,, & x=0 \\ -1\,, & x<0 \end{array} \right.\]
-Two special cases are: (1) For $\kappa=0$, $ A^\kappa (x_2-x_1) = {\rm sgn}(x_1-x_2)$, and the anyons correspond to hardcore bosons; (2) for $\kappa=1$, $A^\kappa (x_2-x_1) = 1$, and the anyons correspond to hardcore, i.e., free, fermions. Note that $A^\kappa = A^{\kappa+2}$, hence we can restrict the values of $\kappa$ to be $\kappa \in [0, 2)$. 
+Two special cases are: (1) For $\kappa=0$, $ A_\kappa (x_2-x_1) = {\rm sgn}(x_1-x_2)$, and the anyons correspond to hardcore bosons; (2) for $\kappa=1$, $A_\kappa (x_2-x_1) = 1$, and the anyons correspond to hardcore, i.e., free, fermions. Note that $A_\kappa = A^{\kappa+2}$, hence we can restrict the values of $\kappa$ to be $\kappa \in [0, 2)$. 
 
-Since $|\Psi^\kappa| = |\Psi_F|$ independent of $\kappa$, the real space density profile $n(x)$ is independent of $\kappa$. In other words, all hardcore anyons have the same real space density profile independent of their statistical parameter.
+Since $|\Psi_\kappa| = |\Psi_F|$ independent of $\kappa$, the real space density profile $n(x)$ is independent of $\kappa$. In other words, all hardcore anyons have the same real space density profile independent of their statistical parameter.
 
 From the two-body wave function for two hard-core anyons in a harmonic trap, the OBDM can be calculated using the formula given in the first section combined with the anyon-fermi mapping:
 \begin{align*}
-\rho^\kappa(x,x')= \langle x'|\hat{\rho}_1| x \rangle &= \int dx_2 \, \Psi^{\kappa^*}(x,x_2) \Psi^\kappa(x',x_2)\\
+\rho_\kappa(x,x')= \langle x'|\hat{\rho}_1| x \rangle &= \int dx_2 \, \Psi_{\kappa}^*(x,x_2) \Psi_\kappa(x',x_2)\\
 & = \int dx_2 \,  e^{-i\pi (1-\kappa) \theta(x - x_2)} e^{i\pi (1-\kappa) \theta(x' - x_2)} \Psi_{F}^*(x,x_2) \Psi_{F}(x',x_2)\\
 & = \rho_{F}(x,x') + \epsilon(x' - x)(e^{\epsilon(x' - x) i\pi (1-\kappa)} - 1)\int_{x}^{x'} dx_2 \, \Psi_{F}^*(x,x_2) \Psi_{F}(x',x_2)
 \end{align*}
@@ -73,12 +72,12 @@ Using the projection formula given in the first section, the anyon OBDM can be u
 
 For instance, if two hard-core bosons are in the two-body ground state of a harmonic trap, then the probability of finding one of those particles in the $\phi_0$ state is .718, the probability for the $\phi_1$ state is .1667, and so on, as is illustrated in the top left plot of Fig. \ref{fig:projections} ($\kappa = 0$).
 \begin{figure}[h]
-	\includegraphics[scale=.5]{"Plots/Anyon Projection Values"}
+	\includegraphics[scale=.5]{"../Plots/Anyon Projection Values"}
 	\caption{Projections}
 	\label{fig:projections}
 \end{figure}
 \begin{figure}[h]
-\includegraphics[scale=.5]{"Plots/Momentum"}
+\includegraphics[scale=.5]{"../Plots/Momentum"}
 \caption{Momentum Distribution}
 \label{fig:momentum}
 \end{figure}
@@ -90,7 +89,7 @@ The von Neumann entropy can be determined from the OBDM by transforming from the
 Thus, the von Neumann entropy for hard-core anyons in the two-body ground state of the harmonic oscillator are given in Fig. \ref{fig:entropy} for various values of $\kappa$. The fermion case ($\kappa = 1$) obtains the analytic result $S = \log(2) = 0.6931$. 
 
 \begin{figure}[h]
-\includegraphics[scale=.5]{"Plots/EntropyPlot"}
+\includegraphics[scale=.5]{"../Plots/EntropyPlot"}
 \caption{Plot of von Neumann Entropy $(S)$}
 \label{fig:entropy}
 \end{figure}
@@ -109,14 +108,14 @@ should hold for some constant $C$ assuming $p$ is sufficiently large. This const
 
 If the $\frac{1}{2\pi}$ prefactor is included in Minguzzi's coefficient, my numerical results should be in agreement with Minguzzi's coefficient, yet they still differ by a factor of 2. According to Minguzzi's paper, when the prefactor is included we have $C = \frac{1}{\pi} \sqrt{\frac{2}{\pi}} \approx 0.253974\ldots$, which is about half what I calculated from my numerical data.
 
-\section{coefficient of momentum decay for hcb}
+\section{coefficient of momentum tail for hcb}
 
 In the following section, I will try to reproduce the result from Minguzzi's paper that 
 \[ \lim_{p \rightarrow \infty} n(p) = 2\sqrt{\frac{2}{\pi }} \frac{(\hbar m \omega)^{3/2}}{p^4}  \]
 
 \begin{center}
 \begin{figure}[h]
-	\includegraphics[scale=.45]{"Plots/FullMomentumTails"}
+	\includegraphics[scale=.45]{"../Plots/FullMomentumTails"}
 	\caption{Momentum Tails for Anyons}
 	\label{fig:tails}
 \end{figure}
@@ -140,107 +139,197 @@ Let $Q_{2} = x_{2}/\alpha$, $Q = x/\alpha$, and $Q' = x'/\alpha$ to obtain
 \end{equation}
 Please note that I have only scaled $Q_{2}$ via u-substitution. The other variables have just been rewritten to simplify the expression. I am not scaling the length. Variables $Q$ and $Q'$ are just shorthand for $ x/\alpha$ and $x'/\alpha$ respectively.
 
-The momentum distribution is just
+The momentum distribution is
 \begin{align*}
 n_{B}(p) &= \dfrac{N}{2 \pi \hbar} \int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} dx' e^{i \frac{p}{\hbar} (x - x')} \rho_{B}(x,x')\\
 & = \dfrac{N}{2 \alpha \pi^2 \hbar} \int_{-\infty}^{\infty} \alpha dQ \int_{-\infty}^{\infty} \alpha dQ' e^{i \alpha \frac{p}{\hbar} (Q - Q')}  e^{-\frac{1}{2} (Q^2 + Q'^2)} \int_{-\infty}^{\infty} e^{-Q_{2}^{2}} |Q_{2} - Q| |Q_{2} - Q'| dQ_{2}\\
-& = \dfrac{N\alpha }{2 \pi^2 \hbar} \int_{-\infty}^{\infty} dQ \int_{-\infty}^{\infty} dQ' e^{i \alpha \frac{p}{\hbar} (Q - Q')}  e^{-\frac{1}{2} (Q^2 + Q'^2)} \int_{-\infty}^{\infty} e^{-Q_{2}^{2}} |Q_{2} - Q| |Q_{2} - Q'| dQ_{2}
+& = \dfrac{N\alpha }{2 \pi^2 \hbar} \int_{-\infty}^{\infty} dQ \int_{-\infty}^{\infty} dQ' e^{i \alpha \frac{p}{\hbar} (Q - Q')}  e^{-\frac{1}{2} (Q^2 + Q'^2)} \int_{-\infty}^{\infty} e^{-Q_{2}^{2}} |Q_{2} - Q| |Q_{2} - Q'| dQ_{2}\\
+& =  \dfrac{N\alpha }{2 \pi^2 \hbar} \int_{-\infty}^{\infty}  dQ_{2} e^{-Q_{2}^2} \int_{-\infty}^{\infty} dQ  e^{i \alpha \frac{p}{\hbar} Q} e^{-\frac{1}{2}Q^2} |Q_{2} - Q|  \int_{-\infty}^{\infty} dQ'  e^{-i \alpha \frac{p}{\hbar} Q'} e^{-\frac{1}{2}Q'^2} |Q_{2} - Q'| \\
+& = \dfrac{N\alpha }{2 \pi^2 \hbar} \int_{-\infty}^{\infty}  dQ_{2} e^{-Q_{2}^2} \left| \int_{-\infty}^{\infty} dQ  e^{i \alpha \frac{p}{\hbar} Q} e^{-\frac{1}{2}Q^2} |Q_{2} - Q| \right|^2
 \end{align*}
 
+The integral over $Q$ can be evaluated asymptotically as
 
-
-
-
-
-
-
-
-
-
-Now, substitute $R = \frac{1}{2}(Q + Q')$, $r = \frac{1}{2}(Q - Q')$, and let $N = 2$, thus $Q = R + r$ and $Q' = R - r$
-\begin{align*}
-n_{B}(p) & = \dfrac{2\alpha }{\pi^2 \hbar} \int_{-\infty}^{\infty} dR \int_{-\infty}^{\infty} dr \, e^{i 2\alpha \frac{p}{\hbar} r}  e^{-(R^2 + r^2)} \int_{-\infty}^{\infty} e^{-Q_{2}^{2}} |r +(Q_{2} - R)| |r - (Q_{2} - R)| dQ_{2}
-\end{align*}
-The Jacobian for the $R, r$ coordinate system is equal to 2, so I have scaled the integral appropriately. Rearranging the integrals, we obtain
 \begin{equation}
-n_{B}(p) = \dfrac{2\alpha }{\pi^2 \hbar} \int_{-\infty}^{\infty} dR \int_{-\infty}^{\infty} dQ_{2} \,  e^{-(R^2 + Q_{2}^{2})} \int_{-\infty}^{\infty} dr \, e^{i 2\alpha \frac{p}{\hbar} r} e^{-r^2} |r + \beta| |r - \beta| 
+\int_{-\infty}^{\infty} dQ  e^{i \alpha \frac{p}{\hbar} Q} e^{-\frac{1}{2}Q^2} |Q_{2} - Q| = \dfrac{-2 \hbar ^2 e^{-\frac{1}{2} Q_{2}^2}}{\alpha^2 p^2}
 \end{equation}
-where $\beta = Q_{2} - R$. 
 
-We can use results from Rahman \footnotemark
-\footnotetext{M. Rahman, Applications of Fourier Transformations to Generalized Functions, WIT Press, Southampton, 2011.} to evaluate the last iterated integral. It is a theorem that if the generalized function $f(x)$ has a finite number of singularities at $x = x_{1}, x_{2}, \ldots, _{M}$, if $f(x) - F_{m}(x)$ has an absolutely integrable $Nth$ derivative in an interval including $x_{m}$ (where $F_{m}$ is a linear combination of standard generalized functions), and if $f^{(N)}(x)$ is well behaved at infinity, then the transform $g(k) = \int_{-\infty}^{\infty} e^{ikx} f(x) dx$ can be evaluated as 
+for large p. Thus,
+\begin{align}
+\lim_{p \rightarrow \infty} n_{B}(p) & = 
+\dfrac{2}{\pi} \sqrt{\dfrac{2}{\pi}} \dfrac{(\hbar m \omega)^{3/2}}{p^4}
+\end{align}
 %
-\[ g(k) = \sum_{m = 1}^{M} G_{m}(k) + o(|k|^{-N}) \]
-%
-where $G_{m}(k) = \int_{-\infty}^{\infty} e^{ikx} f(x) dx$.
-%
-%
-We wish to evaluate $\int_{-\infty}^{\infty} dr \, e^{i 2\alpha \frac{p}{\hbar} r} f(r) $ where $f(r) = e^{-r^2} |r + \beta| |r - \beta|$. The function $f(r)$ has two singularities at $\pm \beta $. Expanding $f(r)$ about $r = \beta$
-%
-\[ f(r) = F_{1}(r) + \mathcal{O}(r^2) = 2 |\beta| e^{-\beta^2} |r - \beta| + \mathcal{O}(r^2)\]
-%
-and expanding $f(r)$ about $r = -\beta$ yields
-%
-\[ f(r) = F_{2}(r) + \mathcal{O}(r^2)  = 2 |\beta| e^{-\beta^2} |r + \beta| + \mathcal{O}(r^2) \]
-%
-To evaluate the transforms of $F_{1}(r)$ and $F_{2}(r)$, we need only use the fact that $\int_{-\infty}^{\infty} e^{ikx} |x| dx = \frac{-2}{k^2}$, thus
-%
-\begin{align*}
-G_{1}(p) & = 2 |\beta| e^{-\beta^2} \int_{-\infty}^{\infty} dr \, e^{i 2\alpha \frac{p}{\hbar} r}|r - \beta|\\
-& =  2 |\beta| e^{-\beta^2} \int_{-\infty}^{\infty} dx \, e^{i 2\alpha \frac{p}{\hbar} (x + \beta)} |x|\\
-& =  2 |\beta| e^{-\beta^2} e^{i 2\alpha \frac{p}{\hbar} \beta} \int_{-\infty}^{\infty} dx \, e^{i 2\alpha \frac{p}{\hbar} x} |x|\\
-& =  2 |\beta| e^{-\beta^2} e^{i 2\alpha \frac{p}{\hbar} \beta} \dfrac{-2}{(2\alpha \frac{p}{\hbar})^2}\\
-& =  \dfrac{- \hbar^2 |\beta| e^{-\beta^2} }{\alpha^2 p^2} e^{i 2\alpha \frac{p}{\hbar} \beta}
-\end{align*}
-and the expression for $G_{2}(p)$ can be easily obtained by exchanging $\beta \rightarrow -\beta$, thus
-%
-\[ G_{2}(p) = \dfrac{- \hbar^2 |\beta| e^{-\beta^2} }{\alpha^2 p^2} e^{-i 2\alpha \frac{p}{\hbar} \beta} \]
-%
-The transformation of $f(r)$ is for large $p$,
-\[ \int_{-\infty}^{\infty} dr \, e^{i 2\alpha \frac{p}{\hbar} r} f(r) = \dfrac{- \hbar^2 |\beta| e^{-\beta^2} }{\alpha^2 p^2} (e^{i 2\alpha \frac{p}{\hbar} \beta} + e^{-i 2\alpha \frac{p}{\hbar} \beta}) \]
-returning to the momentum distribution then,
-%
-\begin{align*}
-n_{B}(p) & = \dfrac{- 2\hbar }{\alpha \pi^2 p^2} \int_{-\infty}^{\infty} dR \int_{-\infty}^{\infty} dQ_{2} \,  e^{-(R^2 + Q_{2}^{2})} |\beta| e^{-\beta^2} (e^{i 2\alpha \frac{p}{\hbar} \beta} + e^{-i 2\alpha \frac{p}{\hbar} \beta}) \\
-& = \dfrac{-2 \hbar }{\alpha \pi^2 p^2} \int_{-\infty}^{\infty} dR \int_{-\infty}^{\infty} dQ_{2} \,  e^{-(R^2 + Q_{2}^{2})} |\beta| e^{-\beta^2} (e^{i 2\alpha \frac{p}{\hbar} \beta} + e^{-i 2\alpha \frac{p}{\hbar} \beta})
-\end{align*}
-%
-Substitute $X = (Q_{2} - R)/\sqrt{2}$ and $Y = (Q_2 + R)/ \sqrt{2}$
-%
-\begin{align*}
-n_{B}(p) & = \dfrac{-2 \hbar }{\alpha \pi^2 p^2} \int_{-\infty}^{\infty} dY \int_{-\infty}^{\infty} dX \,  e^{-(X^2 + Y^{2})} \sqrt{2}|X| e^{-2 X^2} (e^{i 2\alpha \frac{p}{\hbar} \sqrt{2}X} + e^{-i 2\alpha \frac{p}{\hbar} \sqrt{2}X})\\
-& = \dfrac{-2 \hbar \sqrt{2}}{\alpha \pi^2 p^2} \int_{-\infty}^{\infty} dY e^{-Y^2}\int_{-\infty}^{\infty} dX \,  e^{-3 X^2} |X| (e^{i 2 \sqrt{2}\alpha \frac{p}{\hbar}X} + e^{-i 2 \sqrt{2}\alpha \frac{p}{\hbar} X})\\
-& = \dfrac{-2 \hbar \sqrt{2}}{\alpha \pi \sqrt{\pi} p^2} \int_{-\infty}^{\infty} dX \,  e^{-3 X^2} |X| (e^{i 2 \sqrt{2}\alpha \frac{p}{\hbar} X} + e^{-i 2 \sqrt{2}\alpha \frac{p}{\hbar} X})
-\end{align*}
-%
-Substitute $u = \sqrt{3} X$ to obtain
-%
-\[
-n_{B}(p) = \dfrac{-2 \hbar \sqrt{ 2 }}{3\alpha \pi \sqrt{\pi} p^2} \int_{-\infty}^{\infty} du \,  e^{-u^2} |u| (e^{i 2 \sqrt{ \frac{2}{3} }\alpha \frac{p}{\hbar} u} + e^{-i 2 \sqrt{ \frac{2}{3} }\alpha \frac{p}{\hbar} u})
+from which we can infer that the Tan contact for two harmonically trapped hard-core bosons is
+\[ 
+C_{B}= \dfrac{2}{\pi} \sqrt{\dfrac{2}{\pi}}
 \]
-%
-Using the same theorem from before, we can evaluate this integral for large $p$
+This is consistent with the ground state energy of two bosons in the TG ($g \rightarrow \infty$) limit, which reads
+\[ 
+E_{B} = E_{0} - 2 \sqrt{\dfrac{2}{\pi}}\dfrac{1}{g}
+\]
+and from the adiabatic sweep theorem, we have (see Eur. Phys. J. Special Topics \textbf{226}, 1583 (2017))
+\[
+\dfrac{dE_{B}}{d(1/g)} = -2\sqrt{\dfrac{2}{\pi}} = - \pi C_{B}
+\]
+
+\section{coefficient of momentum tail for hca}
+
+To find the momentum tail coefficient for hard-core anyons, the calculation is very similar to the calculation for hard-core bosons. I will give the derivation for the result
+
+\[
+\lim_{p \rightarrow \infty} n_\kappa(p) = \cos^2\left(\frac{\pi \kappa}{2}\right) \dfrac{2}{\pi} \sqrt{\dfrac{2}{\pi}} \dfrac{(\hbar m \omega)^{3/2}}{p^4}
+\]
+where the $\kappa$ subscript denotes the anyon parameter of the anyon two-body system. 
+
+Like before the fermion and hard-core anyon wavefunctions are
+
+\[ \Psi_{B}(x_{1},x_{2}) = \dfrac{1}{\sqrt{\pi} \alpha^2} e^{-\frac{1}{2\alpha^2} (x_{1}^2 + x_{2}^2)} |x_{2} - x_{1}| \]
+\[ \Psi_\kappa(x_{1},x_{2}) = e^{-i \frac{\pi \kappa}{2}  \epsilon(x_{2} - x_{1})} \Psi_{B}(x_{1},x_{2})   \]
+
+where the second relation holds up to a constant phase factor and follows from the anyon-fermi mapping in Section III of this note. So the anyon momentum distribution is
+
 \begin{align*}
-n_{B}(p) & = \dfrac{-2 \hbar \sqrt{ 2 }}{3\alpha \pi \sqrt{\pi} p^2} 
-\left( \int_{-\infty}^{\infty} du \,  e^{i 2 \sqrt{ \frac{2}{3} }\alpha \frac{p}{\hbar} u} e^{-u^2} |u| + \int_{-\infty}^{\infty} du \,  e^{-i 2 \sqrt{ \frac{2}{3} }\alpha \frac{p}{\hbar} u} e^{-u^2} |u|) \right)\\
-& \approx \dfrac{-2 \hbar \sqrt{ 2 }}{3\alpha \pi \sqrt{\pi} p^2} 
-\left(
-\dfrac{-2}{(2 \sqrt{ \frac{2}{3} }\alpha \frac{p}{\hbar})^2}
- + \dfrac{-2}{(2 \sqrt{ \frac{2}{3} }\alpha \frac{-p}{\hbar})^2}
-\right)\\
-& = \dfrac{-2 \hbar \sqrt{ 2 }}{3\alpha \pi \sqrt{\pi} p^2}
-\left(
-\frac{-4 \hbar^2}{\dfrac{8}{3} \alpha^2 p^2}
-\right) = 
-\dfrac{\hbar^3 \sqrt{2}}{ \alpha^3 \pi \sqrt{\pi} p^4}
-=
-\dfrac{1}{\pi} \hbar^3 \sqrt{\left(\dfrac{m \omega}{\hbar}\right)^3} \sqrt{\dfrac{2}{\pi}} \dfrac{1}{p^4}\\
-& = \dfrac{1}{\pi} \sqrt{\dfrac{2}{\pi}} \dfrac{(\hbar m \omega)^{3/2}}{p^4}
+n_\kappa (p) & = \dfrac{N}{2 \pi \hbar} \int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} dx' e^{i \frac{p}{\hbar} (x - x')} \rho_\kappa(x,x')\\
+& =  \dfrac{N}{2 \pi \hbar} \int_{-\infty}^{\infty} dx_{2} 
+\left|\int_{-\infty}^{\infty} dx  e^{i \frac{p}{\hbar} x} \Psi_\kappa^*(x,x_{2}) \right|^2
 \end{align*}
 
+Consider the integral
+\begin{align*}
+\int_{-\infty}^{\infty} dx \, e^{i \frac{p}{\hbar} x} \Psi_\kappa^*(x_{1},x_{2}) & = 
+\int_{-\infty}^{\infty} dx \, e^{i \frac{p}{\hbar} x}  e^{i \frac{\pi \kappa}{2}  \epsilon(x_{2} - x)} \Psi_{B}^*(x, x_{2})\\
+& = \int_{-\infty}^{\infty} dx \, e^{i \frac{p}{\hbar} x} \left( \cos\left(\frac{\pi \kappa}{2}\right) + i \epsilon(x_{2} - x) \sin\left(\frac{\pi \kappa}{2} \right) \right) \Psi_{B}^*(x, x_{2})
+\end{align*}
+Because $\epsilon(x_{2} - x)\Psi_{B}^*(x, x_{2}) = \Psi_{F}(x, x_{2}) $, in the $p \rightarrow \infty$ limit, the $\sin$ term above results in an exponentially decaying term, which means it can be neglected because the $\cos$ term results in a power law $1/p^4$ decay. Thus,
+
+\begin{align*}
+\lim_{p \rightarrow \infty} \left[ \int_{-\infty}^{\infty} dx  e^{i \frac{p}{\hbar} x} \Psi_\kappa^*(x_{1},x_{2}) \right] & =  
+\cos\left(\frac{\pi \kappa}{2}\right) \int_{-\infty}^{\infty} dx  e^{i \frac{p}{\hbar} x} \Psi_{B}^*(x, x_{2})\\
+& = -\cos\left(\frac{\pi \kappa}{2}\right) \dfrac{2 \hbar^2 e^{-(x_{2}/\alpha)^{2}}}{\sqrt{\pi}\alpha^2 p^2}
+\end{align*}
+where the last equality comes from the integrals evaluated in the previous section and $Q_{2}$ is shorthand for $x_{2}/\alpha$. So,
+\begin{align*}
+\lim_{p \rightarrow \infty} n_\kappa (p) & = \dfrac{2 N \hbar^3}{\alpha^4 \pi^2 p^4} 
+\cos^2\left(\frac{\pi \kappa}{2}\right)  \int_{-\infty}^{\infty} dx_{2}  e^{-2(x_{2}/\alpha)^{2}}\\
+& = \dfrac{2}{\pi} \sqrt{\dfrac{2}{\pi}} \cos^2\left(\frac{\pi \kappa}{2}\right) \dfrac{(\hbar m \omega)^{3/2}}{p^4}
+\end{align*}
+
+Numerical simulation can confirm the analytic results I have just cited. We can infer the anyon momentum tail coefficient from numerical values for $n_{\kappa}(p)$.  The plot in fig. \ref{fig:AnyonCoeff} compares the analytic and numerical calculation for the tail coefficient divided by $ \frac{2}{\pi} \sqrt{\frac{2}{\pi}}$ (should just be $\cos^2\left(\frac{\pi \kappa}{2}\right)$). This confirms the calculations from Sections IV and V.
+
+If we define the momentum tail coefficient as the Tan contact, then
+\[
+C_{\kappa} = \cos^2\left(\frac{\pi \kappa}{2}\right) C_{B}
+\]
+which is consistent with the result obtained in Eur. Phys. J. D \textbf{71}, 135 (2017). Note that in that paper, the anyon statistical parameter $\chi$ is equal to $(1 - \kappa)$ in our notation.
+
+An anyon gas with interaction strength $g$ has the same energy as a bosonic gas with interaction strength $g' = \frac{g}{\cos\left(\frac{\pi \kappa}{2}\right)}$. Therefore, in the large $g$ limit, the two harmonically trapped anyons should have energy
+\[
+E_{\kappa} = E_{0} - 2\sqrt{\dfrac{2}{\pi}} \frac{1}{g'} 
+= E_{0} - 2\sqrt{\dfrac{2}{\pi}} \frac{\cos\left(\frac{\pi \kappa}{2}\right)}{g}
+\]
+Therefore, it seems that the adiabatic sweep theorem for anyon gas should read
+\[
+\frac{dE_{\kappa}}{d(1/g)} = - 2 \cos\left(\frac{\pi \kappa}{2}\right) \sqrt{\frac{2}{\pi}} = -\pi C_{\kappa} / \cos\left(\frac{\pi \kappa}{2}\right)
+\]
+
+\begin{center}
+\begin{figure}[h]
+	\includegraphics[scale=.5]{"../Plots/AnyonCoeff"}
+	\caption{Anyon momentum tail coefficient plotted as a function of $\kappa$}
+	\label{fig:AnyonCoeff}
+\end{figure}
+\end{center}
+
+\section{Time Evolution of Momentum Tail for expanding hca}
+
+Let's consider the case where two hard-core anyons in the ground state of a harmonic trap are released suddenly. That is, the trap frequency $\omega$ changes suddenly from $\omega_{0}$ to 0. The time evolution of a particle in a harmonic trap with a time dependent trap frequency can be found analytically. 
+
+Let the potential $V(x) = \frac{1}{2} m \omega^2(t) x^2$ where $\omega(t) = \omega_0$ for $t < 0$ and let $\phi_j(x; 0)$ be the $j^{th}$ excited state solution for the static case with trap frequency $\omega_0$. If $\phi_j(x; t)$ is the solution for the time dependent case, then 
+\[
+\phi_j(x; t) = \frac{1}{\sqrt{b}}\phi_j(x/b; 0) e^{i (\frac{x^2}{2} \frac{\dot{b}}{b} - E_j \tau (t) ) }
+\]
+
+where $b(t)$ and $\tau(t)$ are determined by 
+
+\begin{align*}
+\ddot{b} + \omega^2(t) b = b^{-3}\\
+\tau(t) = \int^{t}_{0}dt' \, b^{-2}(t')
+\end{align*}
+
+In the sudden expansion case where $\omega(t) = \omega_0$ for $t < 0$ and $\omega(t) = 0$ for $t > 0$, solving these equations with the initial conditions that $b(0) = 1$ and $b'(0) = 0$ gives
+\begin{eqnarray}
+b(t) = \sqrt{1 + t^2}\\
+\tau(t) = \arctan(t)
+\end{eqnarray}
+
+These equations can be used to obtain time dependent expressions for the anyonic wavefunction, one-body density matrix, and momentum distribution.
+
+\begin{align*}
+\Psi_{\kappa}(x_{1}, x_{2}; t) & = 
+\frac{1}{b} \Psi_{\kappa}(\frac{x_{1}}{b}, \frac{x_{2}}{b}; 0)
+\exp \left[ \frac{i \dot{b}}{2 b} (x_{1}^2 + x_{2}^2) - i \tau(t) (E_0 + E_1) \right]\\
+\rho_{\kappa}(x, x'; t) & = \frac{1}{b} \rho_{\kappa}(\frac{x}{b}, \frac{x'}{b}; 0)
+\exp \left[ \frac{i \dot{b}}{2 b} (x'^2 - x^2) \right]\\
+n_{\kappa}(p ; t) & = \dfrac{N}{2\pi b} \int dx \int dx' 
+\rho_{\kappa}(\frac{x}{b}, \frac{x'}{b}; 0)
+\exp \left[ip(x - x') +	 \frac{i \dot{b}}{2 b} (x'^2 - x^2) \right]
+\end{align*}
+where
+\begin{align*}
+\Psi_{\kappa}(x_{1}, x_{2}; 0) & = 
+e^{i \pi (1 - \kappa) \theta(x_{2} - x_{1})} \Psi_{F}(x_{1}, x_{2}; 0)\\
+\rho_{\kappa}(x, x'; 0) & = \int dx_2 \, \Psi_{\kappa}^*(x,x_2; 0) \Psi_\kappa(x',x_2; 0)
+\end{align*}
+
+\begin{center}
+\begin{figure}[h!]
+	\includegraphics[scale=.43]{"../Plots/MomDistExpandingPair"}
+	\caption{Fermionization of HCB (left) and HCA (right $\kappa = \frac{1}{2}$) -- dashed red line corresponds to the fermion distribution}
+	\label{fig:HCBFermionizationPair}
+\end{figure}
+\end{center}
+
+Minguzzi et al. (Phys. Rev. Lett. 94, 240404) show using the stationary phase method that as $t \rightarrow \infty$ the momentum distribution of hard-core bosons approaches the fermion momentum distribution. Their numerical calculations also confirm this. I have performed numerical calculation to reproduce this fermionization for two hard-core bosons. These numerical results are depicted in fig. \ref{fig:HCBFermionizationPair}. 
+
+Using numerical simulation, I also confirmed that two expanding hard-core anyons will experience the same fermionization in their momentum distribution. These results are also in fig. \ref{fig:HCBFermionizationPair} in the plot on the right.
+
+To calculate the time evolution of the momentum tail coefficient, we start by simplifying the expression for the momentum distribution to obtain
+\begin{align*}
+n_{\kappa}(p ; t) & = \dfrac{N b}{2\pi} \int du \int dv 
+\rho_{\kappa}(u, v; 0)
+\exp \left[ibp(u - v) +	 \frac{i \dot{b}b}{2 } (v^2 - u^2) \right]\\
+& = \dfrac{N b}{2\pi} \int dx_{2} \left| \int dx \, e^{ibpx} \Psi_{\kappa}(x, x_{2}; 0) e^{\frac{i \dot{b}b}{2} x^2}\right|^2
+\end{align*}
+%
+Evaluating the integral in the modulus square we obtain
+%
+\begin{align*}
+\int dx \, e^{ibpx} \Psi_{\kappa}(x, x_{2}; 0) e^{\frac{i \dot{b}b}{2} x^2} 
+= \cos\left(\frac{\pi \kappa}{2}\right) 
+\frac{1}{\sqrt{\pi}} e^{- x_{2}^2} \frac{-2}{b^2 p^2} e^{i \delta} 
+\text{	as } p \rightarrow \infty 
+\end{align*}
+where $\delta$ is a constant phase shift that will be eliminated by the modulus square and can therefore be ignored. Thus,
+\[
+\lim_{p \rightarrow \infty} n_{\kappa}(p ; t) = 
+\frac{4N}{2 \pi^2 b^3 p^4} \cos^2\left(\frac{\pi \kappa}{2}\right) \sqrt{\frac{\pi}{2}}
+= \frac{2}{\pi} \sqrt{\frac{2}{\pi}} \cos^2\left(\frac{\pi \kappa}{2}\right) \frac{1}{b^3 p^4}
+\]
 \begin{equation}
-\therefore \lim_{p \rightarrow \infty} n_{B}(p) = \dfrac{1}{\pi} \sqrt{\dfrac{2}{\pi}} \dfrac{(\hbar m \omega)^{3/2}}{p^4}
+\lim_{p \rightarrow \infty} n_{\kappa}(p ; t) = 
+\frac{2}{\pi} \sqrt{\frac{2}{\pi}} \cos^2\left(\frac{\pi \kappa}{2}\right) \frac{1}{b^3 p^4}
 \end{equation}
+
+I made two numerical calculations of the time evolution of the momentum tail coefficient for $\kappa = 0$ and $\kappa = \frac{1}{2}$. Both numerical calculations were in agreement with the analytic prediction given in equation 11. Plots of the time evolution are depicted in fig. \ref{fig:HCATimeDepPair}
+
+\begin{center}
+\begin{figure}[h]
+	\includegraphics[scale=.44]{"../Plots/MomTailCoeffTimeDepRow"}
+	\caption{Time evolution of momentum tail coefficient for $\kappa = 0$ (left) and similarly for $\kappa = 1/2$ (right)} 
+	\label{fig:HCATimeDepPair}
+\end{figure}
+\end{center}
 
 %\section{two anyons in harmonic trap with finite contact interaction}
 %Consider the Hamiltonian for two anyons:
