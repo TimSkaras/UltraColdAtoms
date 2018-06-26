@@ -108,7 +108,7 @@ should hold for some constant $C$ assuming $p$ is sufficiently large. This const
 
 If the $\frac{1}{2\pi}$ prefactor is included in Minguzzi's coefficient, my numerical results should be in agreement with Minguzzi's coefficient, yet they still differ by a factor of 2. According to Minguzzi's paper, when the prefactor is included we have $C = \frac{1}{\pi} \sqrt{\frac{2}{\pi}} \approx 0.253974\ldots$, which is about half what I calculated from my numerical data.
 
-\section{coefficient of momentum tail for hcb}
+\section{momentum tail coefficient for hcb}
 
 In the following section, I will try to reproduce the result from Minguzzi's paper that 
 \[ \lim_{p \rightarrow \infty} n(p) = 2\sqrt{\frac{2}{\pi }} \frac{(\hbar m \omega)^{3/2}}{p^4}  \]
@@ -173,7 +173,7 @@ and from the adiabatic sweep theorem, we have (see Eur. Phys. J. Special Topics 
 \dfrac{dE_{B}}{d(1/g)} = -2\sqrt{\dfrac{2}{\pi}} = - \pi C_{B}
 \]
 
-\section{coefficient of momentum tail for hca}
+\section{momentum tail coefficient for hca}
 
 To find the momentum tail coefficient for hard-core anyons, the calculation is very similar to the calculation for hard-core bosons. I will give the derivation for the result
 
@@ -322,12 +322,33 @@ where $\delta$ is a constant phase shift that will be eliminated by the modulus 
 \end{equation}
 
 I made two numerical calculations of the time evolution of the momentum tail coefficient for $\kappa = 0$ and $\kappa = \frac{1}{2}$. Both numerical calculations were in agreement with the analytic prediction given in equation 11. Plots of the time evolution are depicted in fig. \ref{fig:HCATimeDepPair}
-
+%
 \begin{center}
 \begin{figure}[h]
 	\includegraphics[scale=.44]{"../Plots/MomTailCoeffTimeDepRow"}
 	\caption{Time evolution of momentum tail coefficient for $\kappa = 0$ (left) and similarly for $\kappa = 1/2$ (right)} 
 	\label{fig:HCATimeDepPair}
+\end{figure}
+\end{center}
+%
+\section{Time Evolution of oscillating hca}
+
+In the last section, we considered the case where the trap frequency of the harmonic trap is suddenly changed from $\omega_0$ to 0. Now, we will consider the case where the trap frequency is changed from $\omega_0$ to a finite value $\omega_1$.
+
+Again we can use the same equations as before to describe the time evolution of the system. It can be shown that if $\omega(t) = \omega_0$ for $t \leq 0$ and $\omega(t) = \omega_1$ for $t > 0$, then
+\begin{align*}
+b(t) = \sqrt{1 + \frac{\omega_0^2 - \omega_1^2}{\omega_1^2} \sin^2(\omega_1 t)}\\
+\tau(t) = \frac{1}{\omega_0} \arctan\left(\frac{\omega_0}{\omega_1} \tan(\omega_1 t)\right)
+\end{align*}
+Under these conditions, the wave function and the momentum distribution will undergo oscillations with period $T = \pi/\omega_1$. Using the same expressions for the OBDM and momentum distribution from the previous section, we can plot the time evolution of the momentum distribution by solving the integrals numerically. 
+
+In fig. \ref{fig:OscHCATimeDepPair}, there are two plots depicting the time evolution of the oscillating anyon gas for the hard-core boson case ($\kappa = 0$) and the $\kappa = 1/2$ case. For the sake of clarity, only half the period is depicted (where full period $T = 3\pi$) because the time evolution of the latter half of the period is the same as the first half but reversed. So, the plots in fig. \ref{fig:OscHCATimeDepPair} only give time slices from $t = 0$ to $t = \frac{3\pi}{2}$ 
+
+\begin{center}
+\begin{figure}[h]
+	\includegraphics[scale=.52]{"../Plots/MomDistOscillatingPair"}
+	\caption{Time evolution of oscillating anyon gas $\kappa = 0$ (left) and similarly for $\kappa = 1/2$ (right)} 
+	\label{fig:OscHCATimeDepPair}
 \end{figure}
 \end{center}
 
