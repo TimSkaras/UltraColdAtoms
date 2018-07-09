@@ -376,7 +376,7 @@ where $A_{N} = \dfrac{2^{(N - 1)N/4}}{\pi^{N/4}} \left( \prod_{n = 0}^{N} n! \ri
 \begin{align*}
 n_{B}(p) &= \dfrac{N}{2 \pi} \int dx \int dx' e^{i p (x - x')} \rho(x, x')\\
 & = \dfrac{N}{2 \pi} \int dx_{2} \cdots \int dx_{N} \left| \int dx e^{i p x} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \right|^2\\
-& = \tilde{A}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{2 \leq j < k \leq N} |x_{k} - x_{j}| 
+& = \tilde{A}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{2 \leq i < q \leq N} |x_{q} - x_{i}| \right)
 	\left| \int dx e^{i p x} e^{-\frac{1}{2} x^2} \prod_{2 \leq j \leq N} |x_{j} - x| \right|^2
 \end{align*} 
 %
@@ -413,7 +413,60 @@ I have tried to simplify the expression for $A_{N}$ as much as I can, but I stil
 
 \section{momentum tail coefficient for hca (n-particle case)}
 
+In this section, I will find the momentum tail for $N$ hard-core anyons. We will be able to use some of the results from the previous section to help us. The anyon-fermi mapping is given by
+\[
+A_{\kappa}(x_{1},x_{2}, \ldots, x_{N}) = \prod_{2 \leq j < k \leq N} e^{i\pi(1 - \kappa) \theta(x_{k} - x_{j})} = \exp\left[ i\pi(1-\kappa) \left( \sum_{j < k} \theta(x_{k} - x_{j}) \right) \right]
+\]
+Thus, the anyon wave function is 
+\[
+\Psi_{\kappa}(x_{1}, \ldots, x_{N}) = A_{N} \times A_{\kappa}(x_{1},\ldots, x_{N}) \times \exp\left(-\frac{1}{2} 
+\sum_{i = 1}^{N} x_{i}^2\right) \prod_{1 \leq j < k \leq N} (x_{k} - x_{j})
+\]
+But as was mentioned in a previous section, we can also write this as
+\[
+\Psi_{\kappa}(x_{1}, \ldots, x_{N}) = A_{N}  \exp\left(-\frac{1}{2} 
+\sum_{i = 1}^{N} x_{i}^2\right) \exp\left( i\frac{\pi \kappa}{2} \Sigma_{j < k} \epsilon(x_{k} - x_{j}) \right) \prod_{1 \leq j < k \leq N} |x_{k} - x_{j}|
+\]
+Then the momentum distribution is
+\begin{align*}
+n_{\kappa}(p) & = \frac{N}{2\pi} \int dx_{2} \cdots \int dx_{N} \left| \int dx e^{ipx} \Psi_{\kappa}^*(x, x_{2}, \ldots, x_{N}) \right|^2\\
+& = \frac{N}{2\pi} \int dx_{2} \cdots \int dx_{N} \left| \int dx e^{ipx} \exp(i\frac{\pi \kappa}{2} \Sigma_{j=2}^N \epsilon(x_{j} - x)) \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \right|^2\\
+\end{align*}
+Evaluating the integral in the modulus square we obtain
+\begin{align*}
+\int dx e^{ipx} &e^{i\frac{\pi \kappa}{2} \Sigma_{j=2}^N \epsilon(x_{j} - x)} \Psi_{B}^*(x, x_{2}, \ldots, x_{N})
+ = \int dx e^{ipx} e^{i\frac{\pi \kappa}{2}\epsilon(x_{2} - x)} \cdots e^{i\frac{\pi \kappa}{2}\epsilon(x_{N} - x)}  \Psi_{B}^*(x, x_{2}, \ldots, x_{N})\\
+& = \int dx e^{ipx} \left(\cos(\pi \kappa/2) + i\epsilon(x_{2} - x)\sin(\pi \kappa/2) \right) 
+\cdots \left(\cos(\pi \kappa/2) + i\epsilon(x_{N} - x)\sin(\pi \kappa/2)\right)  \Psi_{B}^*(x, x_{2}, \ldots, x_{N})\\
+\end{align*}
+To show how we should handle this product, it will be easier to look at the case for $N = 3$, where
+\begin{align*}
+ \int dx e^{ipx} \left(\cos(\pi \kappa/2) + i\epsilon(x_{2} - x)\sin(\pi \kappa/2)\right) 
+\left(\cos(\pi \kappa/2) + i\epsilon(x_{3} - x)\sin(\pi \kappa/2)\right)  \Psi_{B}^*(x, x_{2}, \ldots, x_{N})\\
+= \int dx e^{ipx} \left( \cos^2(\pi \kappa/2) - \epsilon(x_{2} - x)\epsilon(x_{3} - x) \sin^2(\pi \kappa/2) 
++ i\frac{1}{2}\epsilon(x_{2} - x)\sin(\pi \kappa) + i\frac{1}{2}\epsilon(x_{3} - x)\sin(\pi \kappa) \right)\Psi_{B}^*
+\end{align*}
+%
+The integral over the first term can be found easily by using the calculations from the boson case. The two sign functions in the second term undo the bose-fermi mapping in the boson wave function, thus turning $\Psi_{B}$ back into $\Psi_{F}$, so the second term just gives the fermion momentum distribution. The fermion momentum distribution has exponential decay and is not leading order, thus it can be ignored. I will also show that the latter two terms can be ignored. For instance, let's look at the integral for the third term (ignoring prefactors)
+%
+\[
+\int dx e^{ipx} \epsilon(x_{2} - x) \Psi_{B}^*(x, x_{2},x_{3}) = \int dx e^{ipx} \epsilon(x_{2} - x)\exp\left(-\frac{1}{2}( x + x_{2}^2 + x_{3}^2)\right) |x_{3} - x_{2}| |x_{2} - x|
+\]
+Factoring out terms that are constant with respect to $x$ gives
+\[
+\int dx e^{ipx} \epsilon(x_{2} - x) e^{-\frac{1}{2} x^2 } |x_{2} - x| \approx e^{-\frac{1}{2} x_{2}^2} \times 0
+\]
+according to \textit{Applications of Fourier Transforms to Generalized Functions} by M. Rahman (see the table on p. 159). Similarly for arbitrary N, any term with an $\epsilon(x_{j}- x)$ term will not be leading order in momentum, and can therefore be ignored.
 
+Returning to our evaluation of the integral inside the modulus square, we conclude
+\[
+\int dx e^{ipx} e^{i\frac{\pi \kappa}{2} \Sigma_{j=2}^N \epsilon(x_{j} - x)} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) 
+= \int dx e^{ipx} \cos^{N-1}(\pi \kappa/2) \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) 
+\]
+Hence, for large p
+\[
+n_{\kappa}(p) = \cos^{2N - 2}(\pi \kappa/2) \dfrac{C_{N}}{p^4}
+\]
 %\section{two anyons in harmonic trap with finite contact interaction}
 %Consider the Hamiltonian for two anyons:
 %\[ H = -\frac{1}{2} \left( \partial^2_{x_1} +\partial^2_{x_2} \right) + \frac{1}{2}(x_1^2+x_2^2) + g\delta(x_1-x_2)  \] This can be decomposed to the COM and relative coordinates. The COM Hamiltonian is just the harmoinc oscillator, while the relative Hamiltonian takes the form ($x\equiv x_1-x_2$): \[ H_{\rm rel} = -\frac{1}{2} \partial^2_x + \frac{1}{2} x^2 + g\delta(x) \] The relative wavefunction has to satisfiy \[  \phi(x) = e^{i\pi \kappa \epsilon(x)} \,\phi(-x) \] This constraint, however, seems to indicate that the wavefunction is discontinuous at $x=0$. If this is the case, then the second order derivative term will result in a derivative in delta function, which cannot be cancelled out. The paper PRL {\bf 83}, 1275 (1998) seems to be relevant, but I am not sure how they got from Eq. (16) to (17).
