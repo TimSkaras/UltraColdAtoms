@@ -368,15 +368,15 @@ The expression for the momentum tail coefficient in equation \ref{MomentumTail} 
 In this section I will show that for $N$ hard-core bosons in a harmonic trap, the momentum distribution has a momentum tail that decays like $1/p^4$. It can be shown that (see Girardeau et al. \footnotemark\,)
 \footnotetext{M. D. Girardeau, E. M. Wright, and J. M. Triscari, Physical Review A \textbf{63} 033601 }
 \begin{align*}
-\Psi_B(x_{1}, x_{2}, \ldots, x_{N}) & = C_{N} \exp\left(-\frac{1}{2} \sum_{i = 1}^{N} x_{i}^2\right) \prod_{1 \leq j < k \leq N} |x_{k} - x_{j}|\\
+\Psi_B(x_{1}, x_{2}, \ldots, x_{N}) & = A_{N} \exp\left(-\frac{1}{2} \sum_{i = 1}^{N} x_{i}^2\right) \prod_{1 \leq j < k \leq N} |x_{k} - x_{j}|\\
 \rho(x, x') & = \int dx_{2} \cdots \int dx_{N} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \Psi_{B}(x', x_{2}, \ldots, x_{N})
 \end{align*}
-where $C_{N} = \dfrac{2^{(N - 1)N/4}}{\pi^{N/4}} \left( \prod_{n = 0}^{N} n! \right)^{-1/2}$. Thus, by letting $\tilde{C}_{N} = \frac{N}{2 \pi} C_{N}^2$
+where $A_{N} = \dfrac{2^{(N - 1)N/4}}{\pi^{N/4}} \left( \prod_{n = 0}^{N} n! \right)^{-1/2}$. Thus, by letting $\tilde{A}_{N} = \frac{N}{2 \pi} A_{N}^2$
 %
 \begin{align*}
 n_{B}(p) &= \dfrac{N}{2 \pi} \int dx \int dx' e^{i p (x - x')} \rho(x, x')\\
 & = \dfrac{N}{2 \pi} \int dx_{2} \cdots \int dx_{N} \left| \int dx e^{i p x} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \right|^2\\
-& = \tilde{C}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{2 \leq j < k \leq N} |x_{k} - x_{j}| 
+& = \tilde{A}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{2 \leq j < k \leq N} |x_{k} - x_{j}| 
 	\left| \int dx e^{i p x} e^{-\frac{1}{2} x^2} \prod_{2 \leq j \leq N} |x_{j} - x| \right|^2
 \end{align*} 
 %
@@ -384,6 +384,35 @@ For large $p$, we can approximate the integral inside the modulus as
 \[
 \int dx e^{i p x} e^{-\frac{1}{2} x^2} \prod_{2 \leq j \leq N} |x_{j} - x| = \left( \dfrac{-2}{p^2} \right) \sum_{j = 2}^{N} e^{-\frac{1}{2} x_{j}^2} e^{i p x_{j}} \prod_{k \neq j} |x_{k} - x_{j}|
 \]
+Plug this back into the original expression and abbreviating the condition under the product symbol
+\[
+n_{B}(p) = \tilde{A}_{N} \frac{4}{p^4} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{ i < q} |x_{q} - x_{i}| 
+	\sum_{j = 2}^{N} \sum_{\ell = 2}^{N} e^{-\frac{1}{2} (x_{j}^2 + x_{\ell}^2)} e^{i p (x_{j} - x_{\ell})} 
+	\prod_{k \neq j} |x_{k} - x_{j}| \prod_{m \neq \ell} |x_{m} - x_{\ell}|
+\]
+Now, whenever $x_{j} \neq x_{\ell}$ in the double sum, there will be $e^{i p (x_{j} - x_{\ell})}$ term. Elements in the double sum with this term (after they are integrated over) will lead to higher order dependencies (e.g., $1/p^2$), and once these terms are multiplied by $1/p^4$ in the prefactor, they will no longer be leading order. Thus, we can neglect any terms in the double sum where $x_{j} \neq x_{\ell}$, giving
+\begin{align*}
+n_{B}(p) & = \tilde{A}_{N} \frac{4}{p^4} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{ i < q} |x_{q} - x_{i}| 
+	\sum_{j = 2}^{N} e^{-x_{j}^2} \prod_{k \neq j} (x_{k} - x_{j})^2\\
+	& = \tilde{A}_{N} \frac{4}{p^4} \sum_{j = 2}^{N} \int dx_{2} \cdots \int dx_{N} 
+	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} |x_{q} - x_{i}| \right) 
+	e^{-x_{j}^2} \prod_{k \neq j} (x_{k} - x_{j})^2\\
+\end{align*}
+
+Because each integral in this sum is the same but with the indices rotated, we can write
+\begin{align*}
+n_{B}(p) & = \tilde{A}_{N} \frac{4 * (N - 1)}{p^4} \int dx_{2} \cdots \int dx_{N} 
+	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} |x_{q} - x_{i}| \right) 
+	e^{-x_{2}^2} \prod_{k \neq 2} (x_{k} - x_{2})^2\\
+	& = \dfrac{C_{N}}{p^4}\\
+C_{N} & = 4(N - 1)\tilde{A}_{N}  \int dx_{2} \cdots \int dx_{N} 
+	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} |x_{q} - x_{i}| \right) 
+	e^{-x_{2}^2} \prod_{k \neq 2} (x_{k} - x_{2})^2\\
+\end{align*}
+I have tried to simplify the expression for $A_{N}$ as much as I can, but I still have not been able to find an analytic expression for it. Nonetheless, this still shows that the momentum distribution has a $1/p^4$ momentum decay for arbitrary $N$. For numerical confirmation of this result, see next section
+
+\section{momentum tail coefficient for hca (n-particle case)}
+
 
 %\section{two anyons in harmonic trap with finite contact interaction}
 %Consider the Hamiltonian for two anyons:
