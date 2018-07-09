@@ -319,6 +319,7 @@ where $\delta$ is a constant phase shift that will be eliminated by the modulus 
 \begin{equation}
 \lim_{p \rightarrow \infty} n_{\kappa}(p ; t) = 
 \frac{2}{\pi} \sqrt{\frac{2}{\pi}} \cos^2\left(\frac{\pi \kappa}{2}\right) \frac{1}{b^3 p^4}
+\label{MomentumTail}
 \end{equation}
 
 I made two numerical calculations of the time evolution of the momentum tail coefficient for $\kappa = 0$ and $\kappa = \frac{1}{2}$. Both numerical calculations were in agreement with the analytic prediction given in equation 11. Plots of the time evolution are depicted in fig. \ref{fig:HCATimeDepPair}
@@ -333,7 +334,7 @@ I made two numerical calculations of the time evolution of the momentum tail coe
 %
 \section{Time Evolution of oscillating hca}
 
-In the last section, we considered the case where the trap frequency of the harmonic trap is suddenly changed from $\omega_0$ to 0. Now, we will consider the case where the trap frequency is changed from $\omega_0$ to a finite value $\omega_1$.
+In the last section, we considered the case where the trap frequency of the harmonic trap is suddenly changed from $\omega_0$ to 0. Now, we will consider the case where the trap frequency is changed from $\omega_0$ to a non-zero value $\omega_1$.
 
 Again we can use the same equations as before to describe the time evolution of the system. It can be shown that if $\omega(t) = \omega_0$ for $t \leq 0$ and $\omega(t) = \omega_1$ for $t > 0$, then
 \begin{align*}
@@ -344,6 +345,8 @@ Under these conditions, the wave function and the momentum distribution will und
 
 In fig. \ref{fig:OscHCATimeDepPair}, there are two plots depicting the time evolution of the oscillating anyon gas for the hard-core boson case ($\kappa = 0$) and the $\kappa = 1/2$ case. For the sake of clarity, only half the period is depicted (where full period $T = 3\pi$) because the time evolution of the latter half of the period is the same as the first half but reversed. So, the plots in fig. \ref{fig:OscHCATimeDepPair} only give time slices from $t = 0$ to $t = \frac{3\pi}{2}$ 
 
+The expression for the momentum tail coefficient in equation \ref{MomentumTail} can be used to find the momentum tail coefficient in the oscillating case, as long as the appropriate function is used for $b(t)$. In fig. \ref{fig:MomTailCoeffComp} there is a plot comparing the time evolution of the momentum tail coefficient for the expansion case and the oscillating case. The time evolution of each has been plotted over one full period where $T = 3\pi$. The momentum tail coefficient decays to zero in the expanding gas case, but oscillates periodically in the case where the the trap frequency is changed to a non-zero value.
+
 \begin{center}
 \begin{figure}[h]
 	\includegraphics[scale=.52]{"../Plots/MomDistOscillatingPair"}
@@ -351,6 +354,36 @@ In fig. \ref{fig:OscHCATimeDepPair}, there are two plots depicting the time evol
 	\label{fig:OscHCATimeDepPair}
 \end{figure}
 \end{center}
+
+\begin{center}
+\begin{figure}[h]
+	\includegraphics[scale=.4]{"../Plots/MomTailCoeffComparison"}
+	\caption{Time evolution of momentum tail in expanding case and oscillating case} 
+	\label{fig:MomTailCoeffComp}
+\end{figure}
+\end{center}
+
+\section{momentum tail coefficient for hcb (n-particle case)}
+
+In this section I will show that for $N$ hard-core bosons in a harmonic trap, the momentum distribution has a momentum tail that decays like $1/p^4$. It can be shown that (see Girardeau et al. \footnotemark\,)
+\footnotetext{M. D. Girardeau, E. M. Wright, and J. M. Triscari, Physical Review A \textbf{63} 033601 }
+\begin{align*}
+\Psi_B(x_{1}, x_{2}, \ldots, x_{N}) & = C_{N} \exp\left(-\frac{1}{2} \sum_{i = 1}^{N} x_{i}^2\right) \prod_{1 \leq j < k \leq N} |x_{k} - x_{j}|\\
+\rho(x, x') & = \int dx_{2} \cdots \int dx_{N} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \Psi_{B}(x', x_{2}, \ldots, x_{N})
+\end{align*}
+where $C_{N} = \dfrac{2^{(N - 1)N/4}}{\pi^{N/4}} \left( \prod_{n = 0}^{N} n! \right)^{-1/2}$. Thus, by letting $\tilde{C}_{N} = \frac{N}{2 \pi} C_{N}^2$
+%
+\begin{align*}
+n_{B}(p) &= \dfrac{N}{2 \pi} \int dx \int dx' e^{i p (x - x')} \rho(x, x')\\
+& = \dfrac{N}{2 \pi} \int dx_{2} \cdots \int dx_{N} \left| \int dx e^{i p x} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \right|^2\\
+& = \tilde{C}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{2 \leq j < k \leq N} |x_{k} - x_{j}| 
+	\left| \int dx e^{i p x} e^{-\frac{1}{2} x^2} \prod_{2 \leq j \leq N} |x_{j} - x| \right|^2
+\end{align*} 
+%
+For large $p$, we can approximate the integral inside the modulus as
+\[
+\int dx e^{i p x} e^{-\frac{1}{2} x^2} \prod_{2 \leq j \leq N} |x_{j} - x| = \left( \dfrac{-2}{p^2} \right) \sum_{j = 2}^{N} e^{-\frac{1}{2} x_{j}^2} e^{i p x_{j}} \prod_{k \neq j} |x_{k} - x_{j}|
+\]
 
 %\section{two anyons in harmonic trap with finite contact interaction}
 %Consider the Hamiltonian for two anyons:
