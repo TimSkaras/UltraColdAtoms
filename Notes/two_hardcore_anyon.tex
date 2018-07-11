@@ -376,7 +376,7 @@ where $A_{N} = \dfrac{2^{(N - 1)N/4}}{\pi^{N/4}} \left( \prod_{n = 0}^{N} n! \ri
 \begin{align*}
 n_{B}(p) &= \dfrac{N}{2 \pi} \int dx \int dx' e^{i p (x - x')} \rho(x, x')\\
 & = \dfrac{N}{2 \pi} \int dx_{2} \cdots \int dx_{N} \left| \int dx e^{i p x} \Psi_{B}^*(x, x_{2}, \ldots, x_{N}) \right|^2\\
-& = \tilde{A}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{2 \leq i < q \leq N} |x_{q} - x_{i}| \right)
+& = \tilde{A}_{N} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{2 \leq i < q \leq N} (x_{q} - x_{i})^2 \right)
 	\left| \int dx e^{i p x} e^{-\frac{1}{2} x^2} \prod_{2 \leq j \leq N} |x_{j} - x| \right|^2
 \end{align*} 
 %
@@ -386,27 +386,27 @@ For large $p$, we can approximate the integral inside the modulus as
 \]
 Plug this back into the original expression and abbreviating the condition under the product symbol
 \[
-n_{B}(p) = \tilde{A}_{N} \frac{4}{p^4} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{ i < q} |x_{q} - x_{i}| 
+n_{B}(p) = \tilde{A}_{N} \frac{4}{p^4} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{ i < q} (x_{q} - x_{i})^2 
 	\sum_{j = 2}^{N} \sum_{\ell = 2}^{N} e^{-\frac{1}{2} (x_{j}^2 + x_{\ell}^2)} e^{i p (x_{j} - x_{\ell})} 
 	\prod_{k \neq j} |x_{k} - x_{j}| \prod_{m \neq \ell} |x_{m} - x_{\ell}|
 \]
 Now, whenever $x_{j} \neq x_{\ell}$ in the double sum, there will be $e^{i p (x_{j} - x_{\ell})}$ term. Elements in the double sum with this term (after they are integrated over) will lead to higher order dependencies (e.g., $1/p^2$), and once these terms are multiplied by $1/p^4$ in the prefactor, they will no longer be leading order. Thus, we can neglect any terms in the double sum where $x_{j} \neq x_{\ell}$, giving
 \begin{align*}
-n_{B}(p) & = \tilde{A}_{N} \frac{4}{p^4} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{ i < q} |x_{q} - x_{i}| 
+n_{B}(p) & = \tilde{A}_{N} \frac{4}{p^4} \int dx_{2} \cdots \int dx_{N} \exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \prod_{ i < q} (x_{q} - x_{i})^2 
 	\sum_{j = 2}^{N} e^{-x_{j}^2} \prod_{k \neq j} (x_{k} - x_{j})^2\\
 	& = \tilde{A}_{N} \frac{4}{p^4} \sum_{j = 2}^{N} \int dx_{2} \cdots \int dx_{N} 
-	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} |x_{q} - x_{i}| \right) 
+	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} (x_{q} - x_{i})^2 \right) 
 	e^{-x_{j}^2} \prod_{k \neq j} (x_{k} - x_{j})^2\\
 \end{align*}
 
 Because each integral in this sum is the same but with the indices rotated, we can write
 \begin{align*}
 n_{B}(p) & = \tilde{A}_{N} \frac{4 * (N - 1)}{p^4} \int dx_{2} \cdots \int dx_{N} 
-	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} |x_{q} - x_{i}| \right) 
+	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} (x_{q} - x_{i})^2 \right) 
 	e^{-x_{2}^2} \prod_{k \neq 2} (x_{k} - x_{2})^2\\
 	& = \dfrac{C_{N}}{p^4}\\
 C_{N} & = 4(N - 1)\tilde{A}_{N}  \int dx_{2} \cdots \int dx_{N} 
-	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} |x_{q} - x_{i}| \right) 
+	\exp\left(- \sum_{i = 2}^{N} x_{i}^2\right) \left( \prod_{ i < q} (x_{q} - x_{i})^2 \right) 
 	e^{-x_{2}^2} \prod_{k \neq 2} (x_{k} - x_{2})^2\\
 \end{align*}
 I have tried to simplify the expression for $A_{N}$ as much as I can, but I still have not been able to find an analytic expression for it. Nonetheless, this still shows that the momentum distribution has a $1/p^4$ momentum decay for arbitrary $N$. For numerical confirmation of this result, see next section
@@ -443,11 +443,12 @@ To show how we should handle this product, it will be easier to look at the case
 \begin{align*}
  \int dx e^{ipx} \left(\cos(\pi \kappa/2) + i\epsilon(x_{2} - x)\sin(\pi \kappa/2)\right) 
 \left(\cos(\pi \kappa/2) + i\epsilon(x_{3} - x)\sin(\pi \kappa/2)\right)  \Psi_{B}^*(x, x_{2}, \ldots, x_{N})\\
-= \int dx e^{ipx} \left( \cos^2(\pi \kappa/2) - \epsilon(x_{2} - x)\epsilon(x_{3} - x) \sin^2(\pi \kappa/2) 
-+ i\frac{1}{2}\epsilon(x_{2} - x)\sin(\pi \kappa) + i\frac{1}{2}\epsilon(x_{3} - x)\sin(\pi \kappa) \right)\Psi_{B}^*
+= \int dx e^{ipx} \left( \cos^2(\pi \kappa/2) 
++ i\frac{1}{2}\epsilon(x_{2} - x)\sin(\pi \kappa) + i\frac{1}{2}\epsilon(x_{3} - x)\sin(\pi \kappa)
+ - \epsilon(x_{2} - x)\epsilon(x_{3} - x) \sin^2(\pi \kappa/2) \right)\Psi_{B}^*
 \end{align*}
 %
-The integral over the first term can be found easily by using the calculations from the boson case. The two sign functions in the second term undo the bose-fermi mapping in the boson wave function, thus turning $\Psi_{B}$ back into $\Psi_{F}$, so the second term just gives the fermion momentum distribution. The fermion momentum distribution has exponential decay and is not leading order, thus it can be ignored. I will also show that the latter two terms can be ignored. For instance, let's look at the integral for the third term (ignoring prefactors)
+The integral over the first term can be found easily by using the calculations from the boson case. I will show that all other terms that have a $\epsilon$ function in them will not be leading order and can therefore be ignored. For instance, let's look at the integral for the second term (ignoring prefactors)
 %
 \[
 \int dx e^{ipx} \epsilon(x_{2} - x) \Psi_{B}^*(x, x_{2},x_{3}) = \int dx e^{ipx} \epsilon(x_{2} - x)\exp\left(-\frac{1}{2}( x + x_{2}^2 + x_{3}^2)\right) |x_{3} - x_{2}| |x_{2} - x|
