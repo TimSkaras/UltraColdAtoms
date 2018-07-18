@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     24974,        674]
+NotebookDataLength[     24972,        674]
 NotebookOptionsPosition[     24067,        653]
-NotebookOutlinePosition[     24410,        668]
-CellTagsIndexPosition[     24367,        665]
+NotebookOutlinePosition[     24408,        668]
+CellTagsIndexPosition[     24365,        665]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -651,8 +651,8 @@ MomDistExpandingAG.png\"\>"], "Output",
   "Out[308]=",ExpressionUUID->"2addbc6d-822f-48d1-8c49-75e3246705f6"]
 }, Open  ]]
 },
-WindowSize->{1600, 817},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{1584, 801},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
 StyleDefinitions->"Default.nb"
 ]
