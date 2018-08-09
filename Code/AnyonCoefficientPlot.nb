@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     65148,       1397]
-NotebookOptionsPosition[     63403,       1364]
-NotebookOutlinePosition[     63744,       1379]
-CellTagsIndexPosition[     63701,       1376]
+NotebookDataLength[     65431,       1402]
+NotebookOptionsPosition[     63686,       1369]
+NotebookOutlinePosition[     64027,       1384]
+CellTagsIndexPosition[     63984,       1381]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -946,17 +946,19 @@ Cell[BoxData[{
       RowBox[{
        RowBox[{"FontWeight", "\[Rule]", "Bold"}], ",", 
        RowBox[{"FontFamily", "\[Rule]", " ", "\"\<Helvetica\>\""}], ",", 
-       RowBox[{"FontSize", "\[Rule]", " ", "26"}]}], "}"}]}]}], 
+       RowBox[{"FontSize", "\[Rule]", " ", "26"}]}], "}"}]}], ",", " ", 
+    RowBox[{"AxesStyle", "\[Rule]", "Thick"}]}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"Export", "[", 
   RowBox[{
-  "\"\<C:/Users/Tim/Documents/PhysicsResearch/Poster/AnyonCoeff.png\>\"", ",",
-    "p2"}], "]"}]}], "Input",
+  "\"\<C:/Users/Tim/Documents/PhysicsResearch/UltraColdAtoms/Poster/\
+AnyonCoeff.png\>\"", ",", "p2"}], "]"}]}], "Input",
  CellChangeTimes->{{3.742764122663617*^9, 3.742764161413123*^9}, {
    3.7427642068914256`*^9, 3.742764258483026*^9}, {3.742764572066585*^9, 
    3.7427646202086535`*^9}, {3.74276470478009*^9, 3.742764727849894*^9}, 
-   3.7427647689778576`*^9, {3.742764828807785*^9, 3.7427648464830575`*^9}},
- CellLabel->"In[63]:=",ExpressionUUID->"9e129396-a5b0-4a2e-88e6-de2cfa2a7039"],
+   3.7427647689778576`*^9, {3.742764828807785*^9, 3.7427648464830575`*^9}, {
+   3.7427729107868643`*^9, 3.7427729484741783`*^9}},
+ CellLabel->"In[67]:=",ExpressionUUID->"9e129396-a5b0-4a2e-88e6-de2cfa2a7039"],
 
 Cell[BoxData[
  TemplateBox[{GraphicsBox[{{{{}, {}, 
@@ -1023,7 +1025,7 @@ aKJxO09jjNb0QJzR0dUZLTRKo5MLzKvdYfU/vQLTDoE3mUdtHlN1wxv/WnYQ
 QaP1XOfZtABHxOtujjkg8CpTnXraqtoeF3pSHTRoQX93xfkpVTvoWPt0lo/R
 qMuy7nsWsAdiwo2Z9yZpPFbSHxBdaoKuQiNvt2ka/XKrvpYFbEapd8Z6fYHX
 KfV9yx4I0EKCutT4fx74RE/Yp400M/4/QyQrVQ==
-          "]]}, Annotation[#, "Charting`Private`Tag$15463#1"]& ], 
+          "]]}, Annotation[#, "Charting`Private`Tag$16109#1"]& ], 
        TagBox[{
          Directive[
           Opacity[1.], 
@@ -1111,7 +1113,7 @@ hj+T5yeov1vjuag2UGvHUUi6dnaTgktB3pzac/emNwETFN62huSbBnxXi5Xd
 E2VAOjlE//GA0ABTzWU40UicIh23Koz35vSomt5dDuHpadJBxq5r9noOqG3X
 cxys+kFBu3pFqmtAuxrHso60aNL98yb3DAqmX6kNlex3sCT7CAl5xtaEgCK1
 CofUXfJkn3OU6/S1LwG31e6KrZr5b58KqjlO5Vqb6v8BrpR6GQ==
-          "]]}, Annotation[#, "Charting`Private`Tag$15463#2"]& ]}}, {}, {}}, {
+          "]]}, Annotation[#, "Charting`Private`Tag$16109#2"]& ]}}, {}, {}}, {
     DisplayFunction -> Identity, Ticks -> {Automatic, Automatic}, 
      AxesOrigin -> {0, 0}, FrameTicks -> {{Automatic, 
         Charting`ScaledFrameTicks[{Identity, Identity}]}, {Automatic, 
@@ -1124,7 +1126,8 @@ CofUXfJkn3OU6/S1LwG31e6KrZr5b58KqjlO5Vqb6v8BrpR6GQ==
         Scaled[0.05]}}, PlotRangeClipping -> True, ImagePadding -> All, 
      DisplayFunction -> Identity, AspectRatio -> 
      NCache[GoldenRatio^(-1), 0.6180339887498948], Axes -> {True, True}, 
-     AxesLabel -> {None, None}, AxesOrigin -> {0, 0}, 
+     AxesLabel -> {None, None}, AxesOrigin -> {0, 0}, AxesStyle -> 
+     Thickness[Large], 
      BaseStyle -> {
       FontWeight -> Bold, FontFamily -> "Helvetica", FontSize -> 26}, 
      DisplayFunction :> Identity, Frame -> {{False, False}, {False, False}}, 
@@ -1350,16 +1353,18 @@ CofUXfJkn3OU6/S1LwG31e6KrZr5b58KqjlO5Vqb6v8BrpR6GQ==
  CellChangeTimes->{{3.7427641295294933`*^9, 3.742764162110637*^9}, 
    3.742764208904855*^9, 3.7427642594537354`*^9, {3.7427645734303503`*^9, 
    3.742764620683521*^9}, {3.7427647058195395`*^9, 3.742764728917094*^9}, 
-   3.742764769797598*^9, {3.742764832701521*^9, 3.7427648473489704`*^9}},
- CellLabel->"Out[63]=",ExpressionUUID->"1b97d83c-b599-4950-bc7e-e10905978c7c"],
+   3.742764769797598*^9, {3.742764832701521*^9, 3.7427648473489704`*^9}, 
+   3.7427729180686665`*^9, 3.7427729598020134`*^9},
+ CellLabel->"Out[67]=",ExpressionUUID->"7f7e5a0e-23ce-4bcf-9843-389304a71ecf"],
 
-Cell[BoxData["\<\"C:/Users/Tim/Documents/PhysicsResearch/Poster/AnyonCoeff.\
-png\"\>"], "Output",
+Cell[BoxData["\<\"C:/Users/Tim/Documents/PhysicsResearch/UltraColdAtoms/\
+Poster/AnyonCoeff.png\"\>"], "Output",
  CellChangeTimes->{{3.7427641295294933`*^9, 3.742764162110637*^9}, 
    3.742764208904855*^9, 3.7427642594537354`*^9, {3.7427645734303503`*^9, 
    3.742764620683521*^9}, {3.7427647058195395`*^9, 3.742764728917094*^9}, 
-   3.742764769797598*^9, {3.742764832701521*^9, 3.742764847614602*^9}},
- CellLabel->"Out[64]=",ExpressionUUID->"608afe78-7a36-4baa-a771-f030440bd80a"]
+   3.742764769797598*^9, {3.742764832701521*^9, 3.7427648473489704`*^9}, 
+   3.7427729180686665`*^9, 3.7427729606454167`*^9},
+ CellLabel->"Out[68]=",ExpressionUUID->"a760ca6a-3b95-4803-b318-da2b683d1058"]
 }, Open  ]]
 },
 WindowSize->{1584, 801},
@@ -1395,9 +1400,9 @@ Cell[38810, 890, 534, 8, 32, "Output",ExpressionUUID->"fdfe81ad-c05a-4101-909d-6
 Cell[39347, 900, 520, 8, 32, "Output",ExpressionUUID->"89fc164c-904d-4877-94bf-fc2ee0e051ad"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[39904, 913, 1886, 45, 67, "Input",ExpressionUUID->"9e129396-a5b0-4a2e-88e6-de2cfa2a7039"],
-Cell[41793, 960, 21125, 393, 555, "Output",ExpressionUUID->"1b97d83c-b599-4950-bc7e-e10905978c7c"],
-Cell[62921, 1355, 466, 6, 32, "Output",ExpressionUUID->"608afe78-7a36-4baa-a771-f030440bd80a"]
+Cell[39904, 913, 2011, 47, 67, "Input",ExpressionUUID->"9e129396-a5b0-4a2e-88e6-de2cfa2a7039"],
+Cell[41918, 962, 21214, 395, 555, "Output",ExpressionUUID->"7f7e5a0e-23ce-4bcf-9843-389304a71ecf"],
+Cell[63135, 1359, 535, 7, 32, "Output",ExpressionUUID->"a760ca6a-3b95-4803-b318-da2b683d1058"]
 }, Open  ]]
 }
 ]
