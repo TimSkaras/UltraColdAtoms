@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    105476,       2099]
-NotebookOptionsPosition[    104538,       2077]
-NotebookOutlinePosition[    104900,       2093]
-CellTagsIndexPosition[    104857,       2090]
+NotebookDataLength[    105584,       2098]
+NotebookOptionsPosition[    104646,       2076]
+NotebookOutlinePosition[    105008,       2092]
+CellTagsIndexPosition[    104965,       2089]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -621,7 +621,8 @@ Cell[BoxData[{
        RowBox[{"Thickness", "[", ".003", "]"}], ",", 
        RowBox[{"Thickness", "[", ".003", "]"}], ",", 
        RowBox[{"{", 
-        RowBox[{"Red", ",", "Dashed", ",", 
+        RowBox[{"Red", ",", 
+         RowBox[{"Dashing", "[", ".01", "]"}], ",", 
          RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}]}], "}"}]}], ",", 
     RowBox[{"ImageSize", "\[Rule]", 
      RowBox[{"Scaled", "[", "1.0", "]"}]}], ",", 
@@ -660,9 +661,9 @@ HCAMomentumDistributionPoster.png\>\"", ",", "p1"}], "]"}]}], "Input",
    3.742725805734561*^9}, {3.7427265079164934`*^9, 3.742726528646784*^9}, {
    3.7427730246606426`*^9, 3.742773025082525*^9}, {3.7427732047461023`*^9, 
    3.7427732603650265`*^9}, {3.7427733005515842`*^9, 3.7427733070713453`*^9}, 
-   3.7427733505072913`*^9},
+   3.7427733505072913`*^9, {3.7428343767947044`*^9, 3.7428344095034885`*^9}},
  CellLabel->
-  "(Local2) In[57]:=",ExpressionUUID->"2b380cbd-ce1e-4944-9d13-0c929293067c"],
+  "(Local2) In[17]:=",ExpressionUUID->"2b380cbd-ce1e-4944-9d13-0c929293067c"],
 
 Cell[BoxData[
  TemplateBox[{GraphicsBox[{{{{}, {}, 
@@ -862,7 +863,7 @@ VkvlKzNyY1Jq/rOqObxTe/rSr5oZeRKkhqQeMwc7QkI0xQAzMrqt7WCSZQbC
 embc6aPMiGCWsTcWbAYzjfI5St+ZkYiDoacXbM1AI2601us3M+KCPvQRu2oG
 tOTZt3jXmJEZ8eM9TbxmgJo7DWIbzIi8fsKKGY0ZOA6pGBiSmBFCR8MTrj+v
 4P/6Q5D/7w/5H7gP76k=
-          "]]}, Annotation[#, "Charting`Private`Tag$16462#1"]& ], 
+          "]]}, Annotation[#, "Charting`Private`Tag$12104#1"]& ], 
        TagBox[{
          Directive[
           Opacity[1.], 
@@ -1063,7 +1064,7 @@ uvBJ5iwSxvrR8vfjIRtw5lj8mpVLwj4LSLi01NmApFeV0X9FJCxxIS+fq8AG
 A+N1qm80v5OwhAs6p7npbOBc4kBVwE8SFmSwHbfRZw0sdDmnRRdJ2CvT2Ie3
 q60BOXr14CskrCRd5cR0rjV49v5ndXWDhB2MFttnlmAN////CmYRGpDY4W8N
 /wNHyx1c
-          "]]}, Annotation[#, "Charting`Private`Tag$16462#2"]& ], 
+          "]]}, Annotation[#, "Charting`Private`Tag$12104#2"]& ], 
        TagBox[{
          Directive[
           Opacity[1.], 
@@ -1310,13 +1311,13 @@ oAXCHrX6N0qZkGWlINF9dS1I1DBzCK1hQrZLrvkCpRY8Wk9NIO9mQnCH0Z7p
 fppw9o4jT9YAkf/xKSZ+RxMmGuXylUaZEAZ38dsZspqgmzJQG7jAhLBJD2hw
 bmoANVmeOv8qE8KTURh5+pcGoA88erAtJiSNim2B4qMGuPfesLDcZ0I48kIH
 sQgN+P//aRHeapdOfTsN+D9+OFyt
-          "]]}, Annotation[#, "Charting`Private`Tag$16462#3"]& ], 
+          "]]}, Annotation[#, "Charting`Private`Tag$12104#3"]& ], 
        TagBox[{
          Directive[
           Opacity[1.], 
           AbsoluteThickness[1.6], 
           RGBColor[1, 0, 0], 
-          Dashing[{Small, Small}], 
+          Dashing[0.01], 
           Thickness[0.003]], 
          LineBox[CompressedData["
 1:eJw1m3c4lv/7/+3tvuVNSnZ2GRkZ5T6v0kL2llFaUskoIzNJqGQUpbJXCKFC
@@ -1638,7 +1639,7 @@ I+lLmrAWcyYROfAwawK9Vk9y4Vz4kZlLREpthY0Lpn6QJL0qTc58JCKeRvmP
 XU99eb6GNFaj8f7kMBGhsWB12yJXk4xe/ax8ME1E9l61V1zkrSax0GXriC4Q
 kd6hEK+bRd9J6E2vbmyViGxooI8HjL6TPHvOOFzcJCJh9w9sKS9Vkf7f7zuR
 ///7zv8D0QWRJA==
-          "]]}, Annotation[#, "Charting`Private`Tag$16462#4"]& ]}}, {}, {}}, {
+          "]]}, Annotation[#, "Charting`Private`Tag$12104#4"]& ]}}, {}, {}}, {
     DisplayFunction -> Identity, Ticks -> {Automatic, Automatic}, 
      AxesOrigin -> {0, 0}, FrameTicks -> {{Automatic, 
         Charting`ScaledFrameTicks[{Identity, Identity}]}, {Automatic, 
@@ -1752,7 +1753,7 @@ kd6hEK+bRd9J6E2vbmyViGxooI8HjL6TPHvOOFzcJCJh9w9sKS9Vkf7f7zuR
                     Opacity[1.], 
                     AbsoluteThickness[1.6], 
                     RGBColor[1, 0, 0], 
-                    Dashing[{Small, Small}], 
+                    Dashing[0.36], 
                     Thickness[0.108]], 
                     RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
                     AspectRatio -> Full, ImageSize -> {10, 10}, 
@@ -1983,9 +1984,7 @@ kd6hEK+bRd9J6E2vbmyViGxooI8HjL6TPHvOOFzcJCJh9w9sKS9Vkf7f7zuR
                     Automatic, Method -> "Preemptive"], 
                     RGBColor[1, 0, 0], Editable -> False, Selectable -> 
                     False], ",", 
-                   RowBox[{"Dashing", "[", 
-                    RowBox[{"{", 
-                    RowBox[{"Small", ",", "Small"}], "}"}], "]"}], ",", 
+                   RowBox[{"Dashing", "[", "0.01`", "]"}], ",", 
                    RowBox[{"Thickness", "[", "0.003`", "]"}]}], "]"}]}], 
              "}"}], ",", 
            RowBox[{"{", 
@@ -2030,9 +2029,9 @@ kd6hEK+bRd9J6E2vbmyViGxooI8HjL6TPHvOOFzcJCJh9w9sKS9Vkf7f7zuR
    3.74272573901513*^9, {3.742725774397848*^9, 3.7427258064844894`*^9}, 
    3.742726531078226*^9, 3.742773097473962*^9, {3.742773195876706*^9, 
    3.7427732610584817`*^9}, {3.7427733012231274`*^9, 3.7427733078227854`*^9}, 
-   3.74277335114456*^9},
+   3.74277335114456*^9, 3.74283431376991*^9, 3.7428344105964003`*^9},
  CellLabel->
-  "(Local2) Out[58]=",ExpressionUUID->"1860e694-18d9-45a4-bf27-a9edb1581080"],
+  "(Local2) Out[18]=",ExpressionUUID->"087e91df-84b8-4149-ac2d-d6e4890f22e4"],
 
 Cell[BoxData["\<\"C:/Users/Tim/Documents/PhysicsResearch/UltraColdAtoms/Plots/\
 HCAMomentumDistributionPoster.png\"\>"], "Output",
@@ -2050,9 +2049,9 @@ HCAMomentumDistributionPoster.png\"\>"], "Output",
    3.74272573901513*^9, {3.742725774397848*^9, 3.7427258064844894`*^9}, 
    3.742726531078226*^9, 3.742773097473962*^9, {3.742773195876706*^9, 
    3.7427732610584817`*^9}, {3.7427733012231274`*^9, 3.7427733078227854`*^9}, 
-   3.7427733516677732`*^9},
+   3.74277335114456*^9, 3.74283431376991*^9, 3.74283441111205*^9},
  CellLabel->
-  "(Local2) Out[59]=",ExpressionUUID->"d76c130e-28c5-4984-ba28-a0186e7514b3"],
+  "(Local2) Out[19]=",ExpressionUUID->"9cf60151-2ba7-415c-8981-c6045c656bc9"],
 
 Cell[BoxData["\<\"C:/Users/Tim/Documents/PhysicsResearch/UltraColdAtoms/\
 Poster/HCAMomentumDistributionPoster.png\"\>"], "Output",
@@ -2070,9 +2069,9 @@ Poster/HCAMomentumDistributionPoster.png\"\>"], "Output",
    3.74272573901513*^9, {3.742725774397848*^9, 3.7427258064844894`*^9}, 
    3.742726531078226*^9, 3.742773097473962*^9, {3.742773195876706*^9, 
    3.7427732610584817`*^9}, {3.7427733012231274`*^9, 3.7427733078227854`*^9}, 
-   3.742773352133461*^9},
+   3.74277335114456*^9, 3.74283431376991*^9, 3.742834411565734*^9},
  CellLabel->
-  "(Local2) Out[60]=",ExpressionUUID->"0893bd82-cb82-48ee-9db7-b20df2eec320"]
+  "(Local2) Out[20]=",ExpressionUUID->"e5b186ad-6001-42f8-8903-7b71aeb25082"]
 }, Open  ]]
 },
 Evaluator->"Local2",
@@ -2096,10 +2095,10 @@ Cell[558, 20, 5311, 164, 144, "Input",ExpressionUUID->"ec2ab9c0-95cb-40cb-bfdf-9
 Cell[5872, 186, 1276, 37, 70, "Input",ExpressionUUID->"c193e7c8-65c7-4895-b386-5a0d1f2dfdb2"],
 Cell[7151, 225, 11938, 344, 562, "Input",ExpressionUUID->"61ec7041-38e1-4ba1-8a3c-227f8197bc3b"],
 Cell[CellGroupData[{
-Cell[19114, 573, 4082, 91, 157, "Input",ExpressionUUID->"2b380cbd-ce1e-4944-9d13-0c929293067c"],
-Cell[23199, 666, 78850, 1368, 950, "Output",ExpressionUUID->"1860e694-18d9-45a4-bf27-a9edb1581080"],
-Cell[102052, 2036, 1234, 18, 46, "Output",ExpressionUUID->"d76c130e-28c5-4984-ba28-a0186e7514b3"],
-Cell[103289, 2056, 1233, 18, 46, "Output",ExpressionUUID->"0893bd82-cb82-48ee-9db7-b20df2eec320"]
+Cell[19114, 573, 4170, 92, 157, "Input",ExpressionUUID->"2b380cbd-ce1e-4944-9d13-0c929293067c"],
+Cell[23287, 667, 78789, 1366, 950, "Output",ExpressionUUID->"087e91df-84b8-4149-ac2d-d6e4890f22e4"],
+Cell[102079, 2035, 1273, 18, 46, "Output",ExpressionUUID->"9cf60151-2ba7-415c-8981-c6045c656bc9"],
+Cell[103355, 2055, 1275, 18, 32, "Output",ExpressionUUID->"e5b186ad-6001-42f8-8903-7b71aeb25082"]
 }, Open  ]]
 }
 ]
