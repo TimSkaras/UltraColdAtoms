@@ -1,0 +1,114 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3396,        106]
+NotebookOptionsPosition[      2973,         90]
+NotebookOutlinePosition[      3316,        105]
+CellTagsIndexPosition[      3273,        102]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalOmega]", "[", 
+    RowBox[{"\[CapitalEpsilon]_", ",", " ", "N_"}], "]"}], " ", "=", " ", 
+   FractionBox[
+    RowBox[{"Gamma", "[", 
+     RowBox[{"\[CapitalEpsilon]", "+", 
+      FractionBox["N", "2"]}], "]"}], 
+    RowBox[{
+     RowBox[{"Gamma", "[", 
+      RowBox[{"\[CapitalEpsilon]", "-", 
+       FractionBox["N", "2"], "+", "1"}], "]"}], "*", 
+     RowBox[{"Gamma", "[", "N", "]"}]}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"S", "[", 
+    RowBox[{"\[CapitalEpsilon]_", ",", "N_"}], "]"}], " ", "=", " ", 
+   RowBox[{"Log", "[", 
+    RowBox[{"\[CapitalOmega]", "[", 
+     RowBox[{"\[CapitalEpsilon]", ",", "N"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"T", "[", 
+   RowBox[{"\[CapitalEpsilon]_", ",", "N_"}], "]"}], "=", 
+  RowBox[{"FullSimplify", "[", 
+   RowBox[{"1", "/", 
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"S", "[", 
+       RowBox[{"\[CapitalEpsilon]", ",", "N"}], "]"}], ",", " ", 
+      "\[CapitalEpsilon]"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Mu]", "[", 
+    RowBox[{"\[CapitalEpsilon]_", ",", "N_"}], "]"}], "=", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"T", "[", 
+       RowBox[{"\[CapitalEpsilon]", ",", "N"}], "]"}]}], " ", "*", " ", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"S", "[", 
+        RowBox[{"\[CapitalEpsilon]", ",", "N"}], "]"}], ",", "N"}], "]"}]}], 
+    "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.747349428417756*^9, 3.747349444439907*^9}, {
+   3.7473494973055215`*^9, 3.7473496348477817`*^9}, {3.7473496870262785`*^9, 
+   3.7473496874321947`*^9}, {3.747349980455064*^9, 3.7473501190210075`*^9}, 
+   3.7473502072461243`*^9, 3.7473503662510734`*^9},
+ CellLabel->"In[45]:=",ExpressionUUID->"8cdfb6b6-a03c-4cb0-aeda-22695d5eb525"],
+
+Cell[BoxData[
+ FractionBox["1", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"HarmonicNumber", "[", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox["N", "2"]}], "+", "\[CapitalEpsilon]"}], "]"}]}], "+", 
+   RowBox[{"HarmonicNumber", "[", 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", 
+     FractionBox["N", "2"], "+", "\[CapitalEpsilon]"}], "]"}]}]]], "Output",
+ CellChangeTimes->{3.7473503667627344`*^9},
+ CellLabel->"Out[47]=",ExpressionUUID->"d2b3e18a-cfb7-4da0-960e-1eac737d642f"]
+}, Open  ]]
+},
+WindowSize->{759, 697},
+WindowMargins->{{Automatic, 380}, {24, Automatic}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1890, 50, 139, "Input",ExpressionUUID->"8cdfb6b6-a03c-4cb0-aeda-22695d5eb525"],
+Cell[2473, 74, 484, 13, 70, "Output",ExpressionUUID->"d2b3e18a-cfb7-4da0-960e-1eac737d642f"]
+}, Open  ]]
+}
+]
+*)
+
