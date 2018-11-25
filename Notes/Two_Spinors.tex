@@ -1,0 +1,166 @@
+\documentclass[onecolumn,english,aps,pra]{revtex4}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{bm}
+\usepackage{braket}
+\usepackage{color}
+\usepackage{rotating,booktabs}
+\usepackage{array}
+\usepackage{physics}
+
+
+\begin{document}
+
+\title{Strongly Interacting Spinors in One-Dimensional Harmonic Trap}
+
+\maketitle
+
+\section{General Formulation}
+
+First we will consider two strongly-interacting, ultracold bosons with a spin degree of freedom confined in a one-dimensional harmonic trap. For now, we assume that the interaction is a spin-independent point interaction. The Hamiltonian is given by
+
+\begin{equation}
+    H = \sum_{i = 1}^{N} \left[ -\frac{1}{2} \pdv[2]{}{x} + \frac{1}{2} x_i^2 \right]
+            + g \sum_{i < j} \delta(x_i - x_j)
+	\end{equation}
+%
+where $N$ is the number of particles, the constant $g$ is the interaction strength, and we have set $\hbar = m = \omega = 1$. For spinless bosons, the many-body wave function can be found using the Bose-Fermi mapping \cite{girardeau1960relationship} in the case of $g \rightarrow \infty$.
+
+For the case of spinful particles, Yang et al. \cite{yang2015strongly} obtain a second-order, effective Hamiltonian, which is written as
+%
+\begin{equation}
+H_{\text{eff}} = -\frac{1}{g} \sum_{i = 1}^{N - 1}C_i(1 \pm \mathcal{E}_{i, i+1})
+\label{spinchain}
+\end{equation}
+%
+where $\mathcal{E}_{i, i+1}$ is the exchange operator that exchanges the $i^{th}$ particle with the $(i + 1)^{th}$ particle. Plus is for bosons and minus is for fermions. Each $C_i$ is a constant 
+%
+\begin{equation}
+C_i = N \int \prod_j dx_j \left| \pdv{\varphi_A}{x_i} \right|^2 \delta(x_{i + 1} - x_{i}) \theta^1_{[i+1, i]}
+\end{equation}
+%
+where $\varphi_A$ is the slater determinant for our system of particles, and $\theta^1_{[i+1, i]}$ is the reduced sector function given by
+%
+\[ \theta^1_{[i+1, i]} = \theta^1 / \theta(x_{i + 1} - x_i) 
+= \frac{\theta(x_2 - x_1) \cdots \theta(x_N - x_{N-1})}{\theta(x_{i + 1} - x_i)} \]
+
+Additionally, Yang et al. show that the one-body density matrix for these spinors can be separated into its spatial and spin components
+
+\begin{equation}
+\rho_{\sigma', \sigma}(x', x) = \sum_{m, n} \rho_{m, n}(x', x) S_{m, n}(\sigma', \sigma)
+\end{equation}
+%
+where the spatial component 
+%
+\begin{equation}
+\rho_{m, n}(x', x) = (\pm 1)^{m-n} (N - 1)! \int dx_{2} \cdots dx_{N} \varphi_{A}'^* \varphi_{A} \theta'^{(1,\ldots,m)} \theta^{(1,\ldots, n)}
+\end{equation}
+%
+is just the one-body density matrix for the sector $x_2 < x_3 < \cdots < x_m < x' \cdots x_n < x \cdots < x_N$ for $m < n$. If the particles are bosons, the $\pm$ is a minus and if fermions it is a plus. The function $\theta^{(1,\ldots, n)}$ refers to a cyclic shift backwards for the first $n$ indices of the sector function $\theta^1$, i.e., 
+%
+\[ \theta^{(1,\ldots, n)}(x, x_2, \ldots, x_N) = \theta^1(x_2, x_3, \ldots, x_n, x, \ldots, x_N) \]
+%
+More generally, the expression $(1,\ldots, n)$ denotes a cyclic permutation on the first $n$ indices
+\[ x_1, x_2, \ldots, x_N \longrightarrow x_2, x_3, \ldots, x_n, x_1, x_{n+1}, \ldots, x_N \]
+%
+And the spin component of the one-body density matrix is
+%
+\begin{equation}
+S_{m, n}(\sigma', \sigma) = [(1, \ldots, m) c_m(\sigma')|\chi \rangle ]^\dagger [(1, \ldots, n) c_n(\sigma)|\chi \rangle ]
+\end{equation}
+%
+where $c_m(\sigma')$ is a destruction operator for the $m^{th}$ particle with spin $\sigma'$. For instance, $c_2(\frac{1}{2})$ destroys the second particle if it has spin $\frac{1}{2}$. If it does not, then $c_2(\frac{1}{2}) \ket{\chi} = 0$.
+
+\section{Two Spin 1/2 Bosons}
+
+For the case of two spin $\frac{1}{2}$ bosons, we can see that the eigenstates of the effective hamiltonian in equation \eqref{spinchain} are just the states $| \chi \rangle$ that are symmetric under particle exchange. These eigenstates are easy to find because they correspond to the four total spin states for two spin $\frac{1}{2}$ particles. 
+
+We will first consider the case where we have two strongly-interacting bosons with total spin state $\ket{\chi} = \ket{ 1, 1 } = \ket{\frac{1}{2}, \frac{1}{2}}$. First we calculate the spin component. It is immediately apparent that $ c_m(\sigma') \ket{\chi}$ will be zero unless $\sigma' = \frac{1}{2}$, because that is the spin of both particles. It can be shown that for any $m, n \in \{ 1, 2 \}$
+
+\begin{equation}
+S_{m, n}(\sigma', \sigma) = 
+\begin{cases}
+	1 & \sigma' = \sigma = \frac{1}{2}\\
+	0 & \text{else}
+\end{cases}
+\end{equation}
+
+and thus our one-body density matrix is
+\begin{equation}
+\rho_{\frac{1}{2}, \frac{1}{2}}(x', x) = 
+\rho_{1, 1}(x', x) + \rho_{1, 2}(x', x)
++ \rho_{2, 1}(x', x) + \rho_{2, 2}(x', x)
+\end{equation}
+
+We therefore need only calculate the four spatial sectors for the one-body density matrix. The simplified form of the slater determinant for two particles in a harmonic oscillator is
+
+\begin{equation}
+\varphi_A(x_1, x_2) = \frac{1}{\sqrt{\pi}} e^{-\frac{1}{2} (x_1^2 + x_2^2) } (x_2 - x_1)
+\end{equation}
+
+And so for each spatial sector of the one-body density matrix we have
+\begin{align*}
+\rho_{1, 1}(x', x) &= \frac{1}{\pi} \int dx_2 e^{-\frac{1}{2} (x^2 + x'^2) } 
+ e^{-x_2^2} (x_2 - x')(x_2 - x) \theta(x_2 - x') \theta(x_2 - x)\\
+\rho_{1, 2}(x', x) &= \frac{1}{\pi} \int dx_2 
+e^{-\frac{1}{2} (x^2 + x'^2) } e^{-x_2^2} (x_2 - x')(x - x_2) 
+\theta(x_2 - x') \theta(x - x_2)\\
+\rho_{2, 1}(x', x) &= \frac{1}{\pi} \int dx_2 
+e^{-\frac{1}{2} (x^2 + x'^2) } e^{-x_2^2} (x' - x_2)(x_2 - x) 
+\theta(x' - x_2) \theta(x_2 - x)\\
+\rho_{2,2}(x', x) &= \frac{1}{\pi} \int dx_2 e^{-\frac{1}{2} (x^2 + x'^2) } 
+e^{-x_2^2} (x_2 - x')(x_2 - x) \theta(x' - x_2) \theta(x - x_2)
+\end{align*}
+
+These can be combined into a single simpler integral by rewriting each of them
+\begin{align*}
+\rho_{1, 1}(x', x) &= \frac{1}{\pi} \int^{\infty}_{\text{max}(x', x)} dx_2 e^{-\frac{1}{2} (x^2 + x'^2) } 
+ e^{-x_2^2} (x_2 - x')(x_2 - x) \\
+\rho_{2,2}(x', x) &= \frac{1}{\pi} \int_{-\infty}^{\text{min}(x', x)} dx_2 e^{-\frac{1}{2} (x^2 + x'^2) } 
+e^{-x_2^2} (x_2 - x')(x_2 - x) 
+\end{align*}
+And we can write the sum of the other two as
+\begin{align*}
+\rho_{1, 2}(x', x) + \rho_{2, 1}(x', x) & = \frac{1}{\pi} \epsilon(x' - x) \int_{x}^{x'} dx_2 
+e^{-\frac{1}{2} (x^2 + x'^2) } e^{-x_2^2}(x' - x_2)(x_2 - x)\\
+& =  \frac{1}{\pi} \int_{\text{min}(x', x)}^{\text{max}(x', x)} dx_2 
+e^{-\frac{1}{2} (x^2 + x'^2) } e^{-x_2^2} (x' - x_2)(x_2 - x)
+\end{align*}
+We can turn the sum of these terms into a single integral by noting that for each integral, the integrand is always positive, thus
+%
+\begin{equation}
+\rho_{\frac{1}{2}, \frac{1}{2}}(x', x)
+ = \frac{1}{\pi} \int dx_2 e^{-\frac{1}{2} (x^2 + x'^2) } e^{-x_2^2} |x_2 - x'||x_2 - x|
+\end{equation}
+%
+Which is the same one-body density matrix for two spinless, hard-core bosons. Thus we should expect results for the previous case to hold regarding the Tan Contact, the Tan Contact time dependence, and Dynamical Fermionization. 
+
+Now let's consider a slightly more interesting scenario where
+$\ket{\chi} = \ket{1, 0} = 
+\frac{1}{\sqrt{2}}(\ket{\frac{1}{2}, -\frac{1}{2}} + \ket{-\frac{1}{2}, \frac{1}{2}})$
+Using mathematica code to calculate the spin component of the one-body density matrix, we find that for any $m, n \in \{ 1,2 \}$
+%
+\begin{equation}
+S_{m, n}(\sigma', \sigma) = 
+\begin{cases}
+	\frac{1}{2} & \sigma' = \sigma = \frac{1}{2}\\
+	\frac{1}{2} & \sigma' = \sigma = -\frac{1}{2}\\
+	0 & \text{else}
+\end{cases}
+\end{equation}
+%
+so the simplification of the integrals will be the same as in the previous case but now there will be a constant of $\frac{1}{2}$ out front 
+\begin{equation}
+\rho_{\frac{1}{2}, \frac{1}{2}}(x', x)
+= \rho_{-\frac{1}{2}, -\frac{1}{2}}(x', x)
+ = \frac{1}{2\pi} \int dx_2 e^{-\frac{1}{2} (x^2 + x'^2) } e^{-x_2^2} |x_2 - x'||x_2 - x|
+\end{equation}
+
+\pagebreak
+
+\bibliographystyle{abbrv}
+\bibliography{Two_Spinors}
+
+\end{document}
