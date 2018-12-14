@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    105584,       2098]
-NotebookOptionsPosition[    104646,       2076]
-NotebookOutlinePosition[    105008,       2092]
-CellTagsIndexPosition[    104965,       2089]
+NotebookDataLength[    106680,       2130]
+NotebookOptionsPosition[    105513,       2104]
+NotebookOutlinePosition[    105877,       2120]
+CellTagsIndexPosition[    105834,       2117]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -182,7 +182,7 @@ Cell[BoxData[{
  CellChangeTimes->{{3.7426393460841646`*^9, 3.7426393464904194`*^9}, {
    3.7426395252495775`*^9, 3.7426396064068904`*^9}, 3.7426396629326963`*^9},
  CellLabel->
-  "(Local2) In[1]:=",ExpressionUUID->"ec2ab9c0-95cb-40cb-bfdf-94821b2b0af5"],
+  "(Local2) In[11]:=",ExpressionUUID->"ec2ab9c0-95cb-40cb-bfdf-94821b2b0af5"],
 
 Cell[BoxData[{
  RowBox[{
@@ -2072,11 +2072,39 @@ Poster/HCAMomentumDistributionPoster.png\"\>"], "Output",
    3.74277335114456*^9, 3.74283431376991*^9, 3.742834411565734*^9},
  CellLabel->
   "(Local2) Out[20]=",ExpressionUUID->"e5b186ad-6001-42f8-8903-7b71aeb25082"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SubscriptBox["\[Psi]", "F"], "[", 
+      RowBox[{"x", ",", "y"}], "]"}], "^", "2"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{"-", "Infinity"}], ",", " ", "Infinity"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", 
+      RowBox[{"-", "Infinity"}], ",", "Infinity"}], "}"}]}], "]"}], " ", "//",
+   "FullSimplify"}]], "Input",
+ CellChangeTimes->{{3.753134905711359*^9, 3.7531349560875883`*^9}},
+ CellLabel->
+  "(Local2) In[10]:=",ExpressionUUID->"d2e0b9a8-7d8c-41b3-8194-e9844d46a88d"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{{3.7531349097465353`*^9, 3.753134926247384*^9}, 
+   3.7531349571267614`*^9},
+ CellLabel->
+  "(Local2) Out[10]=",ExpressionUUID->"f10fbc23-c2f6-45d1-ba60-92a82e3ceaa3"]
 }, Open  ]]
 },
 Evaluator->"Local2",
-WindowSize->{1584, 801},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
 StyleDefinitions->"Default.nb"
 ]
@@ -2091,14 +2119,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 5311, 164, 144, "Input",ExpressionUUID->"ec2ab9c0-95cb-40cb-bfdf-94821b2b0af5"],
-Cell[5872, 186, 1276, 37, 70, "Input",ExpressionUUID->"c193e7c8-65c7-4895-b386-5a0d1f2dfdb2"],
-Cell[7151, 225, 11938, 344, 562, "Input",ExpressionUUID->"61ec7041-38e1-4ba1-8a3c-227f8197bc3b"],
+Cell[558, 20, 5312, 164, 159, "Input",ExpressionUUID->"ec2ab9c0-95cb-40cb-bfdf-94821b2b0af5"],
+Cell[5873, 186, 1276, 37, 75, "Input",ExpressionUUID->"c193e7c8-65c7-4895-b386-5a0d1f2dfdb2"],
+Cell[7152, 225, 11938, 344, 816, "Input",ExpressionUUID->"61ec7041-38e1-4ba1-8a3c-227f8197bc3b"],
 Cell[CellGroupData[{
-Cell[19114, 573, 4170, 92, 157, "Input",ExpressionUUID->"2b380cbd-ce1e-4944-9d13-0c929293067c"],
-Cell[23287, 667, 78789, 1366, 950, "Output",ExpressionUUID->"087e91df-84b8-4149-ac2d-d6e4890f22e4"],
-Cell[102079, 2035, 1273, 18, 46, "Output",ExpressionUUID->"9cf60151-2ba7-415c-8981-c6045c656bc9"],
-Cell[103355, 2055, 1275, 18, 32, "Output",ExpressionUUID->"e5b186ad-6001-42f8-8903-7b71aeb25082"]
+Cell[19115, 573, 4170, 92, 145, "Input",ExpressionUUID->"2b380cbd-ce1e-4944-9d13-0c929293067c"],
+Cell[23288, 667, 78789, 1366, 922, "Output",ExpressionUUID->"087e91df-84b8-4149-ac2d-d6e4890f22e4"],
+Cell[102080, 2035, 1273, 18, 46, "Output",ExpressionUUID->"9cf60151-2ba7-415c-8981-c6045c656bc9"],
+Cell[103356, 2055, 1275, 18, 46, "Output",ExpressionUUID->"e5b186ad-6001-42f8-8903-7b71aeb25082"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[104668, 2078, 611, 17, 42, "Input",ExpressionUUID->"d2e0b9a8-7d8c-41b3-8194-e9844d46a88d"],
+Cell[105282, 2097, 215, 4, 46, "Output",ExpressionUUID->"f10fbc23-c2f6-45d1-ba60-92a82e3ceaa3"]
 }, Open  ]]
 }
 ]
