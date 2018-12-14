@@ -336,9 +336,9 @@ and the fermi distribution does not change when the trap is turned off. Thus, we
 \begin{align*}
 \frac{1}{2\pi b} \int dx \int dx' e^{ip(x-x')} e^{\frac{i\dot{b}}{2b}(x'^2 - x^2)}
 \rho_C\left(\frac{x}{b},\frac{x'}{b};0\right) 
-&= \frac{b}{2\pi} \int dx \int dx' e^{ip(x-x')} e^{\frac{i\dot{b}}{2b}(x'^2 - x^2)}
+&= \frac{b}{2\pi} \int dx \int dx' e^{ibp(x-x')} e^{\frac{i\dot{b}b}{2}(x'^2 - x^2)}
 \varphi_F(x,x_2)\varphi_B(x',x_2)\\
-&= \frac{b}{2\pi^2} \int dx \int dx' e^{ip(x-x')} e^{\frac{i\dot{b}}{2b}(x'^2 - x^2)}
+&= \frac{b}{2\pi^2} \int dx \int dx' e^{ibp(x-x')} e^{\frac{i\dot{b}b}{2}(x'^2 - x^2)}
 e^{-\frac{1}{2}(x^2 + x'^2)}e^{-x_2^2} (x_2 -x)|x_2 - x'|
 \end{align*}
 Then, using the stationary phase approximation we find that
@@ -349,15 +349,26 @@ which is the same function as the real space density profile from equation (\ref
 \begin{equation}
 \lim_{t \rightarrow \infty} n_\sigma(p) = S_1(\sigma, \sigma)n_F(p) + S_2(\sigma,\sigma) \frac{-2pe^{-2p^2} - e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p)}{\pi}
 \end{equation} 
-This result has been plotted in figure \ref{nsRSDP-DF}. Thus we obtain the same profile as we observed in the real space density profile prior to expansion.
+This result has been plotted in figure \ref{fig:nsRSDP-DF}, thus obtaining the same profile as we observed in the real space density profile prior to expansion. Additionally, in figure \ref{fig:ncRSDP-DF} we plot the time evolution of $n_C(p;t)$ during this dynamical fermionization process.
 
 \begin{figure}[h]
 \includegraphics[scale=0.6]{"../Plots/MomentumSpaceDProfileMixedSpinorDF"}
 \caption{Here is a plot of the momentum space density profile after the trap has been turned off and $t \rightarrow \infty$}
-\label{nsRSDP-DF}
+\label{fig:nsRSDP-DF}
 \end{figure}
-\pagebreak
 
+Now we consider how the above results would change if we modified equation (\ref{MixedState}) so that the two terms differed by a constant phase, viz.
+\begin{equation}
+a
+\end{equation}
+
+\begin{figure}[h]
+\includegraphics[scale=0.45]{"../Plots/TimeEvolutionNC"}
+\caption{Plot of the time evolution of $n_{C}(p;t)$. The splitting that occurs during dynamical fermionization of the momentum distribution for each value of spin $\sigma$ is due to the change $n_C$.}
+\label{fig:ncRSDP-DF}
+\end{figure}
+
+\pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
 
