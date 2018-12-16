@@ -361,14 +361,34 @@ Now we consider how the above results would change if we modified equation (\ref
 \begin{equation}
 \Psi(x_1, x_2; \sigma_1, \sigma_2) = \frac{1}{\sqrt{2}}\left[\varphi_F(x_1, x_2) \chi_S(\sigma_1, \sigma_2) + e^{i\theta	}\varphi_B(x_1,x_2) \chi_T(\sigma_1, \sigma_2)\right], \qquad \theta \in [0,2\pi)
 \end{equation}
-
+%
+For the real space density profile (RSDP), we obtain a different expression from before
+\[
+n_{\sigma}^\theta(x) = \frac{1}{2}S_1(\sigma, \sigma)(n_F(x) + n_B(x)) +   S_2(\sigma,\sigma) \int dx_2 
+\left[ \varphi_F(x,x_2)\varphi_B(x,x_2) e^{i\theta} + \varphi_F(x,x_2)\varphi_B(x,x_2) e^{-i\theta} \right]
+\]
+and we can simplify this latter term
+\begin{align*}
+n_C^\theta(x) & =  \int dx_2 
+\left[ \varphi_F(x,x_2)\varphi_B(x,x_2) e^{i\theta} + \varphi_F(x,x_2)\varphi_B(x,x_2) e^{-i\theta} \right]\\
+& = 2 \cos (\theta) \int dx_2 \varphi_F(x,x_2)\varphi_B(x,x_2)\\
+& = \frac{2 \cos (\theta)}{\pi} \int dx_2 e^{-\frac{1}{2}(x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x|\\
+& = -\frac{\cos (\theta)}{\pi} (2xe^{-2x^2} + e^{-x^2}\sqrt{\pi} (1 + 2 x^2) \erf(x))
+\end{align*}
 
 \begin{figure}[h]
 \includegraphics[scale=0.45]{"../Plots/TimeEvolutionNC"}
 \caption{Plot of the time evolution of $n_{C}(p;t)$. The splitting that occurs during dynamical fermionization of the momentum distribution for each value of spin $\sigma$ is due to the change $n_C$.}
 \label{fig:ncRSDP-DF}
 \end{figure}
-
+and thus 
+\begin{equation}
+n_C^\theta(x) = -\frac{\cos (\theta)}{\pi} (2xe^{-2x^2} + e^{-x^2}\sqrt{\pi} (1 + 2 x^2) \erf(x))
+\end{equation}
+which is the same expression for RSDP as in equation (\ref{ncRSDP}), differing only by a factor of $\cos(\theta)$ in front. We conclude that the RSDP for this new wave function is 
+\begin{equation}
+n_{\sigma}^\theta(x) = S_1(\sigma, \sigma)n_F(x) +  S_2(\sigma,\sigma) n_C^\theta(x)
+\end{equation}
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
