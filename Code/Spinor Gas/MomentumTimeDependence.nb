@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    526696,      13340]
-NotebookOptionsPosition[    521283,      13240]
-NotebookOutlinePosition[    521993,      13263]
-CellTagsIndexPosition[    521903,      13258]
+NotebookDataLength[    539405,      13662]
+NotebookOptionsPosition[    533261,      13553]
+NotebookOutlinePosition[    533971,      13576]
+CellTagsIndexPosition[    533881,      13571]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -12601,9 +12601,7 @@ Cell[BoxData[
          "\"\<\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)\>\""}], "}"}]}], 
       ",", 
       RowBox[{"AxesLabel", "\[Rule]", 
-       RowBox[{"{", 
-        RowBox[{"Style", "[", 
-         RowBox[{"\"\<x\>\"", ",", "17"}], "]"}], "}"}]}]}], "]"}], ",", 
+       RowBox[{"{", "\"\<x\>\"", "}"}]}]}], "]"}], ",", 
     RowBox[{"{", 
      RowBox[{"\[Theta]", ",", "0", ",", 
       RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}], 
@@ -12612,23 +12610,22 @@ Cell[BoxData[
   3.753896787988425*^9, 3.753896830710579*^9, {3.7538978553940134`*^9, 
    3.7538979122416077`*^9}, {3.753901199661394*^9, 3.7539012126273723`*^9}, {
    3.7539893782690506`*^9, 3.753989380513672*^9}},
- CellLabel->
-  "In[189]:=",ExpressionUUID->"7a736fc4-d384-4b3a-b93f-926b2fe8b5cd"],
+ CellLabel->"In[25]:=",ExpressionUUID->"7a736fc4-d384-4b3a-b93f-926b2fe8b5cd"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0, Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 6.283185307179586, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, 2 Pi}}, Typeset`size$$ = {
-    779., {211., 216.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$267582$$ = 0}, 
+    779., {212., 216.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$22648$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$267582$$, 0]}, 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$22648$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -12654,8 +12651,8 @@ Cell[BoxData[
         PlotLegends -> {
          "\!\(\*SubscriptBox[\(n\), \(F\)]\)(x)", 
           "\[Sigma] = \!\(\*FractionBox[\(1\), \(2\)]\)", 
-          "\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)"}, AxesLabel -> {
-          Style["x", 17]}], 
+          "\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)"}, 
+        AxesLabel -> {"x"}], 
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, 2 Pi}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
      ImageSizeCache->{830., {258., 264.}},
@@ -12670,9 +12667,8 @@ Cell[BoxData[
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{3.7538979201515713`*^9, 3.7538979844323406`*^9, 
-  3.7539012145994687`*^9, 3.7539036970442123`*^9, 3.7539893811556673`*^9},
- CellLabel->
-  "Out[189]=",ExpressionUUID->"05b7aa5c-95fe-48d6-b20d-0d0e7ee2cff5"]
+  3.7539012145994687`*^9, 3.7539036970442123`*^9},
+ CellLabel->"Out[25]=",ExpressionUUID->"bcef299e-7f9f-46cb-b922-d82eee0512f0"]
 }, Open  ]],
 
 Cell["Let\[CloseCurlyQuote]s create a gif of this ", "Text",
@@ -12682,7 +12678,7 @@ e55d6f206b02"],
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"ts", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"pts", "=", "20"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[CapitalDelta]", "=", 
    RowBox[{"1", "/", 
@@ -12751,7 +12747,7 @@ Cell[BoxData[{
             RowBox[{"Opacity", "[", "0.9", "]"}], ",", 
             RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}]}], "}"}]}], ",", 
        RowBox[{"ImageSize", "\[Rule]", 
-        RowBox[{"Scaled", "[", "0.8", "]"}]}], ",", 
+        RowBox[{"Scaled", "[", "0.6", "]"}]}], ",", 
        RowBox[{"PlotLabel", "\[Rule]", 
         RowBox[{"Style", "[", 
          RowBox[{
@@ -12765,7 +12761,9 @@ Cell[BoxData[{
           "\"\<\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)\>\""}], "}"}]}], 
        ",", 
        RowBox[{"AxesLabel", "\[Rule]", 
-        RowBox[{"{", "\"\<x\>\"", "}"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<x\>\"", ",", "17"}], "]"}], "}"}]}], ",", 
        RowBox[{"TicksStyle", "\[Rule]", 
         RowBox[{"Directive", "[", 
          RowBox[{"\"\<Label\>\"", ",", " ", "15"}], "]"}]}]}], "]"}], ",", 
@@ -12800,14 +12798,17 @@ Cell[BoxData[{
    "\"\<C:\\\\Users\\\\tskar\\\\Documents\\\\PhysicsResearch\\\\\
 UltraColdAtoms\\\\Plots\\\\ThetaEvolutionRSDP.gif\>\"", ",", "frames", ",", 
     RowBox[{"AnimationRepetitions", "->", "Infinity"}], ",", 
-    RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", " ", ".15"}], ",", 
+    RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", " ", ".12"}], ",", 
     RowBox[{"ImageSize", "\[Rule]", 
-     RowBox[{"Scaled", "[", "0.7", "]"}]}]}], "]"}], ";"}]}], "Input",
+     RowBox[{"Scaled", "[", "0.8", "]"}]}]}], "]"}], ";"}]}], "Input",
  CellChangeTimes->{{3.7539887543750896`*^9, 3.753988806557822*^9}, {
    3.7539888390705366`*^9, 3.753988968805609*^9}, {3.7539890822677746`*^9, 
    3.7539890967221746`*^9}, 3.7539892192505198`*^9, 3.753989257047082*^9, {
-   3.753989348432562*^9, 
-   3.753989359861352*^9}},ExpressionUUID->"1774c7be-106f-4505-87e3-\
+   3.753989348432562*^9, 3.753989359861352*^9}, {3.753989395563624*^9, 
+   3.753989397440609*^9}, {3.7539894603685513`*^9, 3.7539894641264687`*^9}, {
+   3.7539894977861414`*^9, 3.7539895067333765`*^9}, {3.7540509828355713`*^9, 
+   3.7540509893168206`*^9}, 
+   3.754052169678198*^9},ExpressionUUID->"1774c7be-106f-4505-87e3-\
 4e13dc2b8512"]
 }, Open  ]],
 
@@ -12931,19 +12932,16 @@ Cell[BoxData[{
        RowBox[{
         SubscriptBox["n", "F"], "[", "#", "]"}]}], "}"}], "&"}], "/@", 
     "PDomain"}]}], ";"}]}], "Input",
- CellChangeTimes->{{3.7538353875963397`*^9, 3.753835495229331*^9}, {
-  3.753835543566207*^9, 3.7538356037023163`*^9}, {3.75383566368758*^9, 
-  3.753835669074899*^9}, {3.7538955400422134`*^9, 3.7538955406048183`*^9}, {
-  3.753903169475288*^9, 3.753903209942401*^9}, {3.7539049182184668`*^9, 
-  3.7539049520014877`*^9}, {3.753905086600786*^9, 3.753905097020261*^9}, {
-  3.753905798464056*^9, 3.753905811239611*^9}, {3.7539058812368956`*^9, 
-  3.7539059233681917`*^9}, {3.753905960593522*^9, 3.753905983534583*^9}, {
-  3.7539060199784174`*^9, 3.753906060040244*^9}, {3.753906112322499*^9, 
-  3.7539061423168793`*^9}, {3.7539062366205893`*^9, 3.753906239032627*^9}, {
-  3.753910600231159*^9, 3.75391060277664*^9}, {3.7539739697989955`*^9, 
-  3.7539739779793606`*^9}, {3.7539740244714403`*^9, 3.753974028720437*^9}},
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBmIQbS5anH//+2vHdWHPa0B0nNynJhCdUFnWBaJXMHyb
+CKInpy6aBKIvRDae+wOk10RNBtP9pvodDD9eO6pp2PWC6HV/jyUxAmkDHoZ0
+EL3E8nI5iP61VKESRPfcPHcBRD9dlX4JRC+bon4bRFudyH4AopX+CT0F0X7S
+H5+DaCP/+jcgep1n40cQ/TKQ6weIfqB86jeIvnd7MjsTkPbgfgimV6Sya7IA
+aZtbEWA6fqKllDKQfhNmLw2iucT4FUH0Jd7pEJr7v4c3yH39kd4gOk1N2h9E
+P3IIB9M22wKDQXTJLK1IEA0A0LelDw==
+  "],
  CellLabel->
-  "In[150]:=",ExpressionUUID->"10b52486-5071-4b56-8ccc-97abf69a19c4"],
+  "In[320]:=",ExpressionUUID->"10b52486-5071-4b56-8ccc-97abf69a19c4"],
 
 Cell[CellGroupData[{
 
@@ -12991,12 +12989,12 @@ Cell[BoxData[
       RowBox[{"Style", "[", 
        RowBox[{
        "\"\<Momentum Space Density Profile \!\(\*SubscriptBox[\(n\), \(\
-\[Sigma], \[Theta]\)]\)(x)\>\"", ",", "Bold", ",", "16"}], "]"}]}], ",", 
+\[Sigma], \[Theta]\)]\)(p)\>\"", ",", "Bold", ",", "16"}], "]"}]}], ",", 
      "\[IndentingNewLine]", 
      RowBox[{"PlotLegends", "\[Rule]", 
       RowBox[{"{", 
        RowBox[{
-       "\"\<\!\(\*SubscriptBox[\(n\), \(F\)]\)(x)\>\"", ",", 
+       "\"\<\!\(\*SubscriptBox[\(n\), \(F\)]\)(p)\>\"", ",", 
         "\"\<\[Sigma] = \!\(\*FractionBox[\(1\), \(2\)]\)\>\"", ",", 
         "\"\<\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)\>\""}], "}"}]}], 
      ",", 
@@ -13013,24 +13011,24 @@ Cell[BoxData[
    3.753908947520053*^9}, 3.753908978284898*^9, {3.753910517692466*^9, 
    3.753910526459217*^9}, {3.7539107696986723`*^9, 3.7539107712356367`*^9}, {
    3.7539204881198387`*^9, 3.7539205190537324`*^9}, {3.7539205495214567`*^9, 
-   3.753920569022915*^9}},
+   3.753920569022915*^9}, {3.754057190740856*^9, 3.7540571983963776`*^9}},
  CellLabel->
-  "In[157]:=",ExpressionUUID->"e055d8e0-9337-4321-aefd-a6a7bd40c83e"],
+  "In[327]:=",ExpressionUUID->"e055d8e0-9337-4321-aefd-a6a7bd40c83e"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0., Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 3.480884660177491, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, 2 Pi}}, Typeset`size$$ = {
     779., {215., 220.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$177430$$ = 0}, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$462181$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$177430$$, 0]}, 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$462181$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -13049,9 +13047,9 @@ $CellContext`PDomain],
            Opacity[0.9], 
            Thickness[0.003]}}, ImageSize -> Scaled[0.5], PlotLabel -> 
         Style["Momentum Space Density Profile \!\(\*SubscriptBox[\(n\), \(\
-\[Sigma], \[Theta]\)]\)(x)", Bold, 16], 
+\[Sigma], \[Theta]\)]\)(p)", Bold, 16], 
         PlotLegends -> {
-         "\!\(\*SubscriptBox[\(n\), \(F\)]\)(x)", 
+         "\!\(\*SubscriptBox[\(n\), \(F\)]\)(p)", 
           "\[Sigma] = \!\(\*FractionBox[\(1\), \(2\)]\)", 
           "\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)"}, 
         AxesLabel -> {"p"}], 
@@ -13077,9 +13075,185 @@ $CellContext`PDomain],
    3.75390622246284*^9}, {3.7539089220655513`*^9, 3.753908948517499*^9}, 
    3.753908979612047*^9, 3.753910527005762*^9, 3.7539107730945435`*^9, 
    3.753920519936149*^9, 3.753920570475951*^9, 3.7539739819708986`*^9, 
-   3.7539740336691055`*^9},
+   3.7539740336691055`*^9, 3.7540530487853384`*^9, 3.7540572002937307`*^9},
  CellLabel->
-  "Out[157]=",ExpressionUUID->"1633e916-4c85-4a0d-8db1-d3ca27397a40"]
+  "Out[327]=",ExpressionUUID->"3481738b-39eb-4be6-a695-38687243d36e"]
+}, Open  ]],
+
+Cell["Again we can create a gif", "Text",
+ CellChangeTimes->{{3.7540509536804724`*^9, 
+  3.7540509629023733`*^9}},ExpressionUUID->"38ab513a-ffa2-4273-ae38-\
+1dd0f76b15bf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pts", "=", "10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]", "=", 
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{"pts", "-", "1"}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ThetaDomain", "=", 
+   RowBox[{"2", "\[Pi]", "*", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"\[CapitalDelta]", "*", "j"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "0", ",", 
+        RowBox[{"1", "/", "\[CapitalDelta]"}]}], "}"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"frame", "[", "i_", "]"}], ":=", 
+   RowBox[{"Show", "[", 
+    RowBox[{
+     RowBox[{"ListLinePlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"PPnf", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"#", ",", 
+             RowBox[{"nSigma", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"\[Theta]ThetaDomain", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], "&"}], "/@",
+           "PDomain"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"#", ",", 
+             RowBox[{"nSigma", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{
+                RowBox[{"ThetaDomain", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "+", "\[Pi]"}]}], "]"}]}], 
+            "}"}], "&"}], "/@", "PDomain"}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Dashed", ",", 
+            RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Darker", "[", "Blue", "]"}], ",", 
+            RowBox[{"Opacity", "[", "0.7", "]"}], ",", 
+            RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Opacity", "[", "0.9", "]"}], ",", 
+            RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}]}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"Scaled", "[", "0.5", "]"}]}], ",", 
+       RowBox[{"PlotLabel", "\[Rule]", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+         "\"\<Momentum Space Density Profile \!\(\*SubscriptBox[\(n\), \(\
+\[Sigma], \[Theta]\)]\)(p)\>\"", ",", "Bold", ",", "16"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(n\), \(F\)]\)(p)\>\"", ",", 
+          "\"\<\[Sigma] = \!\(\*FractionBox[\(1\), \(2\)]\)\>\"", ",", 
+          "\"\<\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)\>\""}], "}"}]}], 
+       ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", "\"\<p\>\"", "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", 
+      RowBox[{"Style", "[", 
+       RowBox[{
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"StringForm", "[", 
+           RowBox[{"\"\<\[Theta] = ``\>\"", ",", 
+            RowBox[{
+             RowBox[{"ThetaDomain", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "//", "N"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"3", ",", "0.7"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}]}], "]"}], ",", "17"}], "]"}], 
+      "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"frames", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"frame", "[", "i", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "ThetaDomain", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<C:\\\\Users\\\\tskar\\\\Documents\\\\PhysicsResearch\\\\\
+UltraColdAtoms\\\\Plots\\\\ThetaEvolutionMSDP.gif\>\"", ",", "frames", ",", 
+    RowBox[{"AnimationRepetitions", "->", "Infinity"}], ",", 
+    RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", " ", ".15"}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"Scaled", "[", "0.8", "]"}]}]}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.754050965917908*^9, 3.75405096923302*^9}, {
+   3.754051046317542*^9, 3.75405104670297*^9}, 3.754052164005711*^9, 
+   3.754057178734976*^9, {3.7540572184162493`*^9, 3.7540572451188173`*^9}},
+ CellLabel->
+  "In[328]:=",ExpressionUUID->"d57faa44-7c44-4931-9a36-114444ea2dc4"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"\[Theta]ThetaDomain\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,332,18,29653523099115606943,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.754057258951808*^9},
+ CellLabel->
+  "During evaluation of \
+In[328]:=",ExpressionUUID->"28dde54a-fd7b-456d-997c-f2e78f1cf6e4"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"\[Theta]ThetaDomain\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"2\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,332,19,29653523099115606943,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.754057259096422*^9},
+ CellLabel->
+  "During evaluation of \
+In[328]:=",ExpressionUUID->"af37d500-9059-40e7-8fb4-7c4526db5eb8"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"\[Theta]ThetaDomain\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,332,20,29653523099115606943,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.754057259237047*^9},
+ CellLabel->
+  "During evaluation of \
+In[328]:=",ExpressionUUID->"e6e99d92-607e-4147-a450-5f0e8ab9da87"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partd\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,332,21,29653523099115606943,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7540572593298287`*^9},
+ CellLabel->
+  "During evaluation of \
+In[328]:=",ExpressionUUID->"c8bea542-ad1b-4cad-a4ae-f9dc3d767100"]
 }, Open  ]]
 }, Open  ]],
 
@@ -13157,7 +13331,7 @@ Cell[BoxData[
       RowBox[{"Style", "[", 
        RowBox[{
        "\"\<Momentum Space Density Profile - Dynamical Fermionization \
-\!\(\*SubscriptBox[\(n\), \(\[Sigma], \[Theta]\)]\)(x) as t \[RightArrow] \
+\!\(\*SubscriptBox[\(n\), \(\[Sigma], \[Theta]\)]\)(p) as t \[RightArrow] \
 \[Infinity]\>\"", ",", "Bold", ",", "16"}], "]"}]}], ",", 
      RowBox[{"PlotLegends", "\[Rule]", 
       RowBox[{"{", 
@@ -13172,25 +13346,25 @@ Cell[BoxData[
     RowBox[{"\[Theta]", ",", "0", ",", 
      RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.7539165448374324`*^9, 3.7539165476807785`*^9}, {
-  3.753919699453862*^9, 3.7539197925619535`*^9}, {3.7539198897677703`*^9, 
-  3.753919975573483*^9}},
+   3.753919699453862*^9, 3.7539197925619535`*^9}, {3.7539198897677703`*^9, 
+   3.753919975573483*^9}, 3.754052231395047*^9},
  CellLabel->
-  "In[139]:=",ExpressionUUID->"d57fc25a-d7ed-4d02-aec2-12c810f57397"],
+  "In[281]:=",ExpressionUUID->"d57fc25a-d7ed-4d02-aec2-12c810f57397"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0., Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = Rational[1, 2] Pi, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, 2 Pi}}, Typeset`size$$ = {
     779., {211., 217.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$132062$$ = 0}, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$367013$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$132062$$, 0]}, 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$367013$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -13211,7 +13385,7 @@ Cell[BoxData[
            Opacity[0.9], 
            Thickness[0.003]}}, ImageSize -> Scaled[0.5], PlotLabel -> 
         Style["Momentum Space Density Profile - Dynamical Fermionization \!\(\
-\*SubscriptBox[\(n\), \(\[Sigma], \[Theta]\)]\)(x) as t \[RightArrow] \
+\*SubscriptBox[\(n\), \(\[Sigma], \[Theta]\)]\)(p) as t \[RightArrow] \
 \[Infinity]", Bold, 16], 
         PlotLegends -> {
          "\!\(\*SubscriptBox[\(n\), \(F\)]\)(p)", 
@@ -13220,7 +13394,7 @@ Cell[BoxData[
         AxesLabel -> {"p"}], 
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, 2 Pi}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{830., {258., 264.}},
+     ImageSizeCache->{830., {271., 277.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -13231,10 +13405,149 @@ Cell[BoxData[
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{3.753920079005335*^9},
+ CellChangeTimes->{3.753920079005335*^9, 3.754052965929188*^9, 
+  3.7540530570378046`*^9},
  CellLabel->
-  "Out[139]=",ExpressionUUID->"5e6c2d39-ffe7-45fb-bf91-b0aa68967e4c"]
-}, Open  ]]
+  "Out[281]=",ExpressionUUID->"6ff68588-d7c4-4c5b-886f-8c7414a0da1f"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pts", "=", "70"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]", "=", 
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{"pts", "-", "1"}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ThetaDomain", "=", 
+   RowBox[{"2", "\[Pi]", "*", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"\[CapitalDelta]", "*", "j"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "0", ",", 
+        RowBox[{"1", "/", "\[CapitalDelta]"}]}], "}"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"frame", "[", "i_", "]"}], ":=", 
+   RowBox[{"Show", "[", 
+    RowBox[{
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["n", "F"], "[", "p", "]"}], ",", 
+         RowBox[{"0.5", "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             SubscriptBox["n", "F"], "[", "p", "]"}], " ", "+", " ", 
+            RowBox[{
+             RowBox[{"Cos", "[", 
+              RowBox[{"ThetaDomain", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "]"}], 
+             RowBox[{
+              SubscriptBox["n", "C"], "[", "p", "]"}]}]}], ")"}]}], ",", 
+         RowBox[{"0.5", "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             SubscriptBox["ns", "F"], "[", "p", "]"}], " ", "-", " ", 
+            RowBox[{
+             RowBox[{"Cos", "[", 
+              RowBox[{"ThetaDomain", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "]"}], 
+             RowBox[{
+              SubscriptBox["n", "C"], "[", "p", "]"}]}]}], ")"}]}]}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", 
+         RowBox[{"-", "4"}], ",", "4"}], "}"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Dashed", ",", 
+            RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Darker", "[", "Blue", "]"}], ",", 
+            RowBox[{"Opacity", "[", "0.7", "]"}], ",", 
+            RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Opacity", "[", "0.9", "]"}], ",", 
+            RowBox[{"Thickness", "[", ".003", "]"}]}], "}"}]}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"Scaled", "[", "0.6", "]"}]}], ",", 
+       RowBox[{"PlotLabel", "\[Rule]", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+         "\"\<Momentum Space Density Profile - Dynamical Fermionization \
+\!\(\*SubscriptBox[\(n\), \(\[Sigma], \[Theta]\)]\)(p) as t \[RightArrow] \
+\[Infinity]\>\"", ",", "Bold", ",", "16"}], "]"}]}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(n\), \(F\)]\)(p)\>\"", ",", 
+          "\"\<\[Sigma] = \!\(\*FractionBox[\(1\), \(2\)]\)\>\"", ",", 
+          "\"\<\[Sigma] = -\!\(\*FractionBox[\(1\), \(2\)]\)\>\""}], "}"}]}], 
+       ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<p\>\"", ",", "17"}], "]"}], "}"}]}], ",", 
+       RowBox[{"TicksStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"\"\<Label\>\"", ",", " ", "15"}], "]"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", 
+      RowBox[{"Style", "[", 
+       RowBox[{
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"StringForm", "[", 
+           RowBox[{"\"\<\[Theta] = ``\>\"", ",", 
+            RowBox[{
+             RowBox[{"ThetaDomain", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "//", "N"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"3", ",", "0.6"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}]}], "]"}], ",", "17"}], "]"}], 
+      "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"frames", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"frame", "[", "i", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "ThetaDomain", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<C:\\\\Users\\\\tskar\\\\Documents\\\\PhysicsResearch\\\\\
+UltraColdAtoms\\\\Plots\\\\ThetaEvolutionMSDP-DF.gif\>\"", ",", "frames", ",", 
+    RowBox[{"AnimationRepetitions", "->", "Infinity"}], ",", 
+    RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", " ", ".15"}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"Scaled", "[", "0.8", "]"}]}]}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.7540521603972807`*^9, {3.7540522078183827`*^9, 3.7540522221109695`*^9}, 
+   3.754052261679181*^9, {3.7540523032716985`*^9, 3.7540523430385666`*^9}, {
+   3.7540524047233925`*^9, 3.7540524049264774`*^9}, {3.754052447301445*^9, 
+   3.7540524485511513`*^9}, {3.754052479226614*^9, 3.754052483146476*^9}, 
+   3.754052605896413*^9, {3.754052657633073*^9, 3.754052657804905*^9}, {
+   3.754052699664189*^9, 3.754052701611163*^9}, {3.754052780209584*^9, 
+   3.7540527811132035`*^9}, {3.754052817384551*^9, 3.7540528227515187`*^9}, {
+   3.7540528769417744`*^9, 
+   3.7540529038966827`*^9}},ExpressionUUID->"25e0f81e-76ba-47fb-b22a-\
+bb544f0860cb"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -13257,7 +13570,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info343753874215-4105522", 521592, 13250}
+ {"Info343753874215-4105522", 533570, 13563}
  }
 *)
 (*NotebookFileOutline
@@ -13319,27 +13632,36 @@ Cell[CellGroupData[{
 Cell[492608, 12524, 181, 3, 44, "Subsubsection",ExpressionUUID->"8c2d9597-9fc0-479b-94c3-bbdbcc0fa89d"],
 Cell[492792, 12529, 420, 8, 34, "Text",ExpressionUUID->"ed17d509-2d3f-4a88-a838-88dcbcdc54a3"],
 Cell[CellGroupData[{
-Cell[493237, 12541, 2846, 74, 122, "Input",ExpressionUUID->"7a736fc4-d384-4b3a-b93f-926b2fe8b5cd"],
-Cell[496086, 12617, 2842, 57, 541, "Output",ExpressionUUID->"05b7aa5c-95fe-48d6-b20d-0d0e7ee2cff5"]
+Cell[493237, 12541, 2773, 71, 122, "Input",ExpressionUUID->"7a736fc4-d384-4b3a-b93f-926b2fe8b5cd"],
+Cell[496013, 12614, 2815, 56, 541, "Output",ExpressionUUID->"bcef299e-7f9f-46cb-b922-d82eee0512f0"]
 }, Open  ]],
-Cell[498943, 12677, 190, 3, 34, "Text",ExpressionUUID->"b1e0a463-1eac-4362-8b23-e55d6f206b02"],
-Cell[499136, 12682, 4940, 128, 227, "Input",ExpressionUUID->"1774c7be-106f-4505-87e3-4e13dc2b8512"]
+Cell[498843, 12673, 190, 3, 34, "Text",ExpressionUUID->"b1e0a463-1eac-4362-8b23-e55d6f206b02"],
+Cell[499036, 12678, 5242, 133, 227, "Input",ExpressionUUID->"1774c7be-106f-4505-87e3-4e13dc2b8512"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[504113, 12815, 216, 3, 44, "Subsubsection",ExpressionUUID->"df21f390-f87d-45e5-8af3-413bca66de65"],
-Cell[504332, 12820, 4700, 125, 210, "Input",ExpressionUUID->"10b52486-5071-4b56-8ccc-97abf69a19c4"],
+Cell[504315, 12816, 216, 3, 44, "Subsubsection",ExpressionUUID->"df21f390-f87d-45e5-8af3-413bca66de65"],
+Cell[504534, 12821, 4269, 122, 210, "Input",ExpressionUUID->"10b52486-5071-4b56-8ccc-97abf69a19c4"],
 Cell[CellGroupData[{
-Cell[509057, 12949, 2855, 68, 123, "Input",ExpressionUUID->"e055d8e0-9337-4321-aefd-a6a7bd40c83e"],
-Cell[511915, 13019, 3108, 62, 549, "Output",ExpressionUUID->"1633e916-4c85-4a0d-8db1-d3ca27397a40"]
+Cell[508828, 12947, 2903, 68, 123, "Input",ExpressionUUID->"e055d8e0-9337-4321-aefd-a6a7bd40c83e"],
+Cell[511734, 13017, 3171, 62, 549, "Output",ExpressionUUID->"3481738b-39eb-4be6-a695-38687243d36e"]
+}, Open  ]],
+Cell[514920, 13082, 171, 3, 34, "Text",ExpressionUUID->"38ab513a-ffa2-4273-ae38-1dd0f76b15bf"],
+Cell[CellGroupData[{
+Cell[515116, 13089, 4546, 118, 249, "Input",ExpressionUUID->"d57faa44-7c44-4931-9a36-114444ea2dc4"],
+Cell[519665, 13209, 461, 10, 21, "Message",ExpressionUUID->"28dde54a-fd7b-456d-997c-f2e78f1cf6e4"],
+Cell[520129, 13221, 461, 10, 21, "Message",ExpressionUUID->"af37d500-9059-40e7-8fb4-7c4526db5eb8"],
+Cell[520593, 13233, 461, 10, 21, "Message",ExpressionUUID->"e6e99d92-607e-4147-a450-5f0e8ab9da87"],
+Cell[521057, 13245, 447, 10, 21, "Message",ExpressionUUID->"c8bea542-ad1b-4cad-a4ae-f9dc3d767100"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[515072, 13087, 250, 6, 44, "Subsubsection",ExpressionUUID->"5ec52006-2f33-474c-8c8c-224e6af38d2a"],
-Cell[515325, 13095, 426, 8, 34, "Text",ExpressionUUID->"91cadc7c-2410-4885-b9a7-719bd1823be1"],
+Cell[521553, 13261, 250, 6, 44, "Subsubsection",ExpressionUUID->"5ec52006-2f33-474c-8c8c-224e6af38d2a"],
+Cell[521806, 13269, 426, 8, 34, "Text",ExpressionUUID->"91cadc7c-2410-4885-b9a7-719bd1823be1"],
 Cell[CellGroupData[{
-Cell[515776, 13107, 2687, 70, 131, "Input",ExpressionUUID->"d57fc25a-d7ed-4d02-aec2-12c810f57397"],
-Cell[518466, 13179, 2777, 56, 541, "Output",ExpressionUUID->"5e6c2d39-ffe7-45fb-bf91-b0aa68967e4c"]
-}, Open  ]]
+Cell[522257, 13281, 2711, 70, 131, "Input",ExpressionUUID->"d57fc25a-d7ed-4d02-aec2-12c810f57397"],
+Cell[524971, 13353, 2841, 57, 567, "Output",ExpressionUUID->"6ff68588-d7c4-4c5b-886f-8c7414a0da1f"]
+}, Open  ]],
+Cell[527827, 13413, 5406, 136, 256, "Input",ExpressionUUID->"25e0f81e-76ba-47fb-b22a-bb544f0860cb"]
 }, Open  ]]
 }, Open  ]]
 }

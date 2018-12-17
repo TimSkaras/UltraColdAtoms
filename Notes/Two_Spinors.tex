@@ -8,7 +8,14 @@
 \usepackage{color}
 \usepackage{rotating,booktabs}
 \usepackage{array}
-\usepackage{physics}
+\usepackage{physics,hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue,
+}
 %\usepackage{breqn}
 
 
@@ -271,7 +278,7 @@ Plugging in our result from equation (\ref{MixedOBDMSimp}) and simplifying some,
 \end{equation}
 We are familiar with the first two components and have calculated the momentum distribution from the boson and fermion OBDM before, thus we need only worry about the latter term. We can define our coupled term momentum space density profile as 
 \begin{equation}
-n_C(p) = \frac{1}{\pi}\int dx_2  \int dx \int dx' e^{ip(x-x')}(\varphi_F(x,x_2)\varphi_B(x',x_2) + \varphi_F(x',x_2)\varphi_B(x,x_2))
+n_C(p) = \frac{1}{2}\frac{N}{2\pi}\int dx_2  \int dx \int dx' e^{ip(x-x')}(\varphi_F(x,x_2)\varphi_B(x',x_2) + \varphi_F(x',x_2)\varphi_B(x,x_2))
 \label{ncInitMom}
 \end{equation}
 It can be shown that this function will be identically zero using a parity argument as follows
@@ -378,7 +385,7 @@ n_C^\theta(x) & =  \int dx_2
 
 \begin{figure}[h]
 \includegraphics[scale=0.45]{"../Plots/TimeEvolutionNC"}
-\caption{Plot of the time evolution of $n_{C}(p;t)$. The splitting that occurs during dynamical fermionization of the momentum distribution for each value of spin $\sigma$ is due to the change $n_C$.}
+\caption{Plot of the time evolution of $n_{C}(p;t)$. The splitting that occurs during dynamical fermionization of the momentum distribution for each value of spin $\sigma$ is due to the change $n_C$. There is also an animated \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/TimeEvolutionNC.gif}{gif} of this time evolution.}
 \label{fig:ncRSDP-DF}
 \end{figure}
 and thus 
@@ -389,6 +396,23 @@ which is the same expression for RSDP as in equation (\ref{ncRSDP}), differing o
 \begin{equation}
 n_{\sigma}^\theta(x) = S_1(\sigma, \sigma)n_F(x) +  S_2(\sigma,\sigma) n_C^\theta(x)
 \end{equation}
+See this \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionRSDP.gif}{gif} to observe how the $\theta$ dependence affects the RSDP. The total MSDP is 
+
+The momentum space density profile (MSDP) will also change with $\theta$. For the entire MSDP, we obtain the expression 
+\begin{equation}
+n_\sigma^\theta(p) = \frac{1}{2}\left(n_B(p) + n_F(p)\right)
+ S_1 + n_C^\theta(p)S_2
+\end{equation}
+where $n_C^\theta(p)$ from equation (\ref{ncInitMom}) becomes
+\begin{equation}
+n_C^\theta(p) = \frac{1}{2}\frac{N}{2\pi}\int dx_2  \int dx \int dx' e^{ip(x-x')}(\varphi_F(x,x_2)\varphi_B(x',x_2)e^{i\theta} + \varphi_F(x',x_2)\varphi_B(x,x_2)e^{-i\theta})
+\label{ncInitMomTheta}
+\end{equation}
+which we simplify to
+\begin{align*}
+n_C^\theta(p) &= \frac{1}{\pi^2}\int dx_2  \int dx \int dx' \cos(p(x-x') + \theta) e^{-\frac{1}{2} (x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x'|\\
+&= -\frac{\sin(\theta)}{\pi^2}\int dx_2  \int dx \int dx' \sin(p(x-x')) e^{-\frac{1}{2} (x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x'|\\
+\end{align*}
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
