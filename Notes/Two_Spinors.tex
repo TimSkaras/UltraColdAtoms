@@ -351,6 +351,7 @@ e^{-\frac{1}{2}(x^2 + x'^2)}e^{-x_2^2} (x_2 -x)|x_2 - x'|
 Then, using the stationary phase approximation we find that
 \begin{equation}
 \lim_{t \rightarrow \infty} n_C(p;t) = \frac{-2pe^{-2p^2} - e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p)}{\pi}  
+\label{ncMSDP-DF}
 \end{equation}
 which is the same function as the real space density profile from equation (\ref{ncRSDP}). In conclusion, the large $t$ behavior is therefore
 \begin{equation}
@@ -413,6 +414,23 @@ which we simplify to
 n_C^\theta(p) &= \frac{1}{\pi^2}\int dx_2  \int dx \int dx' \cos(p(x-x') + \theta) e^{-\frac{1}{2} (x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x'|\\
 &= -\frac{\sin(\theta)}{\pi^2}\int dx_2  \int dx \int dx' \sin(p(x-x')) e^{-\frac{1}{2} (x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x'|\\
 \end{align*}
+this integral does not have an integrand with odd parity and will have a non-zero contribution to the MSDP for $\theta \neq 0$. We have created a \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionMSDP.gif}{gif} of how the momentum distribution changes with $\theta$.
+
+Lastly, we consider the MSDP after the trapping potential has been turned off in the $t \rightarrow \infty$ limit. In order to calculate 
+\begin{equation}
+n_\sigma^\theta(p;t) = \frac{1}{2}\left(n_B(p;t) + n_F(p;t)\right)
+ S_1 + n_C^\theta(p;t)S_2
+\end{equation}
+we must find the limit of the last term. Starting with the inital $\theta$ dependent expression
+\begin{equation}
+n_C^\theta(p;t) \equiv \frac{b}{\pi^2} \int dx \int dx' \cos(bp(x-x') + \frac{\dot{b}b}{2}(x'^2 - x^2) + \theta)
+e^{-\frac{1}{2}(x^2 + x'^2)}e^{-x_2^2}(x_2 -x) |x_2 -x'|
+\end{equation}
+expanding the cosine in terms of exponentials and applying the stationary phase approximation again leaves us with the following asymptotic expression
+\begin{equation}
+\lim_{t\rightarrow \infty} n_C^\theta(p;t) = \frac{\cos(\theta)}{\pi}(-2pe^{-2p^2}-e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p))
+\end{equation}
+differing from the previous asymptotic expression when $\theta$ was excluded (\ref{ncMSDP-DF}) only by a factor of $\cos(\theta)$. The $\theta$-dependence will be the same as for the RSDP, therefore. Again, we have created a \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionMSDP-DF.gif}{gif} to animate this $\theta$ dependence.
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
