@@ -397,7 +397,7 @@ which is the same expression for RSDP as in equation (\ref{ncRSDP}), differing o
 \begin{equation}
 n_{\sigma}^\theta(x) = S_1(\sigma, \sigma)n_F(x) +  S_2(\sigma,\sigma) n_C^\theta(x)
 \end{equation}
-See this \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionRSDP.gif}{gif} to observe how the $\theta$ dependence affects the RSDP. The total MSDP is 
+See this \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionRSDP.gif}{gif} to observe how the $\theta$ dependence affects the RSDP. As we saw in figure \ref{fig:PositionDist}, the RSDP for  $\sigma = \frac{1}{2}$ is skewed toward negative momentum and the RSDP for  $\sigma = -\frac{1}{2}$ is skewed toward positive momentum. The gif illustrates that as we increase $\theta$ this trend is reversed once during $\theta \in [0, \pi]$ so that the $\sigma = \frac{1}{2}$ distribution is transformed into the $\sigma = -\frac{1}{2}$ distribution (and vice-versa) and then the trend is reversed once again while $\theta \in [\pi, 2\pi)$.
 
 The momentum space density profile (MSDP) will also change with $\theta$. For the entire MSDP, we obtain the expression 
 \begin{equation}
@@ -414,7 +414,7 @@ which we simplify to
 n_C^\theta(p) &= \frac{1}{\pi^2}\int dx_2  \int dx \int dx' \cos(p(x-x') + \theta) e^{-\frac{1}{2} (x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x'|\\
 &= -\frac{\sin(\theta)}{\pi^2}\int dx_2  \int dx \int dx' \sin(p(x-x')) e^{-\frac{1}{2} (x^2 + x'^2)} e^{-x_2^2} (x_2 -x) |x_2 - x'|\\
 \end{align*}
-this integral does not have an integrand with odd parity and will have a non-zero contribution to the MSDP for $\theta \neq 0$. We have created a \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionMSDP.gif}{gif} of how the momentum distribution changes with $\theta$.
+this integral does not have an integrand with odd parity and will have a non-zero contribution to the MSDP for $\theta \neq 0$. We have created a \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionMSDP.gif}{gif} of how the momentum distribution changes with $\theta$. When $\theta =0$, we saw in figure \ref{fig:InitialMomentumProfile} that the momentum distribution for each spin value was symmetric with respect to $p$. As $\theta$ is increased, we see in the gif that this symmetry is broken as the distribution for each spin value is shifted toward the left or the right depending on the exact value of $\theta$ and $\sigma$.
 
 Lastly, we consider the MSDP after the trapping potential has been turned off in the $t \rightarrow \infty$ limit. In order to calculate 
 \begin{eqnarray}
@@ -424,7 +424,7 @@ n_\sigma^\theta(p;t) = \frac{1}{2}\left(n_B(p;t) + n_F(p;t)\right)
 \end{eqnarray}
 we must find the limit of the last term. Starting with the inital $\theta$ dependent expression
 \begin{equation}
-n_C^\theta(p;t) \equiv \frac{b}{\pi^2} \int dx \int dx' \cos(bp(x-x') + \frac{\dot{b}b}{2}(x'^2 - x^2) + \theta)
+n_C^\theta(p;t) \equiv \frac{b}{\pi^2} \int dx \int dx' \int dx_2  \cos(bp(x-x') + \frac{\dot{b}b}{2}(x'^2 - x^2) + \theta)
 e^{-\frac{1}{2}(x^2 + x'^2)}e^{-x_2^2}(x_2 -x) |x_2 -x'|
 \end{equation}
 expanding the cosine in terms of exponentials and applying the stationary phase approximation again leaves us with the following asymptotic expression
