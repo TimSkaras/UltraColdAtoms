@@ -236,6 +236,7 @@ For each of the four spatial terms in the OBDM ($\varphi_B\varphi_B'$, $\varphi_
 Because the integral with respect to $x'$ decays exponentially with respect to momentum, the term as a whole for $\varphi_B(x, x_2)\varphi_F(x', x_2)$ will not contribute to the Tan contact. The Tan contact will still, therefore, be the same as the spinless case, because the only term that contributes has the same spatial component as spinless HCB. Thus
 \begin{equation}
 \lim_{p \rightarrow \infty} n_{\sigma}(p) =  \frac{1}{2}\left(\frac{2}{\pi} \sqrt{\frac{2}{\pi}} \frac{1}{p^4}\right) S_{1}(\sigma, \sigma)
+\label{InitTanContact}
 \end{equation}
 
 We will also calculate the time evolution of the momentum distribution after the trap has been turned off, but first lets calculate some other physical characteristics so that we will have something to compare the long-term behavior to. We first calculate the number density in position space
@@ -343,9 +344,9 @@ and the fermi distribution does not change when the trap is turned off. Thus, we
 \begin{align*}
 \frac{1}{2\pi b} \int dx \int dx' e^{ip(x-x')} e^{\frac{i\dot{b}}{2b}(x'^2 - x^2)}
 \rho_C\left(\frac{x}{b},\frac{x'}{b};0\right) 
-&= \frac{b}{2\pi} \int dx \int dx' e^{ibp(x-x')} e^{\frac{i\dot{b}b}{2}(x'^2 - x^2)}
+&= \frac{b}{2\pi} \int dx_2 \int dx \int dx' e^{ibp(x-x')} e^{\frac{i\dot{b}b}{2}(x'^2 - x^2)}
 \varphi_F(x,x_2)\varphi_B(x',x_2)\\
-&= \frac{b}{2\pi^2} \int dx \int dx' e^{ibp(x-x')} e^{\frac{i\dot{b}b}{2}(x'^2 - x^2)}
+&= \frac{b}{2\pi^2} \int dx_2 \int dx \int dx' e^{ibp(x-x')} e^{\frac{i\dot{b}b}{2}(x'^2 - x^2)}
 e^{-\frac{1}{2}(x^2 + x'^2)}e^{-x_2^2} (x_2 -x)|x_2 - x'|
 \end{align*}
 Then, using the stationary phase approximation we find that
@@ -432,6 +433,18 @@ expanding the cosine in terms of exponentials and applying the stationary phase 
 \lim_{t\rightarrow \infty} n_C^\theta(p;t) = \frac{\cos(\theta)}{\pi}(-2pe^{-2p^2}-e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p))
 \end{equation}
 differing from the previous asymptotic expression when $\theta$ was excluded (\ref{ncMSDP-DF}) only by a factor of $\cos(\theta)$. The $\theta$-dependence will be the same as for the RSDP, therefore. Again, we have created a \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionMSDP-DF.gif}{gif} to animate this $\theta$ dependence.
+
+% Insert stuff about full MSDP time dependence for various theta
+An animation of the full time dependence for various theta can be viewed \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/ThetaEvolutionMSDP-DF.gif}{here}
+
+Inspecting equation (\ref{ncInitMomTheta}) again, we see that the $n_B$ term is the only term that contribute to the Tan Contact of $n_\sigma$ because all the other terms decay exponentially with $p$. The time dependence of the Tan Contact, therefore, will be the same as in the spinless HCB case, differing only by a constant. We have numerically calculated and plotted this time dependence in the plot in figure \ref{fig:TanContactTimeDep}. The plot shows that numerical calculation agrees with theoretical prediction that the Tan Contact should have a decay proportional to $\frac{1}{b(t)^3}$, where the constant is given in equation (\ref{InitTanContact}).
+
+\begin{figure}[h] 
+\includegraphics[scale=0.55]{"../Plots/SpinorTanContactTimeDependence"}
+\caption{This is a plot of the time dependence of the Tan Contact for $n_\sigma(p)$ with $\sigma = \frac{1}{2}$ and $\sigma = -\frac{1}{2}$. $C_+(t)$ denotes the Tan Contact for the former and $C_-(t)$ denotes the Tan Contact for the latter. To examine just the time dependent behavior, the Tan Contact function has been divided by its value at $t = 0$.}
+\label{fig:TanContactTimeDep}
+\end{figure}
+
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
