@@ -437,13 +437,13 @@ differing from the previous asymptotic expression when $\theta$ was excluded (\r
 % Insert stuff about full MSDP time dependence for various theta
 An animation of the full time dependence for various theta can be viewed \href{https://github.com/TimSkaras/UltraColdAtoms/tree/master/Plots/Time%20Evolution%20NSigma}{here}
 
-Inspecting equation (\ref{ncInitMomTheta}) again, we see that the $n_B$ term is the only term that contribute to the Tan Contact of $n_\sigma$ because all the other terms decay exponentially with $p$. The time dependence of the Tan Contact, therefore, will be the same as in the spinless HCB case, differing only by a constant. We have numerically calculated and plotted this time dependence in the plot in figure \ref{fig:TanContactTimeDep}. The plot shows that numerical calculation agrees with theoretical prediction that the Tan Contact should have a decay proportional to $\frac{1}{b(t)^3}$, where the constant is given in equation (\ref{InitTanContact}).
-
 \begin{figure}[h] 
 \includegraphics[scale=0.55]{"../Plots/SpinorTanContactTimeDependence"}
-\caption{This is a plot of the time dependence of the Tan Contact for $n_\sigma(p)$ with $\sigma = \frac{1}{2}$ and $\sigma = -\frac{1}{2}$. $C_+(t)$ denotes the Tan Contact for the former and $C_-(t)$ denotes the Tan Contact for the latter. To examine just the time dependent behavior, the Tan Contact function has been divided by its value at $t = 0$.}
+\caption{This is a plot of the time dependence of the Tan Contact for $n_\sigma(p)$ with $\sigma = \frac{1}{2}$ and $\sigma = -\frac{1}{2}$. $C_+(t)$ denotes the Tan Contact for the former and $C_-(t)$ denotes the Tan Contact for the latter. To examine just the time dependent behavior, the Tan Contact function has been divided by its value at $t = 0$. The calculations required for this plot assumed that $\theta = 0$. These plots were created by numerically calculating the Tan Contact for several values of $t$ and then interpolating intermediate points for the sake of plotting.}
 \label{fig:TanContactTimeDep}
 \end{figure}
+
+Inspecting equation (\ref{ncInitMomTheta}) again, we see that the $n_B$ term is the only term that contribute to the Tan Contact of $n_\sigma$ because all the other terms decay exponentially with $p$. The time dependence of the Tan Contact, therefore, will be the same as in the spinless HCB case, differing only by a constant. We have numerically calculated and plotted this time dependence in the plot in figure \ref{fig:TanContactTimeDep}. The plot shows that numerical calculation agrees with theoretical prediction that the Tan Contact should have a decay proportional to $\frac{1}{b(t)^3}$, where the constant is given in equation (\ref{InitTanContact}).
 
 \pagebreak
 \bibliographystyle{abbrv}
