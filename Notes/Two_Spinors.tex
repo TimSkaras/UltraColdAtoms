@@ -175,6 +175,8 @@ If we recall from the spinless hard-core boson case, the Bose-Fermi mapping \cit
 
 Similarly, for the present case, equation (\ref{SingletState}) satisfies the same conditions, where the dual antisymmetry of the spatial and spin component make the overall wave function symmetric. Because the spatial component of this wave function matches the fermion spatial component, we expect that the momentum tail for (\ref{SingletState}) will display exponential decay like fermions.
 
+\subsection{Non-separable Wave Function}
+
 When the spin and spatial components of the wave function are not separable like they are in the last cases,
 \begin{align}
 \Psi(x_1, x_2; \sigma_1, \sigma_2) &= \frac{1}{\sqrt{2}}\left[\varphi_F(x_1, x_2) \chi_S(\sigma_1, \sigma_2) + \varphi_B(x_1,x_2) \chi_T(\sigma_1, \sigma_2)\right]
@@ -239,6 +241,8 @@ Because the integral with respect to $x'$ decays exponentially with respect to m
 \label{InitTanContact}
 \end{equation}
 
+\subsection{Real Space Density Profile}
+
 We will also calculate the time evolution of the momentum distribution after the trap has been turned off, but first lets calculate some other physical characteristics so that we will have something to compare the long-term behavior to. We first calculate the number density in position space
 \begin{align}
 n_{\sigma}(x) & = N \rho_{\sigma, \sigma}(x,x)\\
@@ -250,14 +254,14 @@ n_{\sigma}(x) & = N \rho_{\sigma, \sigma}(x,x)\\
 \end{align}
 where our particle number $N$ is 2, thus eliminating $\frac{1}{2}$. In position space, the boson and fermion solution are the same, so
 \begin{align}
-n_{\sigma}(x) & = \frac{1}{2}S_1(\sigma, \sigma)(n_F(x) + n_B(x)) + S_2(\sigma,\sigma) \int dx_2 \varphi_F(x,x_2)\varphi_B(x,x_2)\nonumber\\
-&= S_1(\sigma, \sigma)n_F(x) + S_2(\sigma,\sigma) \frac{1}{\pi} \int dx_2 e^{-(x^2 + x_2^2)} (x_2 -x ) |x_2 - x| \nonumber\\
+n_{\sigma}(x) & = \frac{1}{2}S_1(\sigma, \sigma)(n_F(x) + n_B(x)) + 2S_2(\sigma,\sigma) \int dx_2 \varphi_F(x,x_2)\varphi_B(x,x_2)\nonumber\\
+&= S_1(\sigma, \sigma)n_F(x) + S_2(\sigma,\sigma) \frac{2}{\pi} \int dx_2 e^{-(x^2 + x_2^2)} (x_2 -x ) |x_2 - x| \nonumber\\
 &= S_1(\sigma, \sigma)n_F(x) + S_2(\sigma,\sigma) n_C(x)
 \end{align}
 where $n_F(x)$ is the real space density for two spinless fermions and $n_C(x)$ is the real density profile from the bose-fermi coupled 	terms in the OBDM
 \begin{align}
-n_F(x) &= \frac{e^{-x^2}(1+2x^2)}{\sqrt{\pi}}\\
-n_C(x) &= \frac{-2x e^{-2x^2} - e^{-x^2} (1+2x^2) \erf(x)}{\pi}
+n_F(x) &= \frac{e^{-x^2}(1+2x^2)}{\sqrt{\pi}} \label{nfRSDP}\\
+n_C(x) &= 2 \int dx_2 \varphi_F(x,x_2)\varphi_B(x,x_2)= \frac{-2x e^{-2x^2} - e^{-x^2} (1+2x^2) \erf(x)}{\pi}
 \label{ncRSDP}
 \end{align}
 
@@ -269,10 +273,13 @@ If we plot this distribution for each value of spin $\sigma$, we obtain fig. \re
 \label{fig:PositionDist}
 \end{figure}
 
+\subsection{Momentum Space Density Profile}
+
 Now we consider the density profile in momentum space before the trap has been turned off. We start with the general expression for two particles
 \begin{equation}
 n_{\sigma}(p) = \frac{1}{\pi} \int dx \int dx' e^{ip(x-x')} \rho_{\sigma}(x,x')
 \end{equation}
+
 Plugging in our result from equation (\ref{MixedOBDMSimp}) and simplifying some, we can express our spin OBDM as
 \begin{equation}
 \rho_{\sigma, \sigma'}(x,x') = \frac{1}{2}S_1(\sigma, \sigma')(\rho_B(x,x') + \rho_F(x,x')) + \frac{1}{2}S_2(\sigma, \sigma')(\int dx_2 \varphi_F(x,x_2)\varphi_B(x',x_2) + \varphi_F(x',x_2)\varphi_B(x,x_2))
@@ -293,21 +300,24 @@ Note that in the last expression the entire integrand picks up a negative sign u
 \begin{equation}
 n_{\sigma}(p) =  \frac{1}{2}S_1(\sigma, \sigma)(n_B(p) + n_F(p))
 \end{equation}
-a plot of this distribution is given in figure \ref{fig:InitialMomentumProfile}. 
+a plot of this distribution is given in figure \ref{fig:InitialMomentumProfile}.
 \begin{figure}
 \includegraphics[scale=0.6]{"../Plots/MomentumSpaceDProfileMixedSpinor"}
 \caption{Plot of momentum space density profile for (\ref{MixedState})}
 \label{fig:InitialMomentumProfile}
 \end{figure}
-%
+
+\subsection{Time Evolution of Density Profiles}
+
 Now we turn to the long term dynamics of the momentum space density profile after the trapping potential has been turned off. To find the time evolution of this system, we use a scaling transformation \cite{zel1998quantum}. Our two particle OBDM will evolve as
 %
 \begin{equation}
 \rho_{\sigma, \sigma'}(x, x';t) = \frac{1}{2b} e^{\frac{i\dot{b}}{2b}(x'^2 - x^2)}\left(\left(\rho_B\left(\frac{x}{b},\frac{x'}{b};0\right) + \rho_F\left(\frac{x}{b},\frac{x'}{b};0\right)\right)
  S_1 + 
  \left( \rho_C\left(\frac{x}{b},\frac{x'}{b};0\right) + x \leftrightarrow x' \right)S_2\right)
+ \label{TimeDepOBDM}
 \end{equation}
-where our scaling function $b(t) = \sqrt{1+t^2}$ and 
+where our scaling function $b(t) = \sqrt{1+t^2}$ and
 \[
 \rho_C(x,x';0) \equiv \int dx_2 \varphi_F(x,x_2)\varphi_B(x',x_2)
 \]
@@ -358,13 +368,28 @@ which is the same function as the real space density profile from equation (\ref
 \begin{equation}
 \lim_{t \rightarrow \infty} n_\sigma(p) = S_1(\sigma, \sigma)n_F(p) + S_2(\sigma,\sigma) \frac{-2pe^{-2p^2} - e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p)}{\pi}
 \end{equation} 
-This result has been plotted in figure \ref{fig:nsRSDP-DF}, thus obtaining the same profile as we observed in the real space density profile prior to expansion. Additionally, in figure \ref{fig:ncRSDP-DF} we plot the time evolution of $n_C(p;t)$ during this dynamical fermionization process.
+This result has been plotted in figure \ref{fig:nsRSDP-DF}, thus obtaining the same profile as we observed in the real space density profile prior to expansion. Additionally, in figure \ref{fig:ncRSDP-DF} we plot the time evolution of $n_C(p;t)$ during this dynamical fermionization process.\\
 
 \begin{figure}[h]
 \includegraphics[scale=0.6]{"../Plots/MomentumSpaceDProfileMixedSpinorDF"}
 \caption{Here is a plot of the momentum space density profile after the trap has been turned off and $t \rightarrow \infty$}
 \label{fig:nsRSDP-DF}
 \end{figure}
+
+Notice that after the trapping potential has been turned off, the $\sigma = \frac{1}{2}$ particle has a predominantly negative momentum, whereas the $\sigma = -\frac{1}{2}$ particle tends to have a positive momentum. If this is the case, we should expect to see in the RSDP for both these particles that the $\sigma = \frac{1}{2}$ particle moves to the left and the $\sigma = -\frac{1}{2}$ moves to the right. Let's calculate this to check our result.
+
+The time dependent RSDP is given by 
+\begin{equation}
+n_{\sigma}(x;t) = N \rho_{\sigma, \sigma}(x,x;t)
+\end{equation}
+and using equation (\ref{TimeDepOBDM}), we obtain the expression
+\begin{equation}
+n_{\sigma}(x;t) = \frac{1}{b}\left(S_1 n_F\left(\frac{x}{b};0\right) + S_2 n_C \left(\frac{x}{b}; 0\right) \right)
+\end{equation}
+and these two functions are given analytically in equations (\ref{nfRSDP}) and (\ref{ncRSDP}) respectively. We have created an \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/TimeEvolutionNS-RSDP.gif}{animation} of the time evolution of this RSDP.
+
+
+\subsection{Non-separable Wave Function with Constant Phase Difference}
 
 Now we consider how the above results would change if we modified equation (\ref{MixedState}) so that the two terms differed by a constant phase, viz.
 \begin{equation}
