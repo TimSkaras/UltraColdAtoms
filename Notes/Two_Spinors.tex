@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{bm}
-\usepackage{braket}
+\usepackage{braket, float}
 \usepackage{color}
 \usepackage{rotating,booktabs}
 \usepackage{array}
@@ -366,11 +366,12 @@ Then, using the stationary phase approximation we find that
 \end{equation}
 which is the same function as the real space density profile from equation (\ref{ncRSDP}). In conclusion, the large $t$ behavior is therefore
 \begin{equation}
-\lim_{t \rightarrow \infty} n_\sigma(p) = S_1(\sigma, \sigma)n_F(p) + S_2(\sigma,\sigma) \frac{-2pe^{-2p^2} - e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p)}{\pi}
+\lim_{t \rightarrow \infty} n_\sigma(p;t) = S_1(\sigma, \sigma)n_F(p) + S_2(\sigma,\sigma) \frac{-2pe^{-2p^2} - e^{-p^2}(1+2p^2)\sqrt{\pi}\erf(p)}{\pi}
 \end{equation} 
 This result has been plotted in figure \ref{fig:nsRSDP-DF}, thus obtaining the same profile as we observed in the real space density profile prior to expansion. Additionally, in figure \ref{fig:ncRSDP-DF} we plot the time evolution of $n_C(p;t)$ during this dynamical fermionization process.\\
 
-\begin{figure}[h]
+\begin{figure}[H]
+\center
 \includegraphics[scale=0.6]{"../Plots/MomentumSpaceDProfileMixedSpinorDF"}
 \caption{Here is a plot of the momentum space density profile after the trap has been turned off and $t \rightarrow \infty$}
 \label{fig:nsRSDP-DF}
@@ -388,6 +389,18 @@ n_{\sigma}(x;t) = \frac{1}{b}\left(S_1 n_F\left(\frac{x}{b};0\right) + S_2 n_C \
 \end{equation}
 and these two functions are given analytically in equations (\ref{nfRSDP}) and (\ref{ncRSDP}) respectively. We have created an \href{https://github.com/TimSkaras/UltraColdAtoms/blob/master/Plots/TimeEvolutionNS-RSDP.gif}{animation} of the time evolution of this RSDP.
 
+This animation confirms that the two particles will move away from each other. We can plot the location of the two modes in the RSDP (one mode for the density profile of each $\sigma$) as a function of time to illustrate this more clearly (fig. \ref{DensityPeaks}). As a confirmation of these results, we should see that the derivative of the position curve for each of these density peaks, should approach the final momentum of each particle after dynamical fermionization has occurred. Because the final MSDP is the same distribution as the initial RSDP however, this just means that the intial value of each density peak should approximately equal the steady state slope of each density peak trajectory.
+
+In other words, if we denote $Q_\sigma(t)$ as the location of the RSDP mode for the particle with spin $\sigma$, then our previous analysis translates to the statement
+\[ Q_\sigma(0) = \lim_{t \rightarrow \infty} Q'_{\sigma}(t) \]
+Numerical calculations confirm this with $Q_\sigma(0) \approx .771242$ and the best fit line for $Q_\sigma(t)$ in interval $t \in [100,150]$ has slope $m = 0.771217$. This calculation is a nice indirect result of the dynamical fermionization already discussed.
+
+\begin{figure}[H]
+\center	
+\includegraphics[scale=0.45]{../Plots/DensityPeaks}
+\caption{This is a plot of the time evolution of the two modes in $n_\sigma(x)$ for each $\sigma$ after the trapping potential has been turned off. The two peaks move away from each other and approach a constant momentum.}
+\label{DensityPeaks}
+\end{figure}
 
 \subsection{Non-separable Wave Function with Constant Phase Difference}
 
