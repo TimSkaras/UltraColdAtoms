@@ -123,47 +123,94 @@ def findGroundState(trialSolution, tolerance):
     
     groundState = groundState/getNorm(groundState)
     return groundState, energyPlot, tplot
+
+def momentumSpace(waveFunction):
+    """
+    This function takes a wave function in real space specified over length L 
+    and centered at 0. Then it calculates this wave function in momentum space
+    assuming that the largest momentum will be less than p = N*pi/L
+    
+    OUTPUTS:
+        momentumWF -- array of N values for positive p
+    
+    """
+    
+    momentumWF = np.zeros(numpts, dtype=np.complex_)
+    
+    for i in range(numpts):
+        momentumWF[i] = np.sum(np.exp(-1j*p[i] * x)*waveFunction)
+    
+    momentumWF = momentumWF/np.sqrt(2*np.pi)*h
+    return momentumWF
     
 # Important variables
-L = 15  # Trap is centered at 0 with total length L
+L = 10.0  # Trap is centered at 0 with total length L
 numpts = 160
 h = L/(numpts - 1)
 lam = 0.1  # perturbative parameter on anharmonic term
 dt = .001
 tol = 10**-8
 x = np.linspace(-L/2., L/2., numpts)
+p = np.linspace(-L/2., L/2., numpts)
 
-#trial1 = np.sin(4*2*np.pi/L*x)**2/100.
-trial1 = unperturbedSol(0)
-print(np.sum(trial1*lam*x**4*trial1)*h) # first order correction to energy
+# Important for preventing instability
 print(r'Courant Condition: 1- 4 dt/dx^2 = ' + f'{1.0 - 4*dt/h**2}')
-gs1, gsEnergy, tplot = findGroundState(trial1, tol)
-print(f'Trial Function energy: {getEnergy(trial1)}')
-print(f'Final Computed Energy: {gsEnergy[-1]}')
 
-# Construct analytic perturbed
-analyticPerturbation = -(3./(2.*np.sqrt(2.)) * unperturbedSol(2) + (np.sqrt(3./2)/4.)*unperturbedSol(4))
-firstOrderSol = trial1 + lam*analyticPerturbation
+trial0 = unperturbedSol(0)
+phi0, gsEnergy, tplot0 = findGroundState(trial0, tol)
+#print(f'Trial Function energy: {getEnergy(trial1)}')
+#print(f'Final Computed Energy: {gsEnergy[-1]}')
+
+trial1 = unperturbedSol(1)
+phi1, phi1Energy, tplot1 = findGroundState(trial1, tol)
+
 # Plot solutions
-y1 = trial1
-y2 = gs1
-y3 = firstOrderSol
-#print(getNorm(y))
-fig, ax = plt.subplots()
-ax.plot(x, y1, 'r', label='Unperturbed')
-ax.plot(x, y2, 'b', label='Perturbed')
-ax.plot(x, y3, 'g', label='Perturbed Analytic')
-ax.set_xlabel('x')
-ax.set_ylabel(r'$|\Psi|^2$')
-ax.legend(loc='upper right')
-ax.grid(linestyle=':')
-ax.set_title('Trial Function vs. ITP Solution')
+y1 = trial0
+y2 = phi0
+y3 = trial1
+y4 = phi1
 
-# Plot energy convergence
-fig2, ax2 = plt.subplots()
-ax2.plot(tplot, gsEnergy - gsEnergy[-1])
-ax2.set_title('Energy Plot')
-ax2.set_xlabel('Time')
-ax2.set_ylabel('Energy')
-ax2.grid(linestyle=':')
-plt.show()
+#fig, ax = plt.subplots()
+#ax.plot(x, y1, 'r', label=r'Unperturbed $\phi_0$')
+#ax.plot(x, y2, 'b', label=r'Computed $\phi_0$')
+#ax.set_xlabel('x')
+#ax.set_ylabel(r'$|\psi|$')
+#ax.legend(loc='upper right')
+#ax.grid(linestyle=':')
+#ax.set_title('Ground State Trial Function vs. ITP Solution')
+#
+#fig3, ax3 = plt.subplots()
+#ax3.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
+#ax3.plot(x, y4, 'b', label=r'Computed $\phi_1$')
+#ax3.set_xlabel('x')
+#ax3.set_ylabel(r'$|\psi|$')
+#ax3.legend(loc='upper right')
+#ax3.grid(linestyle=':')
+#ax3.set_title('First Excited State Trial Function vs. ITP Solution')
+#
+## Plot energy convergence
+#fig2, ax2 = plt.subplots()
+#ax2.plot(tplot0, gsEnergy-gsEnergy[-1], label=r'\phi_0 Energy Convergence')
+#ax2.plot(tplot1, phi1Energy - phi1Energy[-1], label=r'\phi_1 Energy Convergence')
+#ax2.set_title('Energy Plot')
+#ax2.set_xlabel('Time')
+#ax2.set_ylabel('Energy')
+#ax2.grid(linestyle=':')
+#plt.show()
+
+phi0_kspace = np.zeros(numpts, dtype=np.complex_)
+phi1_kspace = np.zeros(numpts, dtype=np.complex_)
+
+# Now let's find the momentum distribution
+phi0_kspace = np.real(momentumSpace(phi0))
+phi1_kspace = np.imag(momentumSpace(phi1))
+
+fig4, ax4 = plt.subplots()
+#ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
+ax4.plot(x, phi0, 'b', label=r'Unperturbed $\phi_0(p)$')
+ax4.plot(p, phi0_kspace, 'r', label=r'Computed $\phi_0(p)$')
+ax4.set_xlabel('p')
+ax4.set_ylabel(r'$|\psi(p)|$')
+ax4.legend(loc='upper right')
+ax4.grid(linestyle=':')
+ax4.set_title('Momentum Space G.S. Wave Function')
