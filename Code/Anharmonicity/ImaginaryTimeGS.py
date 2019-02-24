@@ -136,10 +136,7 @@ def momentumSpace(waveFunction):
     """
     
     momentumWF = np.zeros(numpts, dtype=np.complex_)
-    
-    for i in range(numpts):
-        momentumWF[i] = np.sum(np.exp(-1j*p[i] * x)*waveFunction)
-    
+    momentumWF = np.sum(np.exp(-1j*np.transpose([p])* x)*np.transpose([waveFunction]), axis=0, dtype=np.complex_)
     momentumWF = momentumWF/np.sqrt(2*np.pi)*h
     return momentumWF
     
@@ -205,6 +202,7 @@ phi1_kspace = np.zeros(numpts, dtype=np.complex_)
 phi0_kspace = np.real(momentumSpace(phi0))
 phi1_kspace = np.imag(momentumSpace(phi1))
 
+# Plot the momentum distributions
 fig4, ax4 = plt.subplots()
 #ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
 ax4.plot(x, phi0, 'b', label=r'Unperturbed $\phi_0(p)$')
@@ -214,3 +212,5 @@ ax4.set_ylabel(r'$|\psi(p)|$')
 ax4.legend(loc='upper right')
 ax4.grid(linestyle=':')
 ax4.set_title('Momentum Space G.S. Wave Function')
+
+
