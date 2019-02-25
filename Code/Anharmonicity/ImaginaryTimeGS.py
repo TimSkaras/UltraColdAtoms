@@ -100,7 +100,7 @@ def findGroundState(trialSolution, tolerance):
         
         new_gs = groundState + dt * deriv
         
-        if iterations % 5 == 0:
+        if iterations % 10 == 0:
             groundState = groundState/getNorm(groundState)
             energy = getEnergy(groundState)
             delta = np.abs(energy - energyPlot[-1])/energy/dt
@@ -112,14 +112,6 @@ def findGroundState(trialSolution, tolerance):
         # Break if max iterations exceeded
         if iterations > maxIter:
             break
-    # Calculate derivative transformation
-    deriv = 0.5*Dxx(groundState)
-    
-    # Potential term
-    deriv = deriv - (0.5 * x**2 + lam * x**4) * groundState
-        
-#    fig2, ax2 = plt.subplots()
-#    ax2.plot(x, deriv)
     
     groundState = groundState/getNorm(groundState)
     return groundState, energyPlot, tplot
@@ -131,21 +123,37 @@ def momentumSpace(waveFunction):
     assuming that the largest momentum will be less than p = N*pi/L
     
     OUTPUTS:
-        momentumWF -- array of N values for positive p
-    
+        momentumWF -- array of N values for different values of p
     """
     
-    momentumWF = np.zeros(numpts, dtype=np.complex_)
-    momentumWF = np.sum(np.exp(-1j*np.transpose([p])* x)*np.transpose([waveFunction]), axis=0, dtype=np.complex_)
+#    momentumWF = np.zeros(numpts, dtype=np.complex_)
+    momentumWF = np.sum(np.exp(-1j*np.transpose([p])* [x])*[waveFunction], axis=1, dtype=np.complex_)
     momentumWF = momentumWF/np.sqrt(2*np.pi)*h
     return momentumWF
+
+def timeEvolve(momentumWF, t):
+    """
+    This function takes a wave function in momentum space and finds the 
+    value of that wave function at time t in position space where t is 
+    a vector of different times
+    """
+    
+    waveFunction = np.zeros((numpts, len(t)), dtype=np.complex_)
+    
+    # x is contant along the same row and p changes
+    A = np.exp(1j*np.transpose([x])*[p])
+    B = np.array([momentumWF])
+    C = np.exp(-1j*np.transpose([p**2])*[t]/2.)
+    waveFunction = np.matmul(A*B,C)
+    waveFunction = waveFunction/np.sqrt(2*np.pi)*h
+    return np.transpose(waveFunction)
     
 # Important variables
-L = 10.0  # Trap is centered at 0 with total length L
-numpts = 160
+L = 20.0  # Trap is centered at 0 with total length L
+numpts = 200
 h = L/(numpts - 1)
 lam = 0.1  # perturbative parameter on anharmonic term
-dt = .001
+dt = .001  
 tol = 10**-8
 x = np.linspace(-L/2., L/2., numpts)
 p = np.linspace(-L/2., L/2., numpts)
@@ -167,36 +175,38 @@ y2 = phi0
 y3 = trial1
 y4 = phi1
 
-#fig, ax = plt.subplots()
-#ax.plot(x, y1, 'r', label=r'Unperturbed $\phi_0$')
-#ax.plot(x, y2, 'b', label=r'Computed $\phi_0$')
-#ax.set_xlabel('x')
-#ax.set_ylabel(r'$|\psi|$')
-#ax.legend(loc='upper right')
-#ax.grid(linestyle=':')
-#ax.set_title('Ground State Trial Function vs. ITP Solution')
-#
-#fig3, ax3 = plt.subplots()
-#ax3.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-#ax3.plot(x, y4, 'b', label=r'Computed $\phi_1$')
-#ax3.set_xlabel('x')
-#ax3.set_ylabel(r'$|\psi|$')
-#ax3.legend(loc='upper right')
-#ax3.grid(linestyle=':')
-#ax3.set_title('First Excited State Trial Function vs. ITP Solution')
-#
-## Plot energy convergence
-#fig2, ax2 = plt.subplots()
-#ax2.plot(tplot0, gsEnergy-gsEnergy[-1], label=r'\phi_0 Energy Convergence')
-#ax2.plot(tplot1, phi1Energy - phi1Energy[-1], label=r'\phi_1 Energy Convergence')
-#ax2.set_title('Energy Plot')
-#ax2.set_xlabel('Time')
-#ax2.set_ylabel('Energy')
-#ax2.grid(linestyle=':')
-#plt.show()
+fig, ax = plt.subplots()
+ax.plot(x, y1, 'r', label=r'Unperturbed $\phi_0$')
+ax.plot(x, y2, 'b', label=r'Computed $\phi_0$')
+ax.set_xlabel('x')
+ax.set_ylabel(r'$|\psi|$')
+ax.legend(loc='upper right')
+ax.grid(linestyle=':')
+ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam})')
+
+fig3, ax3 = plt.subplots()
+ax3.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
+ax3.plot(x, y4, 'b', label=r'Computed $\phi_1$')
+ax3.set_xlabel('x')
+ax3.set_ylabel(r'$|\psi|$')
+ax3.legend(loc='upper right')
+ax3.grid(linestyle=':')
+ax3.set_title(r'First Excited State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam})')
+
+# Plot energy convergence
+fig2, ax2 = plt.subplots()
+ax2.plot(tplot0, gsEnergy-gsEnergy[-1], label=r'$\phi_0$ Energy Convergence')
+ax2.plot(tplot1, phi1Energy - phi1Energy[-1], label=r'$\phi_1$ Energy Convergence')
+ax2.set_title('Energy Plot $(\lambda = $' + f'{lam})')
+ax2.set_xlabel('Time')
+ax2.set_ylabel('Energy')
+ax2.legend(loc='upper right')
+ax2.grid(linestyle=':')
+plt.show()
 
 phi0_kspace = np.zeros(numpts, dtype=np.complex_)
 phi1_kspace = np.zeros(numpts, dtype=np.complex_)
+phi0_time = np.zeros(numpts, dtype=np.complex_)
 
 # Now let's find the momentum distribution
 phi0_kspace = np.real(momentumSpace(phi0))
@@ -205,12 +215,37 @@ phi1_kspace = np.imag(momentumSpace(phi1))
 # Plot the momentum distributions
 fig4, ax4 = plt.subplots()
 #ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax4.plot(x, phi0, 'b', label=r'Unperturbed $\phi_0(p)$')
-ax4.plot(p, phi0_kspace, 'r', label=r'Computed $\phi_0(p)$')
+ax4.plot(x, phi0, 'r', label=r'Unperturbed $\phi_0(p)$')
+ax4.plot(p, phi0_kspace, 'b', label=r'Computed $\phi_0(p)$')
 ax4.set_xlabel('p')
 ax4.set_ylabel(r'$|\psi(p)|$')
 ax4.legend(loc='upper right')
 ax4.grid(linestyle=':')
-ax4.set_title('Momentum Space G.S. Wave Function')
+ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
 
+#%%
+# Use function to find matrix with phi(x, t) at different t for phi0 & phi1
+time_vector = np.array([0,1,2,3,4])
+phi0_time = timeEvolve(momentumSpace(phi0), time_vector)
+phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
+
+
+# Plot the momentum distributions
+fig5, ax5 = plt.subplots()
+#ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
+ax5.plot(x, np.abs(phi1)**2, 'r', label=r'Unperturbed $\phi_0(p)$')
+ax5.plot(p, np.abs(phi1_time[4][:])**2, 'b', label=r'Computed $\phi_0(p)$')
+ax5.set_xlabel('p')
+ax5.set_ylabel(r'$|\psi(p)|$')
+ax5.grid(linestyle=':')
+ax5.set_title('Time Evolution of G.S.')
+
+#%% Find time evolution of OBDM
+
+# Get slater determinant
+
+# Integrate over second parameter for obdm
+
+
+#%% Find Momentum Space Density Profile
 

@@ -483,6 +483,19 @@ An animation of the full time dependence for various theta can be viewed \href{h
 
 Inspecting equation (\ref{ncInitMomTheta}) again, we see that the $n_B$ term is the only term that contribute to the Tan Contact of $n_\sigma$ because all the other terms decay exponentially with $p$. The time dependence of the Tan Contact, therefore, will be the same as in the spinless HCB case, differing only by a constant. We have numerically calculated and plotted this time dependence in the plot in figure \ref{fig:TanContactTimeDep}. The plot shows that numerical calculation agrees with theoretical prediction that the Tan Contact should have a decay proportional to $\frac{1}{b(t)^3}$, where the constant is given in equation (\ref{InitTanContact}).
 
+\section{Effects of Anharmonicity on Dynamical Fermionization}
+
+Recall our previous investigation of dynamical fermionization of strongly-interacting, spinless bosons. We assumed that two spinless bosons were confined in a harmonic trap, and we calculated the long-term dynamics of the MSDP in the scenario where the trapping potential is turned off. Now we would like to consider the effects of adding anharmonicity to the Hamiltonian of this system, thus giving 
+\begin{equation}
+    H = \sum_{i = 1}^{N} \left[ -\frac{1}{2} \pdv[2]{}{x} + \frac{1}{2} x_i^2 + \lambda x^4 \right]
+            + g \sum_{i < j} \delta(x_i - x_j)
+\end{equation}
+To find the long term dynamics of such a system, we will use the Imaginary Time Propagation method to compute the new ground state and first excited state for two fermions \cite{chiofalo2000ground, muruganandam2009fortran}. Then, once we have these eigenstates in position space $\phi_0(x)$ and $\phi_1(x)$ we can transform them to momentum space to obtain $\widetilde{\phi_0}(p)$ and $\widetilde{\phi_1}(p)$. After obtaining the wave functions in momentum space, it is very easy to find $\phi_0(x,t)$ and $\phi_1(x,t)$ at any time $t$ using the expression
+\begin{equation}
+\phi_i(x,t) = \int dp e^{ipx} \widetilde{\phi_i}(p) e^{-i\frac{p^2}{2}}
+\end{equation}
+Once we have the time evolution of the first two fermion eigenstates, we can numerically compute the time evolution of the OBDM and density profiles using the Bose-Fermi mapping and other standard methods.
+
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
