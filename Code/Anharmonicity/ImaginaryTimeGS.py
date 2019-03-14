@@ -6,6 +6,7 @@ Created on Fri Feb 22 08:57:17 2019
 """
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 """
 NOTES:
@@ -16,7 +17,7 @@ NOTES:
      d\Psi/dt = - (0.5*(- Dxx + x**2) + lam*x**4)*\Psi
 
 """
-
+#%%
 def Dxx(waveFunction):
     # Finds second derivative at each point assuming Neumann BC
     derivs = np.zeros(numpts)
@@ -42,7 +43,7 @@ def getNorm(waveFunction):
 
     return np.sqrt(np.sum(np.abs(waveFunction)**2)*h)    
         
-def unperturbedSol(energyLevel):
+def unperturbedSol(energyLevel, x):
     """
     Finds the unperturbed single particle harmonic solution for wave function
     with n = energyLevel and returns array of vals over num_points
@@ -136,6 +137,9 @@ def timeEvolve(momentumWF, t):
     This function takes a wave function in momentum space and finds the 
     value of that wave function at time t in position space where t is 
     a vector of different times
+    
+    OUTPUT:
+        waveFunction[time index][x index]
     """
     
     waveFunction = np.zeros((numpts, len(t)), dtype=np.complex_)
@@ -147,26 +151,102 @@ def timeEvolve(momentumWF, t):
     waveFunction = np.matmul(A*B,C)
     waveFunction = waveFunction/np.sqrt(2*np.pi)*h
     return np.transpose(waveFunction)
+
+def getSlater(wf1, wf2):
+    """
+    Takes two wave functions with each time slice of the w.f. on a single row
+    and constructs the slater determinant from them
     
+    OUTPUT:
+        slater[time index][x_1 index][x_2 index]
+    """
+    A = np.transpose([wf1[0][:]])*[wf2[0][:]]
+    slater = [A - np.transpose(A)]
+    
+    # Loop over each time slice
+    for i in range(1, len(wf1)):
+        A = np.transpose([wf1[i][:]])*[wf2[i][:]]
+        slater = np.append(slater, [A - np.transpose(A)], axis=0)
+    
+    slater = slater/ np.sqrt(2)
+    return slater
+
+def getOBDM(fullWaveFunction):
+    """
+    Output one-body density matrix given full two body wave function
+    
+    OUTPUT:
+        obdm[time index][x index][x prime index]
+    """
+    
+    obdm = np.zeros(fullWaveFunction.shape, dtype=np.complex_)
+    fullConj = np.conjugate(fullWaveFunction)
+    
+    for j in range(len(fullWaveFunction)):
+        for k in range(numpts):
+            for l in range(numpts):
+                obdm[j, k, l] = np.inner(fullConj[j, k, :], fullWaveFunction[j, l, :])
+            
+    return obdm*h
+
+def timeEvolveAnalytic(n, t):
+    """
+    Gives analytic solution to the time evolution of the single particle states
+    for the analytically solveable harmonic solutions at a given energy level
+    n, position x, and time t
+    
+    OUTPUT:
+        analSol[time index][x index]
+    """
+    
+    b = lambda t: np.sqrt(1 + t**2)
+    bprime = lambda t: t/np.sqrt(1 + t**2)
+    tau = lambda t : np.arctan(t)
+    
+    # Use unperturbed solution to get solution at t=0
+    analSol = unperturbedSol(n, x/b(t))/np.sqrt(b(t))
+    analSol = analSol*np.exp(1j*(x**2*bprime(t)/b(t)/2.0 - (n + 0.5)*tau(t)))
+    
+    return analSol
+
+def getMSDP(obdm):
+    """
+    This function takes the time dependent obdm matrix and finds the time evolution
+    of the momentum space density profile (MSDP)
+    
+    OUTPUTS:
+        msdp[time idx][p idx]
+    """
+    msdp = np.zeros((len(obdm), numpts))
+    
+    # to evaluate this integral we need to create the cos matrix for
+    # every value of p
+    cosMat = np.cos(np.einsum('i, jk', p, np.transpose([x]) - [x]))
+    msdp = np.einsum('ijk, ljk', np.real(obdm), cosMat)
+
+    return msdp * h**2 / np.pi
+    
+    
+#%%
 # Important variables
-L = 20.0  # Trap is centered at 0 with total length L
+L = 25.0  # Trap is centered at 0 with total length 
 numpts = 200
-h = L/(numpts - 1)
-lam = 0.1  # perturbative parameter on anharmonic term
-dt = .001  
-tol = 10**-8
-x = np.linspace(-L/2., L/2., numpts)
-p = np.linspace(-L/2., L/2., numpts)
+h = L/(numpts)
+lam = 0.0  # perturbative parameter on anharmonic term
+dt = .0001  
+tol = 10**-9
+x = -L/2. + h*np.array(range(numpts))
+p = -L/2. + h*np.array(range(numpts))
 
 # Important for preventing instability
 print(r'Courant Condition: 1- 4 dt/dx^2 = ' + f'{1.0 - 4*dt/h**2}')
 
-trial0 = unperturbedSol(0)
+trial0 = unperturbedSol(0, x)
 phi0, gsEnergy, tplot0 = findGroundState(trial0, tol)
-#print(f'Trial Function energy: {getEnergy(trial1)}')
-#print(f'Final Computed Energy: {gsEnergy[-1]}')
+print(f'Trial Function energy: {getEnergy(trial0)}')
+print(f'Final Computed Energy: {gsEnergy[-1]}')
 
-trial1 = unperturbedSol(1)
+trial1 = unperturbedSol(1, x)
 phi1, phi1Energy, tplot1 = findGroundState(trial1, tol)
 
 # Plot solutions
@@ -174,6 +254,8 @@ y1 = trial0
 y2 = phi0
 y3 = trial1
 y4 = phi1
+
+#%%
 
 fig, ax = plt.subplots()
 ax.plot(x, y1, 'r', label=r'Unperturbed $\phi_0$')
@@ -226,26 +308,61 @@ ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
 #%%
 # Use function to find matrix with phi(x, t) at different t for phi0 & phi1
 time_vector = np.array([0,1,2,3,4])
-phi0_time = timeEvolve(momentumSpace(phi0), time_vector)
+phi0_time = timeEvolve(momentumSpace(phi0), time_vector) # phi0_time[time idx][x1 idx]
 phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
 
+compareidx = 4
 
-# Plot the momentum distributions
-fig5, ax5 = plt.subplots()
-#ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax5.plot(x, np.abs(phi1)**2, 'r', label=r'Unperturbed $\phi_0(p)$')
-ax5.plot(p, np.abs(phi1_time[4][:])**2, 'b', label=r'Computed $\phi_0(p)$')
-ax5.set_xlabel('p')
-ax5.set_ylabel(r'$|\psi(p)|$')
-ax5.grid(linestyle=':')
-ax5.set_title('Time Evolution of G.S.')
+## Plot the momentum distributions
+#fig5, ax5 = plt.subplots()
+##ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
+#ax5.plot(x, np.abs(phi0)**2, 'r', label=r'Initial $\phi_0(x)$')
+#ax5.plot(p, np.abs(phi0_time[compareidx][:])**2, 'b', label=r'Final $\phi_0(x)$')
+#ax5.set_xlabel('x')
+#ax5.set_ylabel(r'$|\psi(x)|$')
+#ax5.grid(linestyle=':')
+#ax5.legend(loc='upper right')
+#ax5.set_title('Time Evolution of G.S.')
+#
+## Check to make sure computational answer matches theoretical answer
+#diff = np.abs(phi0_time[compareidx][:] - timeEvolveAnalytic(0, time_vector[compareidx]))
+#maxError = np.max(diff)
+#print(f'Max error between computed phi_0 and actual phi_0 at t=10 = {maxError}')
+
 
 #%% Find time evolution of OBDM
 
 # Get slater determinant
+slater = getSlater(phi0_time, phi1_time) # slater[time idx][x1 idx][x2 idx]
+mapping = np.zeros((numpts,numpts))
+for i in range(numpts):
+    for j in range(numpts):
+        mapping[i][j] = x[j] - x[i]
+mapping = np.sign(mapping)
+boseSlater = slater*mapping
 
 # Integrate over second parameter for obdm
+obdm = getOBDM(slater)
+test = np.array([obdm[0, j, j] for j in range(numpts)])
+actual = np.exp(-x**2)*(1+2*x**2)/(2*np.sqrt(np.pi))
+print(np.sum(np.abs(test-actual)))
+
+#fig6, ax6 = plt.subplots()
+#ax6.plot(x, test, label='Computed')
+#ax6.plot(x, actual, label='Unperturbed')
+#ax6.set_title(r'$\rho(x,x)$')
+#ax6.legend(loc='upper right')
 
 
 #%% Find Momentum Space Density Profile
 
+msdp = getMSDP(obdm)
+
+fig7, ax7 = plt.subplots()
+ax7.plot(p, np.abs(msdp[0,:]), label='n(p)')
+ax7.plot(p, 2*test, label='Fermi n(p)')
+ax7.set_title('Momentum Space Density Profile')
+ax7.set_xlabel('p')
+ax7.set_ylabel('n(p)')
+ax7.legend(loc='upper right')
+ax7.grid()
