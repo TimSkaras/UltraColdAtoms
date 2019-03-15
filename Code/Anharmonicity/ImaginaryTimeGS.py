@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 import time
 
 """
+TODO:
+    - Output OBDM does not have correct norm
+
 NOTES:
  - L should be sufficiently large that neumann boundary conditions are accurate
  - Assume points are allocated such that if L = 10 then the first point on the 
@@ -82,7 +85,7 @@ def findGroundState(trialSolution, tolerance):
     delta = 1.0
     groundState = trialSolution
     new_gs = groundState
-    maxIter = 20000
+    maxIter = 1000000
     iterations = 0
     deriv = np.zeros(numpts)
     energy = getEnergy(trialSolution)
@@ -149,7 +152,7 @@ def timeEvolve(momentumWF, t):
     B = np.array([momentumWF])
     C = np.exp(-1j*np.transpose([p**2])*[t]/2.)
     waveFunction = np.matmul(A*B,C)
-    waveFunction = waveFunction/np.sqrt(2*np.pi)*h
+    waveFunction = waveFunction/np.sqrt(2*np.pi)*hp
     return np.transpose(waveFunction)
 
 def getSlater(wf1, wf2):
@@ -186,6 +189,9 @@ def getOBDM(fullWaveFunction):
         for k in range(numpts):
             for l in range(numpts):
                 obdm[j, k, l] = np.inner(fullConj[j, k, :], fullWaveFunction[j, l, :])
+    
+#    for j in range(len(fullWaveFunction)):
+#        obdm[j] = np.einsum('ik,lk', fullConj[j], fullWaveFunction[j])
             
     return obdm*h
 
@@ -229,17 +235,27 @@ def getMSDP(obdm):
     
 #%%
 # Important variables
-L = 25.0  # Trap is centered at 0 with total length 
-numpts = 200
-h = L/(numpts)
-lam = 0.0  # perturbative parameter on anharmonic term
-dt = .0001  
+Lx = 80.0  # Trap is centered at 0 with total length 
+numpts = 850
+h = Lx/numpts
+lam = 0.01  # perturbative parameter on anharmonic term
+dt = .0001   
 tol = 10**-9
-x = -L/2. + h*np.array(range(numpts))
-p = -L/2. + h*np.array(range(numpts))
-
+x = -Lx/2. + h*np.array(range(numpts))
+Lp = Lx
+hp = Lp/numpts
+p = -Lp/2. + hp*np.array(range(numpts))
+# Determine start and stop index for plotting purposes
+# because we don't want the whole domain when we plot
+start_idx = 0
+end_idx = numpts
+plot_length = 15.0
+if Lx > plot_length:
+    start_idx = np.argmin(np.abs(x+plot_length/2.))
+    end_idx = np.argmin(np.abs(x-plot_length/2.))
+    
 # Important for preventing instability
-print(r'Courant Condition: 1- 4 dt/dx^2 = ' + f'{1.0 - 4*dt/h**2}')
+print(r'Courant Condition:  dt/dx^2 = ' + f'{dt/h**2}')
 
 trial0 = unperturbedSol(0, x)
 phi0, gsEnergy, tplot0 = findGroundState(trial0, tol)
@@ -258,8 +274,8 @@ y4 = phi1
 #%%
 
 fig, ax = plt.subplots()
-ax.plot(x, y1, 'r', label=r'Unperturbed $\phi_0$')
-ax.plot(x, y2, 'b', label=r'Computed $\phi_0$')
+ax.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
+ax.plot(x[start_idx:end_idx], y2[start_idx:end_idx], 'b', label=r'Computed $\phi_0$')
 ax.set_xlabel('x')
 ax.set_ylabel(r'$|\psi|$')
 ax.legend(loc='upper right')
@@ -267,8 +283,8 @@ ax.grid(linestyle=':')
 ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam})')
 
 fig3, ax3 = plt.subplots()
-ax3.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax3.plot(x, y4, 'b', label=r'Computed $\phi_1$')
+ax3.plot(x[start_idx:end_idx], y3[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_1$')
+ax3.plot(x[start_idx:end_idx], y4[start_idx:end_idx], 'b', label=r'Computed $\phi_1$')
 ax3.set_xlabel('x')
 ax3.set_ylabel(r'$|\psi|$')
 ax3.legend(loc='upper right')
@@ -284,7 +300,7 @@ ax2.set_xlabel('Time')
 ax2.set_ylabel('Energy')
 ax2.legend(loc='upper right')
 ax2.grid(linestyle=':')
-plt.show()
+
 
 phi0_kspace = np.zeros(numpts, dtype=np.complex_)
 phi1_kspace = np.zeros(numpts, dtype=np.complex_)
@@ -297,8 +313,8 @@ phi1_kspace = np.imag(momentumSpace(phi1))
 # Plot the momentum distributions
 fig4, ax4 = plt.subplots()
 #ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax4.plot(x, phi0, 'r', label=r'Unperturbed $\phi_0(p)$')
-ax4.plot(p, phi0_kspace, 'b', label=r'Computed $\phi_0(p)$')
+ax4.plot(x[start_idx:end_idx], phi0[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0(p)$')
+ax4.plot(p[start_idx:end_idx], phi0_kspace[start_idx:end_idx], 'b', label=r'Computed $\phi_0(p)$')
 ax4.set_xlabel('p')
 ax4.set_ylabel(r'$|\psi(p)|$')
 ax4.legend(loc='upper right')
@@ -307,22 +323,22 @@ ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
 
 #%%
 # Use function to find matrix with phi(x, t) at different t for phi0 & phi1
-time_vector = np.array([0,1,2,3,4])
+time_vector = np.array([0,1,2,3,4,5,6,7,8,9])
 phi0_time = timeEvolve(momentumSpace(phi0), time_vector) # phi0_time[time idx][x1 idx]
 phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
 
-compareidx = 4
+compareidx = 5
 
-## Plot the momentum distributions
-#fig5, ax5 = plt.subplots()
-##ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-#ax5.plot(x, np.abs(phi0)**2, 'r', label=r'Initial $\phi_0(x)$')
-#ax5.plot(p, np.abs(phi0_time[compareidx][:])**2, 'b', label=r'Final $\phi_0(x)$')
-#ax5.set_xlabel('x')
-#ax5.set_ylabel(r'$|\psi(x)|$')
-#ax5.grid(linestyle=':')
-#ax5.legend(loc='upper right')
-#ax5.set_title('Time Evolution of G.S.')
+# Plot the momentum distributions
+fig5, ax5 = plt.subplots()
+#ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
+ax5.plot(x[start_idx:end_idx], np.abs(phi0[start_idx:end_idx])**2, 'r', label=r'Initial $\phi_0(x)$')
+ax5.plot(p[start_idx:end_idx], np.abs(phi0_time[compareidx][start_idx:end_idx])**2, 'b', label=r'Final $\phi_0(x)$')
+ax5.set_xlabel('x')
+ax5.set_ylabel(r'$|\psi(x)|$')
+ax5.grid(linestyle=':')
+ax5.legend(loc='upper right')
+ax5.set_title('Time Evolution of G.S.')
 #
 ## Check to make sure computational answer matches theoretical answer
 #diff = np.abs(phi0_time[compareidx][:] - timeEvolveAnalytic(0, time_vector[compareidx]))
@@ -342,27 +358,48 @@ mapping = np.sign(mapping)
 boseSlater = slater*mapping
 
 # Integrate over second parameter for obdm
-obdm = getOBDM(slater)
-test = np.array([obdm[0, j, j] for j in range(numpts)])
+begin = time.time()
+obdm = getOBDM(boseSlater)
+end = time.time()
+
+#%%
+time_idx = 8
+rsdp = np.array([obdm[time_idx, j, j] for j in range(numpts)])
 actual = np.exp(-x**2)*(1+2*x**2)/(2*np.sqrt(np.pi))
-print(np.sum(np.abs(test-actual)))
+print(f'Average difference between fermi OBDM and computed OBDM: {np.sum(np.abs(rsdp-actual))/numpts}')
+print(f'Time to compute OBDM: {end - begin}')
 
-#fig6, ax6 = plt.subplots()
-#ax6.plot(x, test, label='Computed')
-#ax6.plot(x, actual, label='Unperturbed')
-#ax6.set_title(r'$\rho(x,x)$')
-#ax6.legend(loc='upper right')
+fig6, ax6 = plt.subplots()
+ax6.plot(x, 2*rsdp, label='Computed')
+ax6.plot(x, 2*actual, label='Unperturbed')
+ax6.set_title('Real Space Density Profile' + f' (t = {time_vector[time_idx]})')
+ax6.legend(loc='upper right')
+ax6.grid()
 
+normCons = np.einsum('ijj',np.abs(obdm))*h
+
+fig8, ax8 = plt.subplots()
+ax8.plot(time_vector, normCons )
+ax8.set_title('Particle Number Conservation of OBDM vs. Time')
+ax8.set_ylabel('Particle Number')
+ax8.set_xlabel('Time')
+ax8.grid()
 
 #%% Find Momentum Space Density Profile
-
+begin = time.time()
 msdp = getMSDP(obdm)
-
+end = time.time()
+#%%
+print(f'Time to compute MDSP: {end - begin}')
+rsdp = np.array([obdm[0, j, j] for j in range(numpts)])
 fig7, ax7 = plt.subplots()
-ax7.plot(p, np.abs(msdp[0,:]), label='n(p)')
-ax7.plot(p, 2*test, label='Fermi n(p)')
-ax7.set_title('Momentum Space Density Profile')
+ax7.plot(p[start_idx:end_idx], np.abs(msdp[time_idx,start_idx:end_idx]), label='n(p)')
+ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial RSDP')
+ax7.set_title('Momentum Space Density Profile' + f' (t = {time_vector[time_idx]})')
 ax7.set_xlabel('p')
 ax7.set_ylabel('n(p)')
 ax7.legend(loc='upper right')
 ax7.grid()
+
+
+plt.show()
