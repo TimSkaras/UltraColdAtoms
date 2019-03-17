@@ -7,6 +7,9 @@ Created on Fri Feb 22 08:57:17 2019
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+from scipy.sparse import diags
+import sys
+from matplotlib import animation
 
 """
 TODO:
@@ -85,40 +88,58 @@ def findGroundState(trialSolution, tolerance):
     delta = 1.0
     groundState = trialSolution
     new_gs = groundState
-    maxIter = 1000000
+    maxIter = 10000
     iterations = 0
     deriv = np.zeros(numpts)
     energy = getEnergy(trialSolution)
     energyPlot = np.array([energy])
     tplot = np.array([0.0])
     
+    r = np.float64(dt)/h**2
+    diagOff = np.ones(numpts-1)*(-r/2.)
+    diagCen = np.ones(numpts -2)*(1.+r)
+    diagCen = np.append(r/2. + 1, diagCen)
+    diagCen = np.append(diagCen, r/2. + 1)
+    diagCen += (0.5*x**2 + lam*x**4)*dt
+    eqnMatrix = diags([diagOff, diagCen, diagOff], [-1,0,1]).toarray()
+    eqnInv = np.linalg.inv(eqnMatrix)
+    
+    animationData = [groundState]
+    
     while delta > tolerance:
         
         iterations += 1
         
-        # Calculate derivative transformation
-        deriv = 0.5*Dxx(groundState)
-        
-        # Potential term
-        deriv = deriv - (0.5 * x**2 + lam * x**4) * groundState
-        
-        new_gs = groundState + dt * deriv
+        if method == 0:
+            # Calculate derivative transformation
+            deriv = 0.5*Dxx(groundState)
+            
+            # Potential term
+            deriv = deriv - (0.5 * x**2 + lam * x**4) * groundState
+            
+            new_gs = groundState + dt * deriv
+        else:
+            new_gs = np.einsum('ij, j', eqnInv, groundState)
         
         if iterations % 10 == 0:
-            groundState = groundState/getNorm(groundState)
-            energy = getEnergy(groundState)
+            new_gs = new_gs/getNorm(new_gs)
+            energy = getEnergy(new_gs)
             delta = np.abs(energy - energyPlot[-1])/energy/dt
             energyPlot = np.append(energyPlot, energy)
             tplot = np.append(tplot, dt*iterations)
+
             
         groundState = new_gs
+        animationData = np.append(animationData, [groundState], axis=0)
         
         # Break if max iterations exceeded
         if iterations > maxIter:
             break
+
     
     groundState = groundState/getNorm(groundState)
-    return groundState, energyPlot, tplot
+    return groundState, energyPlot, tplot, animationData
+
 
 def momentumSpace(waveFunction):
     """
@@ -233,13 +254,14 @@ def getMSDP(obdm):
     return msdp * h**2 / np.pi
     
     
-#%%
+
 # Important variables
-Lx = 80.0  # Trap is centered at 0 with total length 
-numpts = 850
-h = Lx/numpts
-lam = 0.01  # perturbative parameter on anharmonic term
-dt = .0001   
+method = 1 # Forward Euler = 0, Backward Euler = 1
+Lx = 100.0  # Trap is centered at 0 with total length 
+numpts = 1100
+h = np.float64(Lx/numpts)
+lam = 0.1  # perturbative parameter on anharmonic term
+dt = .001   
 tol = 10**-9
 x = -Lx/2. + h*np.array(range(numpts))
 Lp = Lx
@@ -258,12 +280,12 @@ if Lx > plot_length:
 print(r'Courant Condition:  dt/dx^2 = ' + f'{dt/h**2}')
 
 trial0 = unperturbedSol(0, x)
-phi0, gsEnergy, tplot0 = findGroundState(trial0, tol)
+phi0, gsEnergy, tplot0, animationData = findGroundState(trial0, tol)
 print(f'Trial Function energy: {getEnergy(trial0)}')
 print(f'Final Computed Energy: {gsEnergy[-1]}')
 
 trial1 = unperturbedSol(1, x)
-phi1, phi1Energy, tplot1 = findGroundState(trial1, tol)
+phi1, phi1Energy, tplot1, animationData = findGroundState(trial1, tol)
 
 # Plot solutions
 y1 = trial0
@@ -271,7 +293,8 @@ y2 = phi0
 y3 = trial1
 y4 = phi1
 
-#%%
+start_idx = 0
+end_idx = numpts
 
 fig, ax = plt.subplots()
 ax.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
@@ -281,6 +304,35 @@ ax.set_ylabel(r'$|\psi|$')
 ax.legend(loc='upper right')
 ax.grid(linestyle=':')
 ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam})')
+
+## turns on interactive
+#plt.ion()
+#
+## animation
+#plt.figure(2); plt.clf();
+## now plot the motion of the pendulum, assume L=1
+#nplots = 100 # number of points to plot
+#
+#deltai = int(round((len(animationData)-1)/nplots))
+#
+#for i in range(0,len(animationData), 3):
+#    
+#    plt.clf()
+#    plt.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
+#    plt.plot(x[start_idx:end_idx], animationData[i, start_idx:end_idx], 'b', label=r'Computed $\phi_0$')
+#    plt.xlabel('x')
+#    plt.ylabel(r'$|\psi|$')
+#    plt.legend(loc='upper right')
+#    plt.grid(linestyle=':')
+#    plt.title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam}, frame = {i})')
+#    
+#    plt.draw()
+#    plt.pause(.03)
+## puts in a prompt to stop the program
+#plt.ioff()
+
+#sys.exit()
+#%%
 
 fig3, ax3 = plt.subplots()
 ax3.plot(x[start_idx:end_idx], y3[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_1$')
@@ -323,11 +375,12 @@ ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
 
 #%%
 # Use function to find matrix with phi(x, t) at different t for phi0 & phi1
-time_vector = np.array([0,1,2,3,4,5,6,7,8,9])
+time_vector = np.array([0,1,2,3,4,5,6,7,8,9, 11])
 phi0_time = timeEvolve(momentumSpace(phi0), time_vector) # phi0_time[time idx][x1 idx]
 phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
 
-compareidx = 5
+#%%
+compareidx = -1
 
 # Plot the momentum distributions
 fig5, ax5 = plt.subplots()
@@ -344,7 +397,6 @@ ax5.set_title('Time Evolution of G.S.')
 #diff = np.abs(phi0_time[compareidx][:] - timeEvolveAnalytic(0, time_vector[compareidx]))
 #maxError = np.max(diff)
 #print(f'Max error between computed phi_0 and actual phi_0 at t=10 = {maxError}')
-
 
 #%% Find time evolution of OBDM
 
@@ -363,7 +415,7 @@ obdm = getOBDM(boseSlater)
 end = time.time()
 
 #%%
-time_idx = 8
+time_idx = 9
 rsdp = np.array([obdm[time_idx, j, j] for j in range(numpts)])
 actual = np.exp(-x**2)*(1+2*x**2)/(2*np.sqrt(np.pi))
 print(f'Average difference between fermi OBDM and computed OBDM: {np.sum(np.abs(rsdp-actual))/numpts}')
@@ -384,17 +436,22 @@ ax8.set_title('Particle Number Conservation of OBDM vs. Time')
 ax8.set_ylabel('Particle Number')
 ax8.set_xlabel('Time')
 ax8.grid()
+plt.show()
 
 #%% Find Momentum Space Density Profile
 begin = time.time()
 msdp = getMSDP(obdm)
 end = time.time()
 #%%
-print(f'Time to compute MDSP: {end - begin}')
+time_idx = 9
+start_idx = np.argmin(np.abs(x+plot_length/2.))
+end_idx = np.argmin(np.abs(x-plot_length/2.))
+print(f'Time to compute MSDP: {end - begin}')
 rsdp = np.array([obdm[0, j, j] for j in range(numpts)])
 fig7, ax7 = plt.subplots()
 ax7.plot(p[start_idx:end_idx], np.abs(msdp[time_idx,start_idx:end_idx]), label='n(p)')
 ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial RSDP')
+ax7.plot(p[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
 ax7.set_title('Momentum Space Density Profile' + f' (t = {time_vector[time_idx]})')
 ax7.set_xlabel('p')
 ax7.set_ylabel('n(p)')
