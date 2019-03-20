@@ -20,7 +20,7 @@ NOTES:
  - Assume points are allocated such that if L = 10 then the first point on the 
    left is at x = -5 and the last point on the right is at at x = 5
  - ITP Hamiltonian equation becomes
-     d\Psi/dt = - (0.5*(- Dxx + x**2) + lam*x**4)*\Psi
+     d\Psi/dt = - (0.5*(- Dxx + x**2) + lam0*x**3 + lam*x**4)*\Psi
 
 """
 #%%
@@ -40,7 +40,7 @@ def Dxx(waveFunction):
 def getEnergy(waveFunction):
     # Finds the energy of a wave function assuming harmonic hamiltonian
     
-    energy = np.sum(-np.conj(waveFunction)*0.5*Dxx(waveFunction)+ np.conj(waveFunction)*(0.5*x**2+lam*x**4)*waveFunction)*h
+    energy = np.sum(-np.conj(waveFunction)*0.5*Dxx(waveFunction)+ np.conj(waveFunction)*(0.5*x**2+lam0*x**3+lam*x**4)*waveFunction)*h
     
     return energy
 
@@ -100,7 +100,7 @@ def findGroundState(trialSolution, tolerance):
     diagCen = np.ones(numpts -2)*(1.+r)
     diagCen = np.append(r/2. + 1, diagCen)
     diagCen = np.append(diagCen, r/2. + 1)
-    diagCen += (0.5*x**2 + lam*x**4)*dt
+    diagCen += (0.5*x**2 + lam0*x**3 + lam*x**4)*dt
     eqnMatrix = diags([diagOff, diagCen, diagOff], [-1,0,1]).toarray()
     eqnInv = np.linalg.inv(eqnMatrix)
     
@@ -115,7 +115,7 @@ def findGroundState(trialSolution, tolerance):
             deriv = 0.5*Dxx(groundState)
             
             # Potential term
-            deriv = deriv - (0.5 * x**2 + lam * x**4) * groundState
+            deriv = deriv - (0.5 * x**2 + lam0 * x**3 + lam * x**4) * groundState
             
             new_gs = groundState + dt * deriv
         else:
@@ -248,19 +248,22 @@ def getMSDP(obdm):
     
     # to evaluate this integral we need to create the cos matrix for
     # every value of p
-    cosMat = np.cos(np.einsum('i, jk', p, np.transpose([x]) - [x]))
-    msdp = np.einsum('ijk, ljk', np.real(obdm), cosMat)
+#    cosMat = np.cos(np.einsum('i, jk', p, np.transpose([x]) - [x]))
+    cosTerm = np.cos(np.einsum('i,j',p, x))
+    sinTerm = np.sin(np.einsum('i,j',p, x))
+    msdp = np.einsum('ijk,lj,lk->il', np.real(obdm), cosTerm, cosTerm)
+    msdp += np.einsum('ijk,lj,lk->il', np.real(obdm), sinTerm, sinTerm)
 
     return msdp * h**2 / np.pi
     
-    
-
+#%%
 # Important variables
 method = 1 # Forward Euler = 0, Backward Euler = 1
-Lx = 100.0  # Trap is centered at 0 with total length 
-numpts = 1100
+Lx = 90.0  # Trap is centered at 0 with total length 
+numpts = 1000
 h = np.float64(Lx/numpts)
-lam = 0.1  # perturbative parameter on anharmonic term
+lam0 = 0.2
+lam = 0.05  # perturbative parameter on anharmonic term
 dt = .001   
 tol = 10**-9
 x = -Lx/2. + h*np.array(range(numpts))
@@ -375,7 +378,7 @@ ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
 
 #%%
 # Use function to find matrix with phi(x, t) at different t for phi0 & phi1
-time_vector = np.array([0,1,2,3,4,5,6,7,8,9, 11])
+time_vector = np.array([0,3,6])
 phi0_time = timeEvolve(momentumSpace(phi0), time_vector) # phi0_time[time idx][x1 idx]
 phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
 
@@ -415,7 +418,7 @@ obdm = getOBDM(boseSlater)
 end = time.time()
 
 #%%
-time_idx = 9
+time_idx = -1
 rsdp = np.array([obdm[time_idx, j, j] for j in range(numpts)])
 actual = np.exp(-x**2)*(1+2*x**2)/(2*np.sqrt(np.pi))
 print(f'Average difference between fermi OBDM and computed OBDM: {np.sum(np.abs(rsdp-actual))/numpts}')
@@ -436,22 +439,30 @@ ax8.set_title('Particle Number Conservation of OBDM vs. Time')
 ax8.set_ylabel('Particle Number')
 ax8.set_xlabel('Time')
 ax8.grid()
-plt.show()
 
 #%% Find Momentum Space Density Profile
 begin = time.time()
 msdp = getMSDP(obdm)
 end = time.time()
 #%%
-time_idx = 9
 start_idx = np.argmin(np.abs(x+plot_length/2.))
 end_idx = np.argmin(np.abs(x-plot_length/2.))
 print(f'Time to compute MSDP: {end - begin}')
-rsdp = np.array([obdm[0, j, j] for j in range(numpts)])
+rsdp = np.array([obdm[0, j, j] for j in range(numpts)]) # this gives the inital RSDP for the bosons
+fermiRSDP = np.array([obdm[0, j, j] for j in range(numpts)])
+
+# We also need to find the initial MSDP of the fermions to compare to the final MSDP of bosons
+fermiOBDM = getOBDM(slater)
+fermiRSDP = np.array([fermiOBDM[0, j, j] for j in range(numpts)])
+fermiMSDP = getMSDP(fermiOBDM)
+
+#%%
+time_idx = -2
 fig7, ax7 = plt.subplots()
 ax7.plot(p[start_idx:end_idx], np.abs(msdp[time_idx,start_idx:end_idx]), label='n(p)')
-ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial RSDP')
+ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial Boson RSDP')
 ax7.plot(p[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
+ax7.plot(p[start_idx:end_idx], np.abs(fermiMSDP[0,start_idx:end_idx]), label='Fermi MSDP')
 ax7.set_title('Momentum Space Density Profile' + f' (t = {time_vector[time_idx]})')
 ax7.set_xlabel('p')
 ax7.set_ylabel('n(p)')
