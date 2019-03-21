@@ -24,6 +24,22 @@ NOTES:
 
 """
 #%%
+def innerProduct(func1, func2):
+    """
+    This function takes two functions and finds their L2 inner product over length L
+    
+    INPUT:
+    func1, func2 -- two functions represented as discrete sets of points over L
+    
+    OUTPUT:
+    inner -- value of inner product
+    """
+    
+    inner = np.sum(func1*func2) * h
+    
+    return inner
+    
+
 def Dxx(waveFunction):
     # Finds second derivative at each point assuming Neumann BC
     derivs = np.zeros(numpts)
@@ -71,7 +87,7 @@ def unperturbedSol(energyLevel, x):
     
     return harmSol
 
-def findGroundState(trialSolution, tolerance):
+def findGroundState(trialSolution, tolerance, orthogonalize):
     """
     This function finds the ground state for a spinless boson using the 
     imaginary time propagation method
@@ -79,6 +95,7 @@ def findGroundState(trialSolution, tolerance):
     INPUT:
         trialSolution -- array containing values of phi with initial guess
         tolerance -- double for how close final energy should be to actual energy (e.g., 10**-3, 10**-4, etc.)
+        orthogonalize -- boolean (0 or 1) for whether the trial functio needs to be projected orthogonally to the g.s.
         
     OUTPUT:
         groundState -- ground state of spinless Hamiltonian
@@ -88,7 +105,7 @@ def findGroundState(trialSolution, tolerance):
     delta = 1.0
     groundState = trialSolution
     new_gs = groundState
-    maxIter = 10000
+    maxIter = 50000
     iterations = 0
     deriv = np.zeros(numpts)
     energy = getEnergy(trialSolution)
@@ -127,6 +144,9 @@ def findGroundState(trialSolution, tolerance):
             delta = np.abs(energy - energyPlot[-1])/energy/dt
             energyPlot = np.append(energyPlot, energy)
             tplot = np.append(tplot, dt*iterations)
+            
+            if lam0 > 0.0 and np.min(trialSolution) < -1./10:
+                new_gs = new_gs - innerProduct(new_gs, phi0) * phi0 
 
             
         groundState = new_gs
@@ -259,10 +279,10 @@ def getMSDP(obdm):
 #%%
 # Important variables
 method = 1 # Forward Euler = 0, Backward Euler = 1
-Lx = 90.0  # Trap is centered at 0 with total length 
-numpts = 1000
+Lx = 100.0  # Trap is centered at 0 with total length 
+numpts = 1800
 h = np.float64(Lx/numpts)
-lam0 = 0.2
+lam0 = 0.1
 lam = 0.05  # perturbative parameter on anharmonic term
 dt = .001   
 tol = 10**-9
@@ -283,12 +303,14 @@ if Lx > plot_length:
 print(r'Courant Condition:  dt/dx^2 = ' + f'{dt/h**2}')
 
 trial0 = unperturbedSol(0, x)
-phi0, gsEnergy, tplot0, animationData = findGroundState(trial0, tol)
+phi0, gsEnergy, tplot0, animationData = findGroundState(trial0, tol, 0)
 print(f'Trial Function energy: {getEnergy(trial0)}')
 print(f'Final Computed Energy: {gsEnergy[-1]}')
 
+# Use Graham-Schmidt to make sure second trial function is orthogonal to first eigenstate
 trial1 = unperturbedSol(1, x)
-phi1, phi1Energy, tplot1, animationData = findGroundState(trial1, tol)
+trial1 = trial1 - innerProduct(phi0, trial1) * phi0 / innerProduct(phi0, phi0)
+phi1, phi1Energy, tplot1, animationData = findGroundState(trial1, tol, 1)
 
 # Plot solutions
 y1 = trial0
@@ -296,8 +318,8 @@ y2 = phi0
 y3 = trial1
 y4 = phi1
 
-start_idx = 0
-end_idx = numpts
+#start_idx = 0
+#end_idx = numpts
 
 fig, ax = plt.subplots()
 ax.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
@@ -334,7 +356,6 @@ ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{l
 ## puts in a prompt to stop the program
 #plt.ioff()
 
-#sys.exit()
 #%%
 
 fig3, ax3 = plt.subplots()
@@ -356,6 +377,9 @@ ax2.set_ylabel('Energy')
 ax2.legend(loc='upper right')
 ax2.grid(linestyle=':')
 
+
+
+#%%
 
 phi0_kspace = np.zeros(numpts, dtype=np.complex_)
 phi1_kspace = np.zeros(numpts, dtype=np.complex_)
@@ -385,11 +409,14 @@ phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
 #%%
 compareidx = -1
 
+start_idx_temp = np.argmin(np.abs(x+40./2.))
+end_idx_temp = np.argmin(np.abs(x-40./2.))
+
 # Plot the momentum distributions
 fig5, ax5 = plt.subplots()
 #ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax5.plot(x[start_idx:end_idx], np.abs(phi0[start_idx:end_idx])**2, 'r', label=r'Initial $\phi_0(x)$')
-ax5.plot(p[start_idx:end_idx], np.abs(phi0_time[compareidx][start_idx:end_idx])**2, 'b', label=r'Final $\phi_0(x)$')
+ax5.plot(x[start_idx_temp:end_idx_temp], np.abs(phi0[start_idx_temp:end_idx_temp])**2, 'r', label=r'Initial $\phi_0(x)$')
+ax5.plot(p[start_idx_temp:end_idx_temp], np.abs(phi0_time[compareidx][start_idx_temp:end_idx_temp])**2, 'b', label=r'Final $\phi_0(x)$')
 ax5.set_xlabel('x')
 ax5.set_ylabel(r'$|\psi(x)|$')
 ax5.grid(linestyle=':')
@@ -418,15 +445,15 @@ obdm = getOBDM(boseSlater)
 end = time.time()
 
 #%%
-time_idx = -1
+time_idx = 0
 rsdp = np.array([obdm[time_idx, j, j] for j in range(numpts)])
 actual = np.exp(-x**2)*(1+2*x**2)/(2*np.sqrt(np.pi))
 print(f'Average difference between fermi OBDM and computed OBDM: {np.sum(np.abs(rsdp-actual))/numpts}')
 print(f'Time to compute OBDM: {end - begin}')
 
 fig6, ax6 = plt.subplots()
-ax6.plot(x, 2*rsdp, label='Computed')
-ax6.plot(x, 2*actual, label='Unperturbed')
+ax6.plot(x[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Computed')
+ax6.plot(x[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Unperturbed')
 ax6.set_title('Real Space Density Profile' + f' (t = {time_vector[time_idx]})')
 ax6.legend(loc='upper right')
 ax6.grid()
@@ -445,8 +472,8 @@ begin = time.time()
 msdp = getMSDP(obdm)
 end = time.time()
 #%%
-start_idx = np.argmin(np.abs(x+plot_length/2.))
-end_idx = np.argmin(np.abs(x-plot_length/2.))
+#start_idx = np.argmin(np.abs(x+plot_length/2.))
+#end_idx = np.argmin(np.abs(x-plot_length/2.))
 print(f'Time to compute MSDP: {end - begin}')
 rsdp = np.array([obdm[0, j, j] for j in range(numpts)]) # this gives the inital RSDP for the bosons
 fermiRSDP = np.array([obdm[0, j, j] for j in range(numpts)])
@@ -457,13 +484,17 @@ fermiRSDP = np.array([fermiOBDM[0, j, j] for j in range(numpts)])
 fermiMSDP = getMSDP(fermiOBDM)
 
 #%%
-time_idx = -2
+time_idx = 1
+start_idx = np.argmin(np.abs(x+10/2.))
+end_idx = np.argmin(np.abs(x-10./2.))
 fig7, ax7 = plt.subplots()
-ax7.plot(p[start_idx:end_idx], np.abs(msdp[time_idx,start_idx:end_idx]), label='n(p)')
+#ax7.plot(p[start_idx:end_idx], np.abs(msdp[0,start_idx:end_idx]), label=f'n(p; t={time_vector[0]}), ' + r' $\lambda = $' + f'{lam})')
+ax7.plot(p[start_idx:end_idx], np.abs(msdp[1,start_idx:end_idx]), label=f'n(p; t={time_vector[1]}), ' + r' $\lambda = $' + f'{lam})')
+ax7.plot(p[start_idx:end_idx], np.abs(msdp[2,start_idx:end_idx]), label=f'n(p; t={time_vector[2]}), ' + r' $\lambda = $' + f'{lam})')
 ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial Boson RSDP')
 ax7.plot(p[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
 ax7.plot(p[start_idx:end_idx], np.abs(fermiMSDP[0,start_idx:end_idx]), label='Fermi MSDP')
-ax7.set_title('Momentum Space Density Profile' + f' (t = {time_vector[time_idx]})')
+ax7.set_title('Momentum Space Density Profile')
 ax7.set_xlabel('p')
 ax7.set_ylabel('n(p)')
 ax7.legend(loc='upper right')

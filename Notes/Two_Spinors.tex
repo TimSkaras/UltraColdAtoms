@@ -493,30 +493,110 @@ Recall our previous investigation of dynamical fermionization of strongly-intera
 To find the long term dynamics of such a system, we will use the Imaginary Time Propagation method to compute the new ground state and first excited state for two fermions \cite{chiofalo2000ground, muruganandam2009fortran}. Then, once we have these eigenstates in position space $\phi_0(x)$ and $\phi_1(x)$ we can transform them to momentum space to obtain $\widetilde{\phi_0}(p)$ and $\widetilde{\phi_1}(p)$. After obtaining the wave functions in momentum space, it is very easy to find $\phi_0(x,t)$ and $\phi_1(x,t)$ at any time $t$ using the expression
 \begin{equation}
 \phi_i(x,t) = \int dp e^{ipx} \widetilde{\phi_i}(p) e^{-i\frac{p^2}{2}}
+\label{timeEvolution}
 \end{equation}
 Once we have the time evolution of the first two fermion eigenstates, we can numerically compute the time evolution of the OBDM and density profiles using the Bose-Fermi mapping and other standard methods.
 
-I will now describe the results I have obtained and the methods I implemented.
+I will now describe the results I have obtained and the methods I implemented for the case where $\lambda = 0.1$.
+
+\subsection*{Numerical Scheme \& Instability}
 
 % Description of backward euler and stability issues
+To implement the Imaginary Time Propagation method (ITP), I had initially used a Forward Euler method to solve the resulting PDE. This proved to be problematic, however, because when potential terms are added, the instability of this method becomes much worse. To overcome these issues, I switched to using a Backward Euler method, which is usually unconditionally stable.
 
+\subsection*{Ground State \& First Excited State}
 % Ground state and first excited state
+After using the proper numerical scheme, I used to the ITP method to obtain the ground state for the Hamiltonian
+\begin{equation}
+H =  -\frac{1}{2} \pdv[2]{}{x} + \frac{1}{2} x^2 + \lambda x^4 
+\label{anharmonic}
+\end{equation}
+by using the harmonic trap ground state as the starting trial function. To find the the  first excited state for \ref{anharmonic}, we must use a trial function that is orthogonal to the actual ground state of \ref{anharmonic}. The first excited state for the harmonic potential satisfies this constraint because it is an odd function.
+
+Figures \ref{fig:GroundState} and \ref{fig:FirstExcitedState} plot the resulting ground state and first excited state. I have plotted along with each the corresponding eigenstate for a harmonic trap.
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.7]{../Plots/Anharmonic/GroundState}
+\caption{Ground state wave function for anharmonic potential. Computed $\phi_0$ is the anharmonic wave function "computed" from the ITP method. The red plot depicts the ground state for harmonic potential.}
+\label{fig:GroundState}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.7]{../Plots/Anharmonic/FirstExcitedState}
+\caption{First excited state for anharmonic potential. Labeling convention is same as in previous plot.}
+\label{fig:FirstExcitedState}
+\end{figure}
 
 % Energy convergence
-
+To ensure that these computed eigenstates are correct, I compute the energy of the trial wave function at each iteration to ensure that it is indeed increasing. To make the convergence easier to plot for each eigenstate, I have subtracted the final energy value from the energy value at each iteration of the trial wave function, which is why both curves appear to converge to zero in the plot. Figure \ref{fig:EnergyConvergence} shows that energy converges to some value for each eigenfunction.
+%
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.8]{../Plots/Anharmonic/EnergyConvergence}
+\caption{At every tenth time step of my ITP method, I have recorded the energy of the trial solution. For this plot, I recorded the energy at different iterations and subtracted the final energy the method converged to. Thus, these plots merely show the relationship between the initial energy of the trial function and the energy of successive iterations.}
+\label{fig:EnergyConvergence}
+\end{figure}
+%
 % Matches g.s. in lam=0 case
+As a check on my code, I have ensured that the eigenstates my program finds in the case where $\lambda = 0$ indeed matches the analytically known results for the eigenstates of the harmonic potential.
+
+\subsection*{Momentum Distributions, OBDM, MSDP}
 
 % Momentum states compared to harmonic solution
-
+After obtaining the eigenstates, I fourier transform these wave functions to find their representation in momentum space. I have checked that my code for the fourier transformation is correct by ensuring that its result for the harmonic eigenstates match the analytically known result. After doing so, I calculated the momentum distribution $\widetilde{\phi_i}(p)$ of each of these eigenstates and have plotted $\widetilde{\phi_0}(p)$ in figure \ref{fig:MomentumDist}.
+%
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.8]{../Plots/Anharmonic/GSMomentumDist}
+\caption{Momentum distribution for ground state wave function.}
+\label{fig:MomentumDist}
+\end{figure}
+%
 % Time evolution of each state again matches time evolution of harmonic case
+By using equation \ref{timeEvolution}, we can calculate the time evolution of each eigenstate in the situation where both trapping potentials are suddenly turned off. Then, $\phi_i(x,t)$ can be used to compute $\rho_B(x, x';t)$ by using the bose-fermi mapping on the slater determinant. 
 
-% Plots of time evolution
+Again, when $\lambda =0$, the OBDM can be calculated analytically and compared to my computed values. I did this to check my code and found that my computed OBDM for a harmonic potential differed from the exact answer by an average value of $10^{-5}$.
+To check the validity of this time evolution method, I also made sure that the particle number of the RSDP is conserved through time, which I have plotted in figure \ref{fig:ParticleConservation}
+
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.7]{../Plots/Anharmonic/ParticleConservation}
+\caption{This plot depicts how the particle number of the RSDP changes in time with my time evolution method. For my purposes, I only calculated the RSDP at $t = 0, 3, 6$, so this plot only has three distinct points. But we can nonetheless see that the particle number changes by less than one part in $10^{-12}$.}
+\label{fig:ParticleConservation}
+\end{figure}
 
 % OBDM -- avg difference from analytic solution in lam =0 is very small
+Figure \ref{fig:InitRSDP} depicts how the RSDP is affected by the addition of the quartic potential term to the Hamiltonian. Of course, the question we are really interested in is what happens to the MSDP after all trapping potentials are turned off? Even when the quartic perturbation is added to the Hamiltonian, we still see dynamical fermionization occur. Though it is difficult to see, figure \ref{fig:DF} shows that the MSDP at $t=6$ (orange figure) is almost identical to the initial MSDP of non-interacting fermions in an anharmonic potential (purple). 
 
-% Plot RSDP
+For reference, I have also plotted other relevant Momentum Space Density Profiles that are very similar. The green figure plots the initial RSDP of the harmonically confined bosons. Because the quartic perturbation breaks the symmetry between momentum space and position space, the initial RSDP and final MSDP are different now. Nonetheless, the plot shows that as the time $t$ increases, the bosonic MSDP asymptotically approaches the fermi MSDP
+
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.8]{../Plots/Anharmonic/InitRSDP}
+\caption{This figure plots the RSDP before the trapping potential is turned off. The blue figure is the anharmonic RSDP and the orange figure is the RSDP for two harmonically confined fermions.}
+\label{fig:InitRSDP}
+\end{figure}
 
 % Plot Time evolution of MSDP
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.7]{../Plots/Anharmonic/MSDP-DF}
+\label{fig:DF}
+\caption{This figure plots the evolution of the MSDP for the anharmonically confined bosons and compares the initial and final MSDP to other density profiles. We can see that with the anharmonic term, the initial RSDP is larger near the center than the initial harmonic RSDP, and, correspondingly, the final MSDP is less than the initial harmonic RSDP.}
+\end{figure}
+
+\subsection*{Asymmetric Anharmonicity}
+It is rather surprising to find that dynamical fermionization will still occur even when the bosons are not harmonically confined. But now we ask, what factor does the symmetry of the Hamiltonian play in this? Because the parity operator commutes with Hamiltonian \ref{anharmonic}, the resulting eigenstates are symmetric. If we add a cubic term to this Hamiltonian to obtain
+\begin{equation}
+H =  -\frac{1}{2} \pdv[2]{}{x} + \frac{1}{2} x^2 + \alpha x^3 + \lambda x^4 
+\label{AnharmonicCubic}
+\end{equation}
+our eigenstates will no longer be eigenstates of the parity operator, so we will have asymmetric eigenfunctions. I have conducted the same analysis to that above for this situation, where $\lambda = 0.05$ and $\alpha = 0.1$. In my results, I demonstrate that dynamical fermionization still occurs and I discuss some symmetry properties of the MSDP to understand this better.
+
 
 \pagebreak
 \bibliographystyle{abbrv}
