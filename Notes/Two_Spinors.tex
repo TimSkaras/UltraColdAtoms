@@ -585,19 +585,55 @@ For reference, I have also plotted other relevant Momentum Space Density Profile
 \begin{figure}[H]
 \center
 \includegraphics[scale=0.7]{../Plots/Anharmonic/MSDP-DF}
+\caption{This figure plots the evolution of the MSDP, given by $n(p;t)$, for the anharmonically confined bosons and compares the initial and final MSDP to other density profiles. Initial Boson RSDP is the RSDP for bosons before the trapping potential has been turned off. Harmonic RSDP is the RSDP for bosons/fermions (same in this case) with a purely harmonic trapping potential, and the Fermi MSDP is the MSDP of fermions with the anharmonic potential. We can see that with the anharmonic term, the initial RSDP is larger near the center than the initial harmonic RSDP, and, correspondingly, the final MSDP is less than the initial harmonic RSDP.}
 \label{fig:DF}
-\caption{This figure plots the evolution of the MSDP for the anharmonically confined bosons and compares the initial and final MSDP to other density profiles. We can see that with the anharmonic term, the initial RSDP is larger near the center than the initial harmonic RSDP, and, correspondingly, the final MSDP is less than the initial harmonic RSDP.}
 \end{figure}
 
 \subsection*{Asymmetric Anharmonicity}
-It is rather surprising to find that dynamical fermionization will still occur even when the bosons are not harmonically confined. But now we ask, what factor does the symmetry of the Hamiltonian play in this? Because the parity operator commutes with Hamiltonian \ref{anharmonic}, the resulting eigenstates are symmetric. If we add a cubic term to this Hamiltonian to obtain
+It is rather surprising to find that dynamical fermionization will still occur even when the bosons are not harmonically confined. But now we ask, what factor does the symmetry of the Hamiltonian play in this? Because the parity operator commutes with Hamiltonian in equation \ref{anharmonic}, the resulting eigenstates are symmetric. If we add a cubic term to this Hamiltonian to obtain
 \begin{equation}
 H =  -\frac{1}{2} \pdv[2]{}{x} + \frac{1}{2} x^2 + \alpha x^3 + \lambda x^4 
 \label{AnharmonicCubic}
 \end{equation}
 our eigenstates will no longer be eigenstates of the parity operator, so we will have asymmetric eigenfunctions. I have conducted the same analysis to that above for this situation, where $\lambda = 0.05$ and $\alpha = 0.1$. In my results, I demonstrate that dynamical fermionization still occurs and I discuss some symmetry properties of the MSDP to understand this better.
 
+Following the same procedure as before, the ground state and first excited state are no longer even/odd with this potential, and the initial RSDP is no longer symmetric either (figure \ref{fig:RSDP_ASYM})
 
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.8]{../Plots/Anharmonic/InitRSDP-ASYM}
+\caption{This figure plots the initial real space density profile for the case of an asymmetric trapping potential}
+\label{fig:RSDP_ASYM}
+\end{figure}
+
+Nonetheless, the momentum space density profile remains even, and we still observe dynamical fermionization in this trapping potential.
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.8]{../Plots/Anharmonic/MSDP-DF-ASYM}
+\caption{This figure plots the MSDP for various situations.  We can see that the final MSDP of the }
+\label{fig:DF_ASYM}
+\end{figure}
+
+Admittedly, it is rather curious to see the asymmetric RSDP juxtaposed with the completely symmetric time evolution of the MSDP, but this can be explained. Recalling our expression for the real space density profile
+\begin{equation}
+n(x) = N\rho(x,x) = \int dx_2 \Psi^*(x, x_2) \Psi(x,x_2)
+\end{equation}
+the symmetry of this expression under the exchange $x \rightarrow -x$ is completely dependent on the eigenstates of our Hamiltonian, which make up the slater determinant $\Psi(x_1, x_2)$. In general, $\Psi(x_1, x_2)$ is only symmetric under exchange $x_1 \rightarrow x_2$, so when the eigenstates $\phi_0(x)$ and $\phi_1(x)$.
+
+The same cannot be said about the MSDP, however. For two particles, the momentum space density profile is
+\begin{equation}
+n(p) = \frac{N}{2\pi} \int dx \int dx' e^{ip(x-x')} \rho(x,x')
+\end{equation}
+The integration variables are arbitrary, so we can change them without affecting the value of the expression. 
+\begin{align*}
+n(p) & = \frac{1}{2}\frac{N}{2\pi}\left( \int dx \int dx' e^{ip(x-x')} \rho(x,x')+
+ \int dx' \int dx e^{ip(x'-x)} \rho(x',x)\right)\\
+& = \frac{1}{2}\frac{N}{2\pi}\left( \int dx \int dx' e^{ip(x-x')} \rho(x,x')+
+ \int dx' \int dx e^{-ip(x-x')} \rho(x,x')^*\right)\\
+& = \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \left(e^{ip(x-x')} \rho(x,x')+ e^{-ip(x-x')} \rho(x,x')^*\right)\\
+&= \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \Re\left[e^{ip(x-x')} \rho(x,x')\right]\\
+\end{align*}
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}
