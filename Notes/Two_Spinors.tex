@@ -1,6 +1,6 @@
 \documentclass[onecolumn,english,aps,pra]{revtex4}
 \usepackage{amssymb}
-\usepackage{amsmath}
+\usepackage{amsmath, amsthm}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{bm}
@@ -18,7 +18,7 @@
 }
 %\usepackage{breqn}
 
-
+\newtheorem{remark}{Remark}
 \begin{document}
 
 \title{Strongly Interacting Spinors in One-Dimensional Harmonic Trap}
@@ -619,21 +619,37 @@ Admittedly, it is rather curious to see the asymmetric RSDP juxtaposed with the 
 \begin{equation}
 n(x) = N\rho(x,x) = \int dx_2 \Psi^*(x, x_2) \Psi(x,x_2)
 \end{equation}
-the symmetry of this expression under the exchange $x \rightarrow -x$ is completely dependent on the eigenstates of our Hamiltonian, which make up the slater determinant $\Psi(x_1, x_2)$. In general, $\Psi(x_1, x_2)$ is only symmetric under exchange $x_1 \rightarrow x_2$, so when the eigenstates $\phi_0(x)$ and $\phi_1(x)$.
+the symmetry of this expression under the exchange $x \rightarrow -x$ is completely dependent on the eigenstates of our Hamiltonian, which make up the slater determinant $\Psi(x_1, x_2)$. In general, $\Psi(x_1, x_2)$ is only symmetric under exchange $x_1 \rightarrow x_2$, which is guaranteed by our bose-fermi mapping of the slater determinant. Total wave function $\Psi(x_1, x_2)$ will have parity symmetry when the eigenstates $\phi_0(x)$ and $\phi_1(x)$ that comprise it have parity symmetry. 
 
-The same cannot be said about the MSDP, however. For two particles, the momentum space density profile is
+This symmetry came from the fact that the parity operator $\hat{\Pi}$ commuted with the Hamiltonian in equation (\ref{anharmonic}), which meant that our eigenstates were degenerate in the parity subspace. Once we know this to be true, an arbitrary eigenbasis $\phi_0, \phi_1, \ldots$ for the Hamiltonian can simultaneously be eigenstates of $\hat{\Pi}$. For the purposes of this discussion, I will call this kind of symmetry \textit{strong parity symmetry}. This means that $\comm{H}{\Pi} =0$ and that the eigenstates of $H$ will be even or odd. Or expressed in position space this means $\phi(-x) = \pm \phi(x)$. If the Hamiltonian in equation (\ref{AnharmonicCubic}) does not have this symmetry, then why is the MSDP even? I would like to show that while strong parity symmetry is sufficient for an even MSDP, it is not necessary. First I will make some comments on the momentum space density profile and proceed to a more formal justification of this claim.
+
+For two particles, the momentum space density profile is
 \begin{equation}
-n(p) = \frac{N}{2\pi} \int dx \int dx' e^{ip(x-x')} \rho(x,x')
+n(p; t) = \frac{N}{2\pi} \int dx \int dx' e^{ip(x-x')} \rho(x,x'; t)
 \end{equation}
 The integration variables are arbitrary, so we can change them without affecting the value of the expression. 
 \begin{align*}
-n(p) & = \frac{1}{2}\frac{N}{2\pi}\left( \int dx \int dx' e^{ip(x-x')} \rho(x,x')+
- \int dx' \int dx e^{ip(x'-x)} \rho(x',x)\right)\\
-& = \frac{1}{2}\frac{N}{2\pi}\left( \int dx \int dx' e^{ip(x-x')} \rho(x,x')+
- \int dx' \int dx e^{-ip(x-x')} \rho(x,x')^*\right)\\
-& = \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \left(e^{ip(x-x')} \rho(x,x')+ e^{-ip(x-x')} \rho(x,x')^*\right)\\
-&= \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \Re\left[e^{ip(x-x')} \rho(x,x')\right]\\
+n(p; t) & = \frac{1}{2}\frac{N}{2\pi}\left( \int dx \int dx' e^{ip(x-x')} \rho(x,x'; t)+
+ \int dx' \int dx e^{ip(x'-x)} \rho(x',x; t)\right)\\
+& = \frac{1}{2}\frac{N}{2\pi}\left( \int dx \int dx' e^{ip(x-x')} \rho(x,x'; t)+
+ \int dx' \int dx e^{-ip(x-x')} \rho(x,x'; t)^*\right)\\
+& = \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \left(e^{ip(x-x')} \rho(x,x'; t)+ e^{-ip(x-x')} \rho(x,x'; t)^*\right)\\
+&= \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \Re\left[e^{ip(x-x')} \rho(x,x'; t)\right]\\
 \end{align*}
+
+This follows directly from the definition of the one-body density matrix that satisfies $\rho(x, x') = \rho(x',x)^*$. We conclude
+
+\begin{remark}
+The momentum space density profile $n(p; t)$ for any configuration of spinless particles will be real.
+\label{R1}
+\end{remark}
+
+In the case where $\rho$ is real, the integrand can be simplified to be 
+\begin{equation}
+n(p; t) = \frac{1}{2}\frac{N}{2\pi} \int dx \int dx' \cos(p(x-x')) \rho(x,x'; t)
+\end{equation}
+from which it is apparent that $n(p)$ will be even. Now, for all the cases we have considered, the one body density matrix at $t =0$ is real because it is composed of eigenfunctions that are solutions to a real differential equation given by the time-independent Schrodinger equation. If $\rho(x,x';t)$ is the OBDM for a system of particles after a trapping potential has been turned off, $\rho(x,x';t)$ will in general not be strictly real for $t > 0$. 
+
 \pagebreak
 \bibliographystyle{abbrv}
 \bibliography{Two_Spinors}

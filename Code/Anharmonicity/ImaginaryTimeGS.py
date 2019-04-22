@@ -273,23 +273,29 @@ def getMSDP(obdm):
     OUTPUTS:
         msdp[time idx][p idx]
     """
-    msdp = np.zeros((len(obdm), numpts))
+    msdp = np.zeros((len(obdm), numpts), dtype=np.complex_)
     
     # to evaluate this integral we need to create the cos matrix for
     # every value of p
 #    cosMat = np.cos(np.einsum('i, jk', p, np.transpose([x]) - [x]))
-    cosTerm = np.cos(np.einsum('i,j',p, x))
-    sinTerm = np.sin(np.einsum('i,j',p, x))
-    msdp = np.einsum('ijk,lj,lk->il', np.real(obdm), cosTerm, cosTerm)
-    msdp += np.einsum('ijk,lj,lk->il', np.real(obdm), sinTerm, sinTerm)
-
+#    cosTerm = np.cos(np.einsum('i,j',p, x))
+#    sinTerm = np.sin(np.einsum('i,j',p, x))
+#    msdp = np.einsum('ijk,lj,lk->il', np.real(obdm), cosTerm, cosTerm)
+#    msdp += np.einsum('ijk,lj,lk->il', np.real(obdm), sinTerm, sinTerm)
+    
+    expTerm = np.exp(1j*np.einsum('i,j', p, x))
+    msdp = np.einsum('lj, lk, ijk->il', expTerm, np.conj(expTerm), obdm)
+    
+    # MSDP is guaranteed to be real
+    msdp = np.real(msdp)
+    
     return msdp * h**2 / np.pi
     
 #%%
 # Important variables
 method = 1 # Forward Euler = 0, Backward Euler = 1
-L = 25.0  # Trap is centered at 0 with total length (old=100)
-numpts = 300
+L = 100.0  # Trap is centered at 0 with total length (old=100)
+numpts = 1200
 h = np.float64(L/(numpts-2)) # This is because we have neumann boundary conditions
 alpha = 0.1
 lam = 0.07  # perturbative parameter on anharmonic term
@@ -331,8 +337,8 @@ y4 = phi1
 #end_idx = numpts
 
 fig, ax = plt.subplots()
-ax.plot(x[start_idx:end_idx], y3[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
-ax.plot(x[start_idx:end_idx], y4[start_idx:end_idx], 'b', label=r'Computed $\phi_0$')
+ax.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
+ax.plot(x[start_idx:end_idx], y2[start_idx:end_idx], 'b', label=r'Computed $\phi_0$')
 ax.set_xlabel('x')
 ax.set_ylabel(r'$|\psi|$')
 ax.legend(loc='upper right')
@@ -364,8 +370,6 @@ ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{l
 #    plt.pause(.03)
 ## puts in a prompt to stop the program
 #plt.ioff()
-sys.exit()
-#%%
 
 fig3, ax3 = plt.subplots()
 ax3.plot(x[start_idx:end_idx], y3[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_1$')
@@ -386,8 +390,6 @@ ax2.set_ylabel('Energy')
 ax2.legend(loc='upper right')
 ax2.grid(linestyle=':')
 
-
-
 #%%
 
 phi0_kspace = np.zeros(numpts, dtype=np.complex_)
@@ -395,20 +397,20 @@ phi1_kspace = np.zeros(numpts, dtype=np.complex_)
 phi0_time = np.zeros(numpts, dtype=np.complex_)
 
 # Now let's find the momentum distribution
-phi0_kspace = np.real(momentumSpace(phi0))
-phi1_kspace = np.imag(momentumSpace(phi1))
+phi0_kspace = np.abs(momentumSpace(phi0))
+phi1_kspace = np.real(momentumSpace(phi1))
 
 # Plot the momentum distributions
 fig4, ax4 = plt.subplots()
 #ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax4.plot(x[start_idx:end_idx], phi0[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0(p)$')
+ax4.plot(x[start_idx:end_idx], trial0[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0(p)$')
 ax4.plot(p[start_idx:end_idx], phi0_kspace[start_idx:end_idx], 'b', label=r'Computed $\phi_0(p)$')
 ax4.set_xlabel('p')
 ax4.set_ylabel(r'$|\psi(p)|$')
 ax4.legend(loc='upper right')
 ax4.grid(linestyle=':')
 ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
-
+sys.exit()
 #%%
 # Use function to find matrix with phi(x, t) at different t for phi0 & phi1
 time_vector = np.array([0,3,6])
@@ -498,8 +500,8 @@ start_idx = np.argmin(np.abs(x+10/2.))
 end_idx = np.argmin(np.abs(x-10./2.))
 fig7, ax7 = plt.subplots()
 #ax7.plot(p[start_idx:end_idx], np.abs(msdp[0,start_idx:end_idx]), label=f'n(p; t={time_vector[0]}), ' + r' $\lambda = $' + f'{lam})')
-ax7.plot(p[start_idx:end_idx], np.abs(msdp[1,start_idx:end_idx]), label=f'n(p; t={time_vector[1]})')
-ax7.plot(p[start_idx:end_idx], np.abs(msdp[2,start_idx:end_idx]), label=f'n(p; t={time_vector[2]})')
+ax7.plot(p[start_idx:end_idx], msdp[1,start_idx:end_idx], label=f'n(p; t={time_vector[1]})')
+ax7.plot(p[start_idx:end_idx], msdp[2,start_idx:end_idx], label=f'n(p; t={time_vector[2]})')
 ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial Boson RSDP')
 ax7.plot(p[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
 ax7.plot(p[start_idx:end_idx], np.abs(fermiMSDP[0,start_idx:end_idx]), label='Fermi MSDP')
