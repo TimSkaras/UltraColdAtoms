@@ -337,13 +337,13 @@ y4 = phi1
 #end_idx = numpts
 
 fig, ax = plt.subplots()
-ax.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0$')
-ax.plot(x[start_idx:end_idx], y2[start_idx:end_idx], 'b', label=r'Computed $\phi_0$')
+ax.plot(x[start_idx:end_idx], y1[start_idx:end_idx], 'r', label=r'Harmonic Trap $\phi_0$')
+ax.plot(x[start_idx:end_idx], y2[start_idx:end_idx], 'b', label=r'ITP $\phi_0$')
 ax.set_xlabel('x')
 ax.set_ylabel(r'$|\psi|$')
 ax.legend(loc='upper right')
 ax.grid(linestyle=':')
-ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam})')
+ax.set_title('Ground State Harmonic Trap vs. ITP Solution' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
 
 ## turns on interactive
 #plt.ion()
@@ -372,19 +372,19 @@ ax.set_title('Ground State Trial Function vs. ITP Solution $(\lambda = $' + f'{l
 #plt.ioff()
 
 fig3, ax3 = plt.subplots()
-ax3.plot(x[start_idx:end_idx], y3[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_1$')
-ax3.plot(x[start_idx:end_idx], y4[start_idx:end_idx], 'b', label=r'Computed $\phi_1$')
+ax3.plot(x[start_idx:end_idx], y3[start_idx:end_idx], 'r', label=r'Harmonic Trap $\phi_1$')
+ax3.plot(x[start_idx:end_idx], y4[start_idx:end_idx], 'b', label=r'ITP $\phi_1$')
 ax3.set_xlabel('x')
 ax3.set_ylabel(r'$|\psi|$')
 ax3.legend(loc='upper right')
 ax3.grid(linestyle=':')
-ax3.set_title(r'First Excited State Trial Function vs. ITP Solution $(\lambda = $' + f'{lam})')
+ax3.set_title(r'First Excited State Harmonic Trap vs. ITP Solution' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
 
 # Plot energy convergence
 fig2, ax2 = plt.subplots()
 ax2.plot(tplot0, gsEnergy-gsEnergy[-1], label=r'$\phi_0$ Energy Convergence')
 ax2.plot(tplot1, phi1Energy - phi1Energy[-1], label=r'$\phi_1$ Energy Convergence')
-ax2.set_title('Energy Plot $(\lambda = $' + f'{lam})')
+ax2.set_title('Energy Convergence Plot' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
 ax2.set_xlabel('Time')
 ax2.set_ylabel('Energy')
 ax2.legend(loc='upper right')
@@ -403,25 +403,25 @@ phi1_kspace = np.real(momentumSpace(phi1))
 # Plot the momentum distributions
 fig4, ax4 = plt.subplots()
 #ax4.plot(x, y3, 'r', label=r'Unperturbed $\phi_1$')
-ax4.plot(x[start_idx:end_idx], trial0[start_idx:end_idx], 'r', label=r'Unperturbed $\phi_0(p)$')
-ax4.plot(p[start_idx:end_idx], phi0_kspace[start_idx:end_idx], 'b', label=r'Computed $\phi_0(p)$')
+ax4.plot(x[start_idx:end_idx], trial0[start_idx:end_idx], 'r', label=r'Harmonic Trap $\phi_0(p)$')
+ax4.plot(p[start_idx:end_idx], phi0_kspace[start_idx:end_idx], 'b', label=r'ITP $\phi_0(p)$')
 ax4.set_xlabel('p')
 ax4.set_ylabel(r'$|\psi(p)|$')
 ax4.legend(loc='upper right')
 ax4.grid(linestyle=':')
-ax4.set_title('Momentum Space G.S. Wave Function $(\lambda = $' + f'{lam})')
-sys.exit()
+ax4.set_title('Momentum Space Ground State Wave Function' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
+
 #%%
 # Use function to find matrix with phi(x, t) at different t for phi0 & phi1
-time_vector = np.array([0,3,6])
+time_vector = np.array([0,1,4])
 phi0_time = timeEvolve(momentumSpace(phi0), time_vector) # phi0_time[time idx][x1 idx]
 phi1_time = timeEvolve(momentumSpace(phi1), time_vector)
 
 #%%
 compareidx = -1
 
-start_idx_temp = np.argmin(np.abs(x+40./2.))
-end_idx_temp = np.argmin(np.abs(x-40./2.))
+start_idx_temp = np.argmin(np.abs(x+10./2.))
+end_idx_temp = np.argmin(np.abs(x-10./2.))
 
 # Plot the momentum distributions
 fig5, ax5 = plt.subplots()
@@ -432,7 +432,7 @@ ax5.set_xlabel('x')
 ax5.set_ylabel(r'$|\psi(x)|$')
 ax5.grid(linestyle=':')
 ax5.legend(loc='upper right')
-ax5.set_title('Time Evolution of G.S.')
+ax5.set_title('Time Evolution of Ground State' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
 #
 ## Check to make sure computational answer matches theoretical answer
 #diff = np.abs(phi0_time[compareidx][:] - timeEvolveAnalytic(0, time_vector[compareidx]))
@@ -463,20 +463,22 @@ print(f'Average difference between fermi OBDM and computed OBDM: {np.sum(np.abs(
 print(f'Time to compute OBDM: {end - begin}')
 
 fig6, ax6 = plt.subplots()
-ax6.plot(x[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Computed')
-ax6.plot(x[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Unperturbed')
-ax6.set_title('Real Space Density Profile' + f' (t = {time_vector[time_idx]})' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
+ax6.plot(x[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='n(x,t=0)')
+ax6.plot(x[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
+ax6.set_ylabel('n(x)')
+ax6.set_xlabel('x')
+ax6.set_title('Real Space Density Profile' + f' n(x, t = {time_vector[time_idx]})' + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
 ax6.legend(loc='upper right')
 ax6.grid()
 
 normCons = np.einsum('ijj',np.abs(obdm))*h
 
-fig8, ax8 = plt.subplots()
-ax8.plot(time_vector, normCons )
-ax8.set_title('Particle Number Conservation of OBDM vs. Time')
-ax8.set_ylabel('Particle Number')
-ax8.set_xlabel('Time')
-ax8.grid()
+#fig8, ax8 = plt.subplots()
+#ax8.plot(time_vector, normCons )
+#ax8.set_title('Particle Number Conservation of OBDM vs. Time')
+#ax8.set_ylabel('Particle Number')
+#ax8.set_xlabel('Time')
+#ax8.grid()
 
 #%% Find Momentum Space Density Profile
 begin = time.time()
@@ -500,11 +502,12 @@ start_idx = np.argmin(np.abs(x+10/2.))
 end_idx = np.argmin(np.abs(x-10./2.))
 fig7, ax7 = plt.subplots()
 #ax7.plot(p[start_idx:end_idx], np.abs(msdp[0,start_idx:end_idx]), label=f'n(p; t={time_vector[0]}), ' + r' $\lambda = $' + f'{lam})')
+ax7.plot(p[start_idx:end_idx], msdp[0,start_idx:end_idx], label=f'n(p; t={time_vector[0]})')
 ax7.plot(p[start_idx:end_idx], msdp[1,start_idx:end_idx], label=f'n(p; t={time_vector[1]})')
 ax7.plot(p[start_idx:end_idx], msdp[2,start_idx:end_idx], label=f'n(p; t={time_vector[2]})')
-ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial Boson RSDP')
-ax7.plot(p[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
-ax7.plot(p[start_idx:end_idx], np.abs(fermiMSDP[0,start_idx:end_idx]), label='Fermi MSDP')
+#ax7.plot(p[start_idx:end_idx], 2*rsdp[start_idx:end_idx], label='Initial Boson RSDP')
+#ax7.plot(p[start_idx:end_idx], 2*actual[start_idx:end_idx], label='Harmonic RSDP')
+ax7.plot(p[start_idx:end_idx], np.abs(fermiMSDP[0,start_idx:end_idx]), label='Fermi MSDP', linestyle='--')
 ax7.set_title('Momentum Space Density Profile'  + r' ($\alpha = $' + f'{alpha},'  + r' $\lambda = $' + f'{lam})')
 ax7.set_xlabel('p')
 ax7.set_ylabel('n(p)')
